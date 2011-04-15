@@ -39,9 +39,9 @@ class template(_RenderAction):
     if name[-5:] == '.html': name = name[:-5]
     self.name = name
     self.var_dict = var_dict
-  
+
   def render_to_string(self):
-    
+
     # add always needed info
     var_dict = self.var_dict
     # add login info
@@ -49,24 +49,28 @@ class template(_RenderAction):
     user = get_current_user()
     user_info = {'login_user':user, 'is_not_guest':user != Guest}
     var_dict.update(user_info)
-    
+
     from home.models import Site
     site_info = {'site':Site.get_instance()}
     var_dict.update(site_info)
-    
+
     from chrisw.helper.django_helper import render_to_string
     return render_to_string(self.name + ".html", self.var_dict)
+
+  def wrap(self, new_name):
+    """docstring for wrap"""
+    return template(new_name, self.var_dict)
 
 class text(_RenderAction):
   """docstring for text"""
   def __init__(self, _text):
     super(text, self).__init__()
     self._text = _text
-  
+
   def render_to_string(self):
     """docstring for render_to_string"""
     return self._text
-    
+
 class redirect(Action):
   """Redirect the user to page URL"""
   def __init__(self, to_url):
@@ -82,23 +86,23 @@ class cache(_RenderAction):
     self.func = func
     self.func_args = func_args
     self.func_kwargs = func_kwargs
-  
+
   def render_to_string(self):
     data = memcache.get(self.key)
     if data is not None:
       import logging
       logging.debug("cache hitted for key: %s", self.key)
       return data
-    
+
     action = self.func(*self.func_args, **self.func_kwargs)
-    
+
     if not isinstance(action, _RenderAction) or isinstance(action, cache):
       raise Exception("Can't cache the action except template and forward")
-      
+
     data = action.render_to_string()
     memcache.set(self.key, data, self.time)
     return data
-    
+
 
 class forward(_RenderAction):
   """forward action: load the content from the forwarding url.
@@ -108,27 +112,27 @@ class forward(_RenderAction):
     self.to_path = to_path
     self.args = args
     self.request_type = None
-  
+
   def resolve_action(self):
     """Resolve the URL's action
     """
-    
-    
+
+
     path = self.to_path
     request_type = self.request_type
     handler = router.resolve_path(path, request_type)
     args = self.args
     action = None
-    
+
     if handler:
       import inspect
-      
+
       if inspect.isclass(handler):
         handler_class = handler
-        
+
         request_handler = handler_class()
         # request_handler.initialize(self.request, self.response)
-        
+
         if request_type == 'get':
           action = request_handler.get_action(*args)
         elif request_type == 'post':
@@ -146,22 +150,22 @@ class forward(_RenderAction):
         else:
           # use get as default
           action = request_handler.get_action(*args)
-        
+
       elif inspect.isfunction(handler):
         handler_func = handler
         action = handler_func(self, *args)
-        
+
     else:
-      #exception happend  
+      #exception happend
       raise CannotResolvePath(path)
-      
+
     return action
-  
+
   def render_to_string(self):
     action = self.resolve_action()
-    
-    result_string = "Forward to PATH " + self.to_path 
-    
+
+    result_string = "Forward to PATH " + self.to_path
+
     if action:
       if isinstance(action, _RenderAction):
         result_string = action.render_to_string()
@@ -175,11 +179,10 @@ class forward(_RenderAction):
         result_string = "Dose not support action " + str(action)
     else:
       result_string += " Can't resolve the forwared action"
-    
+
     return result_string
-  
+
   def render(self):
     """Retrieve the fowarded content"""
     return self.render_to_string()
-    
-    
+
