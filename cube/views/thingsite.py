@@ -20,6 +20,7 @@ from common.auth import get_current_user
 from common.models import User
 from conf import settings
 
+
 class ThingSiteUI(ModelUI):
   """docstring for ThingSiteUI"""
   def __init__(self, thing_site):
@@ -67,8 +68,40 @@ class ThingSiteHandler(handlers.RequestHandler):
 
   def post(self):
     """docstring for post"""
-
     thing_site = thing_meta.thing_site_class.get_instance()
     thing_site_ui = ThingSiteUI(thing_site)
 
     return self.post_impl(thing_site_ui)
+
+
+class ThingSiteViewAllHandler(handlers.PartialHandler):
+  """docstring for ThingSiteViewHandler"""
+  def get_impl(self, thing_site_ui):
+    """docstring for get_impl"""
+    return thing_site_ui.view_all()
+
+class ThingSiteSearchHandler(handlers.PartialHandler):
+  """docstring for ThingSiteSearchHandler"""
+  def get_impl(self, thing_site_ui):
+    """docstring for get_impl"""
+    return thing_site_ui.search(self.request)
+
+  def post_impl(self, thing_site_ui):
+    """docstring for post_impl"""
+    return thing_site_ui.search_post(self.request)
+
+class ThingSiteCreateHandler(handlers.PartialHandler):
+  """docstring for ThingSiteCreateHandler"""
+  def get_impl(self, thing_site_ui):
+    """docstring for get_impl"""
+    return thing_site_ui.create(self.request)
+
+  def post_impl(self, thing_site_ui):
+    """docstring for post_impl"""
+    return thing_site_ui.create_post(self.request)
+
+
+abstract_apps = [(r'/{thing_url}/all', ThingSiteViewHandler),
+                 (r'/{thing_url}/search', ThingSiteSearchHandler),
+                 (r'/{thing_url}/new', ThingSiteCreateHandler),
+                 ]
