@@ -28,7 +28,7 @@ class ThingSiteUI(ModelUI):
 
   def view_all(self):
     """docstring for view"""
-    pass
+    return template('page_thing_site_view_all.html', locals())
 
   def view_tags(self):
     """docstring for view_tags"""
@@ -36,14 +36,20 @@ class ThingSiteUI(ModelUI):
 
   def search(self, request):
     """docstring for search"""
-    pass
+    return template('page_thing_site_search.html', locals())
 
   def search_post(self, request):
     """docstring for search_post"""
     pass
 
+  @check_permission('create', _('You are not allowed to create this type of item.'))
   def create(self):
     """docstring for create"""
+    return template('page_thing_site_create.html', locals())
+
+  @check_permission('create', _('You are not allowed to create this type of item.'))
+  def create_post(self, request):
+    """docstring for create_post"""
     pass
 
 

@@ -26,13 +26,16 @@ class ThingSite(db.Model):
   """docstring for ThingSite"""
   avaliable_slots = db.IntegerProperty(default=0)
 
-  def can_create_thing(self, user):
+  def can_create(self, user):
     """docstring for can_create_thing"""
     return self.avaliable_slots > 0
 
-  def create_thing(self, thing):
+  def create(self, thing):
     """docstring for create_thing"""
-    pass
+    thing.put()
+    self.avaliable_slots -= 1
+    self.put()
+
 
   @classmethod
   @cache_result('%s-site', 240)

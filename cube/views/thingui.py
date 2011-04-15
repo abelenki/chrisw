@@ -49,10 +49,13 @@ class ThingUI(ModelUI):
     """docstring for view"""
     current_item = self.thing
 
+    return template('page_thing_view.html', locals())
+
   @check_permission('edit', _("User is not allowed to edit this item."))
   def edit(self):
     """docstring for edit"""
-    pass
+
+    return template('page_thing_edit.html', locals())
 
   @check_permission('edit', _("User is not allowed to edit this item."))
   def edit_post(self):
@@ -94,6 +97,37 @@ class ThingUI(ModelUI):
     return back()
 
 
-t
+class ThingHandler(handlers.RequestHandler):
+  """Here we use a trick to enable 'mixin' feature for Python.
+  Consider the following code example:
 
+  >>> class A():
+  ...   def foo(self):
+  ...     self.bar()
+
+  >>> class B():
+  ...   def bar(self):
+  ...     print "bar"
+
+  >>> C = type('C', (A, B, object),{})
+  >>> C().foo()
+  bar
+
+  """
+
+  thing_meta = None
+
+  def get(self, thing_id):
+    """docstring for get"""
+    thing = thing_meta.thing_class.get_by_id(thing_id)
+    thing_ui = thing_meta.thing_ui_class(thing)
+
+    self.get_impl(thing_ui)
+
+  def post(self, thing_id):
+    """docstring for post"""
+    thing = thing_meta.thing_class.get_by_id(thing_id)
+    thing_ui = thing_meta.thing_ui_class(thing)
+
+    self.post_impl(thing_ui)
 
