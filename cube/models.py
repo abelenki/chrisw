@@ -66,6 +66,9 @@ class Thing(gdb.Entity):
   rank_counts = db.ListFlyProperty(default=[0] * 6)
   rank_count_sum = db.IntegerFlyProperty(default=0)
 
+  owner_count = db.IntegerFlyProperty(default=0)
+  wanting_one_count = db.IntegerFlyProperty(default=0)
+  comment_count = db.IntegerFlyProperty(default=0)
 
   def can_own(self, user):
     """docstring for can_own"""
@@ -78,10 +81,17 @@ class Thing(gdb.Entity):
   def add_owner(self, user):
     """docstring for add_owner"""
     self.link(OWNER, user)
+    self._update_owner_count()
 
   def remove_owner(self, user):
     """docstring for remove_owner"""
     self.unlink(OWNER, user)
+    self._update_owner_count()
+
+  def _update_owner_count(self):
+    """docstring for update_owner_count"""
+    self.owner_count = self.targets(OWNER, User).count()
+    self.put()
 
 
   def can_want(self, user):
@@ -96,10 +106,17 @@ class Thing(gdb.Entity):
   def add_wanting_one(self, user):
     """docstring for add_wanting_one"""
     self.link(WANTING_ONE, user)
+    self._update_wanting_one_count()
 
   def remove_wanting_one(self, user):
     """docstring for remove_wanting_one"""
     self.unlink(WANTING_ONE, user)
+    self._update_wanting_one_count()
+
+  def _update_wanting_one_count(self):
+    """docstring for update_wanting_one_count"""
+    self.wanting_one_count = self.targets(WANTING_ONE, User).count()
+    self.put()
 
   def can_rank(self, user):
     """docstring for can_rank"""
@@ -113,28 +130,41 @@ class Thing(gdb.Entity):
     """docstring for add_rank"""
     if int(rank) in range(1, 6):
       self.link(RANK, user, link_attr=rank)
+      self.update_rank_info()
     else:
       raise Exception("Rank must between 1 to 5")
 
+
   def can_comment(self, user):
     """docstring for can_comment"""
-    pass
+    return self.is_not_guest() and not self.has_comment_by(self, user)
 
   def has_comment_by(self, user):
     """docstring for has_comment_by"""
-    pass
+    return self.get_comment(user) is None
 
   def get_comment(self, user):
     """docstring for get_comment_by"""
-    pass
+    return self.comments.filter('author', user).get()
 
   def add_comment(self, user, comment):
     """docstring for add_comment"""
-    pass
+    comment.author = user
+    comment.thing = self
+    comment.thing_type = self.get_type_name()
+    comment.put()
 
-  def remove_comment(self):
+    self._update_comment_count()
+
+  def _update_comment_count(self):
+    """docstring for update_comment_count"""
+    self.comment_count = self.comments.count()
+
+  def remove_comment(self, comment):
     """docstring for remove_comment"""
-    pass
+    comment.delete()
+
+    self._update_comment_count()
 
   def update_rank_info(self):
     """docstring for update_rank_info"""
@@ -149,6 +179,8 @@ class Thing(gdb.Entity):
 
     self.rank = self.rank / self.rank_count_sum
 
+    self.put()
+
   @property
   def rank_info(self):
     """docstring for rank_info"""
@@ -161,13 +193,22 @@ class Thing(gdb.Entity):
     """docstring for update_keyword_index"""
     pass
 
+  def get_type_name(self):
+    """docstring for get_type_name"""
+    return self.__class__.get_cls_type_name()
+
+  @classmethod
+  def get_cls_type_name(cls):
+    """docstring for get_cls_type_name"""
+    return cls.__name__
+
 
 class ThingComment(db.Entity):
   """docstring for ThingComment"""
   author = db.ReferenceProperty(User)
   content = db.TextPropery(required=True)
 
-  thing = db.ReferenceProperty(Thing)
+  thing = db.ReferenceProperty(Thing, collection_name='comments')
   thing_type = db.StringProperty(required=True)
 
   ups = db.IntegerFlyProperty(default=0)
@@ -195,3 +236,5 @@ class ThingComment(db.Entity):
     """docstring for update_digs"""
     self.ups = self.targets(DIG, User, link_attr=str(1)).count()
     self.downs = self.targets(DIG, User, link_attr=str(-1)).count()
+
+    self.put()
