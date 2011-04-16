@@ -15,21 +15,25 @@ from chrisw.core import router
 
 from decorators import *
 
+__all__ = ['register_app', 'run_appengine_app', 'register_handler_classes',
+'get_handler', 'post_handler', 'options_handler', 'head_handler',
+'delete_handler', 'trace_handler']
+
 def register_app(app_names):
   """docstring for register_app"""
   module_names = []
-  
+
   for app_name in app_names:
     view_module_name = app_name + "." + "views"
     module_names.append(view_module_name)
-  
+
   for module_name in module_names:
     try:
       __import__(module_name, globals(), locals())
       module = sys.modules[module_name]
       members = [module.__dict__[m] for m in dir(module)]
       submodules = [m for m in members if inspect.ismodule(m)]
-      
+
       for submodule in submodules:
         smembers = [submodule.__dict__[m] for m in dir(submodule)]
         sfunctions = [m for m in smembers if inspect.isfunction(m)]
@@ -38,9 +42,9 @@ def register_app(app_names):
           if hasattr(func,'is_request_handler') and func.is_request_handler:
             path = func.path
             request_type = func.request_type
-            
+
             router.register_path_handler(path, func, request_type)
-            
+
     except ImportError, e:
       logging.error("Can't import " + module_name)
 
@@ -51,14 +55,13 @@ def register_handler_classes(handler_url_pairs):
 
 def run_appengine_app():
   """docstring for run_appengine_app"""
-  
+
   from google.appengine.ext.webapp.util import run_wsgi_app
   from google.appengine.ext import webapp
   from chrisw.core import handlers
-  
+
   application = webapp.WSGIApplication(handlers.get_handler_bindings(),\
                                        debug=True)
   run_wsgi_app(application)
-  
-  
-    
+
+

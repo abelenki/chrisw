@@ -12,6 +12,8 @@ from chrisw import db, gdb
 from chrisw.core.memcache import cache_result
 from conf import settings
 
+__all__ = ['User', 'Guest']
+
 class User(gdb.Entity):
   """docstring for User"""
   fullname = db.StringProperty(required=True, default="Name")

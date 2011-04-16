@@ -10,9 +10,14 @@ Copyright (c) 2011 Shanghai Jiao Tong University. All rights reserved.
 """
 
 
+_all_thing_metas = []
+
 class _ThingMetaMeta(type):
   """docstring for _ThingMetaMeta"""
-  pass
+  def __new__(cls, name, bases, attrs):
+
+    new_thing_meta = super(_ThingMetaMeta, cls).new(name, bases, attrs)
+    return new_thing_meta
 
 class ThingMeta(object):
   """docstring for ThingConfig"""

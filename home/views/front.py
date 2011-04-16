@@ -21,18 +21,19 @@ from common.auth import get_current_user, Guest
 from conf import settings
 from group.models import *
 from home.models import *
+from common.models import *
 
 @get_handler(r'/home')
 def display_home_page(request):
   """docstring for topic_edit_post"""
-  
+
   topics = GroupTopic.latest().fetch(12)
   streams = UserStream.latest().fetch(12)
-  
+
   recent_members = [x for x in User.latest().fetch(5) if x.key() != Guest.key()]
-  
+
   recent_groups = Group.latest().fetch(5)
-  
+
   display_group_name = True
-  
+
   return template('page_site_home_v1.html', locals())

@@ -62,14 +62,14 @@ class ThingSiteHandler(handlers.RequestHandler):
   def get(self):
     """docstring for get"""
     thing_site = thing_meta.thing_site_class.get_instance()
-    thing_site_ui = ThingSiteUI(thing_site)
+    thing_site_ui = thing_meta.thing_site_ui_class(thing_site)
 
     return self.get_impl(thing_site_ui)
 
   def post(self):
     """docstring for post"""
     thing_site = thing_meta.thing_site_class.get_instance()
-    thing_site_ui = ThingSiteUI(thing_site)
+    thing_site_ui = thing_site_ui_class(thing_site)
 
     return self.post_impl(thing_site_ui)
 

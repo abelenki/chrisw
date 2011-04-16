@@ -7,6 +7,7 @@ Created by Kang Zhang on 2011-02-15.
 Copyright (c) 2011 Shanghai Jiao Tong University. All rights reserved.
 """
 
+__all__ = ['CannotResolvePath', 'PermissionException']
 
 class ChriswException(Exception):
   pass

@@ -10,7 +10,7 @@ be registered on application's init.
 Usage:
 
   def topic_handler(func):
-    # wrapper for all topic related hanlders, it retrieves topic model for 
+    # wrapper for all topic related hanlders, it retrieves topic model for
     # request
     def wrapper(handler, topic_id):
       topic = GroupTopic.get_by_id(int(topic_id))
@@ -24,13 +24,16 @@ Usage:
   @topic_handler
   def topic_view_get(topic_ui, request):
     return topic_ui.view(request)
-  
+
 
 More examples can be found in group/views/topicui.py
 
 Created by Kang Zhang on 2011-02-15.
 Copyright (c) 2011 Shanghai Jiao Tong University. All rights reserved.
 """
+
+__all__ = ['get_handler', 'post_handler', 'options_handler', 'head_handler',
+'delete_handler', 'trace_handler']
 
 def request_handler(func, path, request_type = 'get'):
   """docstring for request_handler"""
@@ -41,7 +44,7 @@ def request_handler(func, path, request_type = 'get'):
 
 def get_handler(path):
   """Decorator for get method
-  
+
   Usage:
   @get_handler(r'/home')
   def home(self):
@@ -68,6 +71,8 @@ def delete_handler():
 def trace_handler(path):
   """Decorator for trace method"""
   return lambda func: request_handler(func, path, 'trace')
+
+
 
 
 
