@@ -29,10 +29,14 @@ class ThingSiteUI(ModelUI):
   def __init__(self, thing_site):
     super(ThingSiteUI, self).__init__(thing_site)
     self.thing_site = thing_site
+    self.user = get_current_user()
 
   def view_front(self):
     """docstring for view"""
-    return template('page_thing_site_view_all.html', locals())
+    
+    
+    
+    return template('page_thing_site_view_front.html', locals())
 
   def view_tags(self):
     """docstring for view_tags"""
@@ -46,16 +50,22 @@ class ThingSiteUI(ModelUI):
     """docstring for search_post"""
     pass
 
-  @check_permission('create', _('You are not allowed to create this type of item.'))
+  @check_permission('create_thing', _('You are not allowed to create this type of item.'))
   def create(self):
     """docstring for create"""
     form = self.thing_meta.thing_form_class()
     return template('page_thing_site_create.html', locals())
 
-  @check_permission('create', _('You are not allowed to create this type of item.'))
+  @check_permission('create_thing', _('You are not allowed to create this type of item.'))
   def create_post(self, request):
     """docstring for create_post"""
-    pass
+    form = self.thing_meta.thing_form_class(data=request.POST)
+    
+    if form.is_valid():
+      new_thing = form.save(commit=False)
+      self.thing_site.create_thing(new_thing, self.user)
+    
+    return template('page_thing_site_create.html', locals())
 
 
 class ThingSiteHandler(handlers.RequestHandler):
@@ -73,7 +83,7 @@ class ThingSiteHandler(handlers.RequestHandler):
   def post(self):
     """docstring for post"""
     thing_site = self.thing_meta.thing_site_class.get_instance()
-    thing_site_ui = self.thing_site_ui_class(thing_site)
+    thing_site_ui = self.thing_meta.thing_site_ui_class(thing_site)
 
     return self.post_impl(thing_site_ui)
 

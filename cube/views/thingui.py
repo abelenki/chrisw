@@ -31,6 +31,9 @@ class ThingForm(djangoforms.ModelForm):
         max_length=20)
   introduction = fields.CharField(label = _("Introductioin"),\
     widget=forms.Textarea, min_length=2, max_length = 200)
+  tags = fields.fields.CharField(label = _("Tags (Please seperate tags by comma ',')"),\
+  min_length=2, max_length=20)
+  
 
 class ThingCommentForm(djangoforms.ModelForm):
   """docstring for ThingCommentForm"""

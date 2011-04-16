@@ -47,7 +47,6 @@ class ThingMeta(object):
   __metaclass__ = _ThingMetaMeta
 
   class_prefix = 'Thing'
-  url_prefix = 'thing'
 
   title = 'Thing'
 
@@ -59,6 +58,11 @@ class ThingMeta(object):
   _thing_site_class = None
   _thing_site_ui_class = None
   _thing_site_handler_class = None
+  
+  @property
+  def url_prefix(self):
+    """docstring for url_prefix"""
+    return class_prefix.lower()
 
   def _init_thing_class(self):
     from cube.models import Thing
@@ -72,14 +76,15 @@ class ThingMeta(object):
 
   def _init_thing_form_class(self):
     from views.thingui import ThingForm
-    new_form_class = self.new_class(ThingForm)
+    new_form_class_name = self.new_class_name(ThingForm)
     fields = ThingForm.Meta.fields
     
     # init meta class
     meta_class = type('Meta', (object,), {'model':self.thing_class,
       'fields':fields})
-      
-    new_form_class.Meta = meta_class
+    
+    new_form_class = type(new_form_class_name, (ThingForm,), 
+      {'Meta':meta_class})
     
     return new_form_class
 

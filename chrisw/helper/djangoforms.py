@@ -31,7 +31,6 @@ class ModelForm(djangoforms.ModelForm):
     
   def save(self, commit=False):
     """docstring for save"""
-    
     instance = super(ModelForm, self).save(commit)
     
     if instance:

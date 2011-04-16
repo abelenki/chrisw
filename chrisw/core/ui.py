@@ -99,7 +99,12 @@ def view_method(func):
     # append the instance variable
     if hasattr(action, 'var_dict'):
       var_dict = action.var_dict
+      
+      # add instance attributes
       var_dict.update(self.__dict__)
+      # add class attributes
+      var_dict.update(self.__class__.__dict__)
+      
       # skip the keys
       for key in ('self', 'model_obj', 'model_user'):
         if var_dict.has_key(key): 

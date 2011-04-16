@@ -26,11 +26,11 @@ class ThingSite(db.Model):
   """docstring for ThingSite"""
   avaliable_slots = db.IntegerProperty(default=0)
 
-  def can_create(self, user):
+  def can_create_thing(self, user):
     """docstring for can_create_thing"""
     return self.avaliable_slots > -10
 
-  def create(self,user, thing):
+  def create_thing(self, thing, user):
     """docstring for create_thing"""
     thing.creator = user
     thing.put()
@@ -53,7 +53,7 @@ class ThingSite(db.Model):
 
 class Thing(gdb.Entity):
   """docstring for Thing"""
-  creator = db.ReferenceProperty(User, required=True)
+  creator = db.ReferenceProperty(User)
 
   title = db.StringProperty(required=True)
 
@@ -66,17 +66,19 @@ class Thing(gdb.Entity):
   tags = db.StringListProperty(default=[])
 
   index_fields = ['title']
-  keyword_index = db.StringListProperty(required=True)
+  keyword_index = db.StringListProperty(required=True, default=[])
 
   # rank properties
-  rank = db.FloatProperty(required=True, default=0)
+  rank = db.FloatProperty(required=True, default=0.0)
   rank_counts = db.ListFlyProperty(default=[0] * 6)
   rank_count_sum = db.IntegerFlyProperty(default=0)
 
   owner_count = db.IntegerFlyProperty(default=0)
   wanting_one_count = db.IntegerFlyProperty(default=0)
   comment_count = db.IntegerFlyProperty(default=0)
-
+  
+  url_format = r"/c/%(url_prefix)s/%(tid)s"
+  
   def can_own(self, user):
     """docstring for can_own"""
     return user.is_not_guest() and not self.has_owner(user)
@@ -203,6 +205,17 @@ class Thing(gdb.Entity):
   def get_type_name(self):
     """docstring for get_type_name"""
     return self.__class__.get_cls_type_name()
+    
+  @property
+  def type_name(self):
+    return self.get_type_name()
+  
+  @property
+  def url(self):
+    url_prefix = self.get_type_name().lower()
+    tid = self.key().id()
+    
+    return self.url_format % locals()
 
   @classmethod
   def get_cls_type_name(cls):
