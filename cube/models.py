@@ -59,6 +59,8 @@ class Thing(gdb.Entity):
 
   photo_url = db.StringProperty(required=True)
 
+  source_url = db.StringProperty()
+
   tags = db.StringListProperty(default=[])
 
   index_fields = ['title']

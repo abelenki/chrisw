@@ -149,18 +149,6 @@ For more document, you can refer to
 
     https://github.com/kangzhang/chrisw/wiki
 
-About Chrisw2
-=============
-
-Yes, **Chrisw2** is under development. The mission of Chrisw2 is becoming a
-scalable, fast, module based web framework. Once it has been done, we will
-re-implement Chrisw using it.
-
-Chrisw and Chrisw2 are both under construction at current time. The team for
-Chrisw2 is larger and full of enthusiasm. Chrisw2 will be published when it
-reaches the first milestone. If you've any idea of that, contact
-jobo.zh AT gmail.com without any hesitate. :-)
-
 License
 =======
 
