@@ -72,9 +72,13 @@ class ThingMeta(object):
 
   def _init_thing_form_class(self):
     from views.thingui import ThingForm
-    new_form_class = self.new_form_class(ThingForm)
+    new_form_class = self.new_class(ThingForm)
+    fields = ThingForm.Meta.fields
+    
     # init meta class
-    meta_class = type('Meta', (object), {'model':self.thing_class})
+    meta_class = type('Meta', (object,), {'model':self.thing_class,
+      'fields':fields})
+      
     new_form_class.Meta = meta_class
     
     return new_form_class

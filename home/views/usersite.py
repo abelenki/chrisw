@@ -173,7 +173,6 @@ class UserSiteHandler(handlers.RequestHandler):
     return self.post_impl(usersiteui, self.request)
 
 class SignupUserHanlder(UserSiteHandler):
-  """docstring for RegUserHanlder"""
   def get_impl(self, usersiteui):
     return usersiteui.signup()
   
@@ -181,7 +180,6 @@ class SignupUserHanlder(UserSiteHandler):
     return usersiteui.signup_post(request)
       
 class LoginUserHandler(UserSiteHandler):
-  """docstring for LoginHandler"""
   def get_impl(self, usersiteui):
     return usersiteui.login(self.request)
   
@@ -189,12 +187,10 @@ class LoginUserHandler(UserSiteHandler):
     return usersiteui.login_post(request)
 
 class LogoutUserHandler(UserSiteHandler):
-  """docstring for LogoutUserHandler"""
   def get_impl(self, usersiteui):
     return usersiteui.logout()
 
 class LoginDemoHandler(UserSiteHandler):
-  """docstring for ClassName"""
   def get(self):
     import gaesessions
     logging.debug("current session %s", gaesessions.get_current_session())

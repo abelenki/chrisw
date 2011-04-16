@@ -38,6 +38,8 @@ DEFAULT_USER_PHOTO = "http://www.gravatar.com/avatar.php?"
 
 DEFAULT_GROUP_PHOTO = "http://www.gravatar.com/avatar/cf4773410a19cd50fc2b8bccaef9a9dc?s=48"
 
+DEFAULT_THING_PHOTO = 'http://www.gravatar.com/avatar.php?'
+
 USE_I18N = True
 
 GRAVATAR_BASE = "http://www.gravatar.com/avatar/"

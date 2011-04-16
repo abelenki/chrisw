@@ -28,11 +28,13 @@ class ThingSite(db.Model):
 
   def can_create(self, user):
     """docstring for can_create_thing"""
-    return self.avaliable_slots > 0
+    return self.avaliable_slots > -10
 
-  def create(self, thing):
+  def create(self,user, thing):
     """docstring for create_thing"""
+    thing.creator = user
     thing.put()
+    
     self.avaliable_slots -= 1
     self.put()
 
@@ -57,7 +59,7 @@ class Thing(gdb.Entity):
 
   introduction = db.StringProperty(required=True)
 
-  photo_url = db.StringProperty(required=True)
+  photo_url = db.StringProperty(required=True, default=settings.DEFAULT_THING_PHOTO)
 
   source_url = db.StringProperty()
 
@@ -67,7 +69,7 @@ class Thing(gdb.Entity):
   keyword_index = db.StringListProperty(required=True)
 
   # rank properties
-  rank = db.FloatProperty(required=True)
+  rank = db.FloatProperty(required=True, default=0)
   rank_counts = db.ListFlyProperty(default=[0] * 6)
   rank_count_sum = db.IntegerFlyProperty(default=0)
 

@@ -23,7 +23,14 @@ from cube.models import ThingComment
 
 class ThingForm(djangoforms.ModelForm):
   """docstring for ThingForm"""
-  pass
+  class Meta:
+    """docstring for Meta"""
+    fields = ['title', 'introduction', 'tags']
+  
+  title = fields.fields.CharField(label = _("Title"), min_length=2,\
+        max_length=20)
+  introduction = fields.CharField(label = _("Introductioin"),\
+    widget=forms.Textarea, min_length=2, max_length = 200)
 
 class ThingCommentForm(djangoforms.ModelForm):
   """docstring for ThingCommentForm"""
@@ -132,37 +139,26 @@ class ThingHandler(handlers.RequestHandler):
     self.post_impl(thing_ui)
 
 class ThingWantHandler(handlers.PartialHandler):
-  """docstring for ThingWantHandler"""
   def get_impl(self, thing):
-    """docstring for get_impl"""
     return thing.want()
 
 class ThingOwnHandler(handlers.PartialHandler):
-  """docstring for ThingOwnHandler"""
   def get_impl(self, thing):
-    """docstring for get_impl"""
     return thing.own()
 
 class ThingRankHandler(handlers.PartialHandler):
-  """docstring for ThingRankHandler"""
   def get_impl(self, thing):
-    """docstring for get_impl"""
     return thing.rank(self.request)
 
 class ThingEditHandler(handlers.PartialHandler):
-  """docstring for ThingEditHandler"""
   def get_impl(self, thing):
-    """docstring for get_impl"""
     return thing.edit()
 
   def post_impl(self, thing):
-    """docstring for post_impl"""
     return thing.edit(self.request)
 
 class ThingViewHandler(handlers.PartialHandler):
-  """docstring for ThingViewHandler"""
   def get_impl(self, thing):
-    """docstring for get_impl"""
     return thing.view()
 
 

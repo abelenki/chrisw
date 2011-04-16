@@ -49,6 +49,7 @@ class ThingSiteUI(ModelUI):
   @check_permission('create', _('You are not allowed to create this type of item.'))
   def create(self):
     """docstring for create"""
+    form = self.thing_meta.thing_form_class()
     return template('page_thing_site_create.html', locals())
 
   @check_permission('create', _('You are not allowed to create this type of item.'))
@@ -90,7 +91,7 @@ class ThingSiteSearchHandler(handlers.PartialHandler):
 
 class ThingSiteCreateHandler(handlers.PartialHandler):
   def get_impl(self, thing_site_ui):
-    return thing_site_ui.create(self.request)
+    return thing_site_ui.create()
 
   def post_impl(self, thing_site_ui):
     return thing_site_ui.create_post(self.request)

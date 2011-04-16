@@ -125,12 +125,10 @@ class UserHandler(handlers.RequestHandler):
     
 
 class UserProfileHandler(UserHandler):
-  """docstring for UserProfileHandler"""
   def get_impl(self, userui):
     return userui.view()
   
 class UserProfileSettingHandler(handlers.RequestHandler):
-  """docstring for UserSettingHandler"""
   def get(self):
     userui = UserUI(get_current_user())
     return userui.profile(self.request)
