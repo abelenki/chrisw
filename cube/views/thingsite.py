@@ -23,11 +23,14 @@ from conf import settings
 
 class ThingSiteUI(ModelUI):
   """docstring for ThingSiteUI"""
+  
+  thing_meta = None
+  
   def __init__(self, thing_site):
     super(ThingSiteUI, self).__init__(thing_site)
     self.thing_site = thing_site
 
-  def view_all(self):
+  def view_front(self):
     """docstring for view"""
     return template('page_thing_site_view_all.html', locals())
 
@@ -61,47 +64,39 @@ class ThingSiteHandler(handlers.RequestHandler):
 
   def get(self):
     """docstring for get"""
-    thing_site = thing_meta.thing_site_class.get_instance()
-    thing_site_ui = thing_meta.thing_site_ui_class(thing_site)
+    thing_site = self.thing_meta.thing_site_class.get_instance()
+    thing_site_ui = self.thing_meta.thing_site_ui_class(thing_site)
 
     return self.get_impl(thing_site_ui)
 
   def post(self):
     """docstring for post"""
-    thing_site = thing_meta.thing_site_class.get_instance()
-    thing_site_ui = thing_site_ui_class(thing_site)
+    thing_site = self.thing_meta.thing_site_class.get_instance()
+    thing_site_ui = self.thing_site_ui_class(thing_site)
 
     return self.post_impl(thing_site_ui)
 
 
-class ThingSiteViewAllHandler(handlers.PartialHandler):
-  """docstring for ThingSiteViewHandler"""
+class ThingSiteViewFrontHandler(handlers.PartialHandler):
   def get_impl(self, thing_site_ui):
-    """docstring for get_impl"""
-    return thing_site_ui.view_all()
+    return thing_site_ui.view_front()
 
 class ThingSiteSearchHandler(handlers.PartialHandler):
-  """docstring for ThingSiteSearchHandler"""
   def get_impl(self, thing_site_ui):
-    """docstring for get_impl"""
     return thing_site_ui.search(self.request)
 
   def post_impl(self, thing_site_ui):
-    """docstring for post_impl"""
     return thing_site_ui.search_post(self.request)
 
 class ThingSiteCreateHandler(handlers.PartialHandler):
-  """docstring for ThingSiteCreateHandler"""
   def get_impl(self, thing_site_ui):
-    """docstring for get_impl"""
     return thing_site_ui.create(self.request)
 
   def post_impl(self, thing_site_ui):
-    """docstring for post_impl"""
     return thing_site_ui.create_post(self.request)
 
 
-abstract_apps = [(r'/%(thing_url)s/all', ThingSiteViewHandler),
-                 (r'/%(thing_url)s/search', ThingSiteSearchHandler),
-                 (r'/%(thing_url)s/new', ThingSiteCreateHandler),
+abstract_apps = [(r'/c/%(thing_url)s', ThingSiteViewFrontHandler),
+                 (r'/c/%(thing_url)s/search', ThingSiteSearchHandler),
+                 (r'/c/%(thing_url)s/new', ThingSiteCreateHandler),
                  ]

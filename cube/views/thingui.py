@@ -29,7 +29,7 @@ class ThingCommentForm(djangoforms.ModelForm):
   """docstring for ThingCommentForm"""
   class Meta:
     model = ThingComment
-    fields = content
+    fields = ['content']
 
   content = fields.fields.CharField(label = _("Short comment"), min_length=10,\
       max_length=140)

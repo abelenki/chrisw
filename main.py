@@ -30,13 +30,13 @@ def main():
   djsettings.LANGUAGE_CODE = settings.LANGUAGE_CODE
   djsettings.LOCALE_PATHS += settings.LOCALE_PATHS
 
-  import home, group
+  import home, group, cube
 
   from chrisw.core import handlers
   from chrisw.web.util import register_app, register_handler_classes
   register_app(['group','home'])
 
-  handler_path_mappings = home.apps + group.apps
+  handler_path_mappings = home.apps + group.apps + cube.apps
   register_handler_classes(handler_path_mappings)
 
   application = webapp.WSGIApplication( handler_path_mappings + \

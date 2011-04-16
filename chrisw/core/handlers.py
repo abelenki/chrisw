@@ -23,6 +23,7 @@ except Exception, e:
   # before appengine's python upgrade to 2.7, we need import json from django
   from django.utils import simplejson as json
 
+__all__ = ['RequestHandler', 'PartialHandler', 'get_handler_bindings']
 
 class APIError(exceptions.ChriswException):
   def __init__(self, reason):
@@ -275,7 +276,7 @@ class RequestHandler(webapp.RequestHandler):
   """
   __metaclass__ = RequestHandlerMeta
 
-class PartialRequestHandler(object):
+class PartialHandler(object):
   """docstring for PartialRequestHandler"""
   pass
 

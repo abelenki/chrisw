@@ -69,7 +69,7 @@ class Thing(gdb.Entity):
   # rank properties
   rank = db.FloatProperty(required=True)
   rank_counts = db.ListFlyProperty(default=[0] * 6)
-  rank_count_sum = db.IntegerFlyProperty(default=0)
+  rank_count_sum = db.IntegerFlyProperty(default=0)
 
   owner_count = db.IntegerFlyProperty(default=0)
   wanting_one_count = db.IntegerFlyProperty(default=0)
@@ -208,10 +208,10 @@ class Thing(gdb.Entity):
     return cls.__name__
 
 
-class ThingComment(db.Entity):
+class ThingComment(gdb.Entity):
   """docstring for ThingComment"""
   author = db.ReferenceProperty(User)
-  content = db.TextPropery(required=True)
+  content = db.TextProperty(required=True)
 
   thing = db.ReferenceProperty(Thing, collection_name='comments')
   thing_type = db.StringProperty(required=True)

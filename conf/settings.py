@@ -21,6 +21,7 @@ ROOT_PATH, CONFIG_PATH = os.path.split(os.path.dirname(__file__))
 TEMPLATE_DIRS = (ROOT_PATH + "/common/templates",
                  ROOT_PATH + "/home/templates",
                  ROOT_PATH + "/group/templates",
+                 ROOT_PATH + "/cube/templates",
                 )
 
 LIB_DIRS = (ROOT_PATH + "/lib",)
@@ -46,7 +47,6 @@ LANGUAGES = (
     # 'en', 'zh_TW' match the directories in conf/locale/*
     ('en', 'English'),
     ('zh_CN', 'Chinese'),
-    # or ('zh-tw', _('Chinese')), # But the directory must still be conf/locale/zh_TW
     )
 
 ENABLE_CACHE = True

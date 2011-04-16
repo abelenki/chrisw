@@ -9,3 +9,6 @@ Created by Kang Zhang on 2011-04-10.
 Copyright (c) 2011 Shanghai Jiao Tong University. All rights reserved.
 """
 
+import things
+
+apps = things.apps

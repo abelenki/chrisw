@@ -11,13 +11,13 @@ Copyright (c) 2011 Shanghai Jiao Tong University. All rights reserved.
 
 __all__ = ['ThingMeta']
 
-_all_thing_metas = []
+_all_thing_metas = {}
 
 class _ThingMetaMeta(type):
   """docstring for _ThingMetaMeta"""
   def __new__(cls, name, bases, attrs):
 
-    new_thing_meta = super(_ThingMetaMeta, cls).new(name, bases, attrs)
+    new_thing_meta = super(_ThingMetaMeta, cls).__new__(cls, name, bases, attrs)
     global _all_thing_metas
     _all_thing_metas[name] = new_thing_meta
 
@@ -149,7 +149,7 @@ class ThingMeta(object):
   def new_class(self, class_):
     """Simple new class"""
     new_handler_class_name = self.new_class_name(class_)
-    return type(new_handler_class_name, class_, {'thing_meta':self})
+    return type(new_handler_class_name, (class_, ), {'thing_meta':self})
 
   def _init_apps(self):
     """docstring for _init_apps"""
@@ -169,7 +169,7 @@ class ThingMeta(object):
       apps.append((url, new_handler_class))
 
     # init thing site apps
-    from views.thingsite import abstract_apps as thingsite_apps:
+    from views.thingsite import abstract_apps as thingsite_apps
 
     for (url_parttern, handler_class) in thingsite_apps:
       url = url_parttern % {'thing_url':self.url_prefix}
@@ -179,7 +179,7 @@ class ThingMeta(object):
       new_handler_class = type(new_handler_class_name, \
         (self.thing_site_handler_class, handler_class), {})
 
-      apps.append(url, new_handler_class)
+      apps.append((url, new_handler_class))
 
     return apps
 
