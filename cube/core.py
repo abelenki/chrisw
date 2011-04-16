@@ -70,9 +70,14 @@ class ThingMeta(object):
     """Return the class for the thing"""
     pass
 
-
   def _init_thing_form_class(self):
-    pass
+    from views.thingui import ThingForm
+    new_form_class = self.new_form_class(ThingForm)
+    # init meta class
+    meta_class = type('Meta', (object), {'model':self.thing_class})
+    new_form_class.Meta = meta_class
+    
+    return new_form_class
 
   @property
   @lazy_property
