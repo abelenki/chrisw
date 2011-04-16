@@ -57,20 +57,26 @@ class ThingUI(ModelUI):
   @check_permission('view', _('User is not allowed to view this item.'))
   def view(self):
     """docstring for view"""
-    current_item = self.thing
 
     return template('page_thing_view.html', locals())
 
   @check_permission('edit', _("User is not allowed to edit this item."))
   def edit(self):
     """docstring for edit"""
-
+    form = self.thing_meta.thing_form_class()
     return template('page_thing_edit.html', locals())
 
   @check_permission('edit', _("User is not allowed to edit this item."))
-  def edit_post(self):
+  def edit_post(self, request):
     """docstring for edit_post"""
-    pass
+    form = self.thing_meta.thing_form_class(data=request.POST, \
+      instance=self.thing)
+      
+    if form.is_valid():
+      instance = form.save(commit=False)
+      instance.put()
+    
+    return template('page_thing_edit.html', locals())
 
   @check_permission('want', _('User are not allowed to want this item.'))
   def want(self):

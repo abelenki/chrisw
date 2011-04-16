@@ -1,1 +1,15 @@
 {% extends "cube_master.html" %}
+
+{% load i18n %}
+
+{% block content %}
+	
+<form action="/c/{{thing.key.id}}/edit" method="POST" accept-charset="utf-8">
+	<table id="thing_edit_form" border="0" cellspacing="5" cellpadding="5">
+		{{ form.as_p }}
+	</table>
+
+	<p><input type="submit" value="{% trans "Create" %}"></p>
+</form>
+
+{% endblock %}
