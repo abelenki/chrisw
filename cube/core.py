@@ -61,7 +61,8 @@ class ThingMeta(object):
   _thing_site_handler_class = None
 
   def _init_thing_class(self):
-    pass
+    from cube.models import Thing
+    return self.new_class(Thing)
 
   @property
   @lazy_property
@@ -69,9 +70,9 @@ class ThingMeta(object):
     """Return the class for the thing"""
     pass
 
+
   def _init_thing_form_class(self):
     pass
-
 
   @property
   @lazy_property
@@ -79,8 +80,10 @@ class ThingMeta(object):
     """docstring for thing_form_class"""
     pass
 
+
   def _init_thing_ui_class(self):
-    pass
+    from views.thingui import ThingUI
+    return self.new_class(ThingUI)
 
   @property
   @lazy_property
@@ -91,7 +94,8 @@ class ThingMeta(object):
 
   def _init_thing_handler_class(self):
     """docstring for _init_thing_handler_class"""
-    pass
+    from views.thingui import ThingHandler
+    return self.new_class(ThingHandler)
 
   @property
   @lazy_property
@@ -101,7 +105,8 @@ class ThingMeta(object):
 
 
   def _init_thing_site_class(self):
-    pass
+    from cube.models import ThingSite
+    return self.new_class(ThingSite)
 
   @property
   @lazy_property
@@ -111,7 +116,8 @@ class ThingMeta(object):
 
 
   def _init_thing_site_ui_class(self):
-    pass
+    from views.thingsite import ThingSiteUI
+    return self.new_class(ThingSiteUI)
 
   @property
   @lazy_property
@@ -122,7 +128,8 @@ class ThingMeta(object):
 
   def _init_thing_site_handler_class(self):
     """docstring for _init_thing_site_handler_class"""
-    pass
+    from views.thingsite import ThingSiteHandler
+    return self.new_class(ThingSiteHandler)
 
   @property
   @lazy_property
@@ -130,10 +137,17 @@ class ThingMeta(object):
     """docstring for thing_site_handler_class"""
     pass
 
-  @property
-  @lazy_property
-  def apps(self):
-    """docstring for url_bindings"""
+  def new_class_name(self, class_):
+    """docstring for new_class_name"""
+    return class_.__name__.replace('Thing', self.class_prefix)
+
+  def new_class(self, class_):
+    """Simple new class"""
+    new_handler_class_name = self.new_class_name(class_)
+    return type(new_handler_class_name, class_, {'thing_meta':self})
+
+  def _init_apps(self):
+    """docstring for _init_apps"""
     apps = []
 
     # init thing apps
@@ -142,8 +156,7 @@ class ThingMeta(object):
     for (url_parttern, handler_class) in thing_apps:
       url = url_parttern % {'thing_url':self.url_prefix}
 
-      new_handler_class_name = handler_class.__name__.replace('Thing',\
-        self.class_prefix)
+      new_handler_class_name = self.new_class_name(handler_class)
 
       new_handler_class = type(new_handler_class_name, \
         (self.thing_handler_class, handler_class), {})
@@ -156,8 +169,7 @@ class ThingMeta(object):
     for (url_parttern, handler_class) in thingsite_apps:
       url = url_parttern % {'thing_url':self.url_prefix}
 
-      new_handler_class_name = handler_class.__name__.replace('Thing',\
-        self.class_prefix)
+      new_handler_class_name = self.new_class_name(handler_class)
 
       new_handler_class = type(new_handler_class_name, \
         (self.thing_site_handler_class, handler_class), {})
@@ -165,3 +177,9 @@ class ThingMeta(object):
       apps.append(url, new_handler_class)
 
     return apps
+
+  @property
+  @lazy_property
+  def apps(self):
+    """docstring for url_bindings"""
+    pass
