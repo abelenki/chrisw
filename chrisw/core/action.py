@@ -20,8 +20,10 @@ class Action(object):
 
 class back(Action):
   """``back`` action: return to the previous page"""
-  def __init__(self):
+  def __init__(self, default_url=None):
     super(back, self).__init__()
+    
+    self.default_url = default_url
 
 class login(Action):
   """``login`` action: return to the login page"""
