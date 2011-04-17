@@ -56,6 +56,22 @@ class ThingSiteUI(ModelUI):
     """docstring for create"""
     form = self.thing_meta.thing_form_class()
     return template('page_thing_site_create.html', locals())
+  
+  # TODO add dynamic fields for creating form
+  def _get_dynamic_fields(self, data):
+    """docstring for _get_dynamic_fields"""
+    
+    line_key_format = "opt_attr[optattr][%s][%s]"
+    
+    fields = []
+    for i in range(0, 10):
+      key = data[line_key_format % (i, 'key')]
+      value = data[line_key_format % (i, 'value')]
+      
+      if key and value:
+        fields.append(key, value)
+        
+    return fields
 
   @check_permission('create_thing', _('You are not allowed to create this type of item.'))
   def create_post(self, request):

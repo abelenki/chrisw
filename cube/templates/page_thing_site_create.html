@@ -2,11 +2,35 @@
 
 {% load i18n %}
 
+{% block html_head %}
+	<script type="text/javascript" charset="utf-8" src="/javascript/libs/jquery-dynamic-form.js"></script>
+	
+	<script type="text/javascript" charset="utf-8">
+		$(document).ready(function(){
+			$("#opt_attr").dynamicForm("#plus", "#minus", {limit:5, createColor:'yellow', removeColor:'red',});
+		});
+		
+	</script>
+{% endblock %}
+
 {% block content %}
 	
 <form action="/c/{{thing_meta.url_prefix}}/new" method="POST" accept-charset="utf-8">
-	<table id="thing_create_form" border="0" cellspacing="5" cellpadding="5">
+	<table class="dynamic_form" border="0" cellspacing="5" cellpadding="5">
 		{{ form.as_p }}
+		
+		<!--<p>	
+			{% trans "Optional fields: " %}
+			<font style="color:#aaa;">
+			 	({% trans "In attribute name and attribute value format" %})
+			</font>
+			<a id="plus" href="#">{% trans " + More field" %}</a>
+			<a id="minus" href="#">{% trans "- Less field" %}</a>
+		</p>
+		<p id="opt_attr">
+			<input type="text" name="key" title="Put Your Values here" id="key" style="width:100px;">
+			<input type="text" name="value" title="Put Your Values here" id="value">
+		</p>-->
 	</table>
 
 	<p><input type="submit" value="{% trans "Create" %}"></p>

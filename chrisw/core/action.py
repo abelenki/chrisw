@@ -58,6 +58,10 @@ class template(_RenderAction):
     from home.models import Site
     site_info = {'site':Site.get_instance()}
     var_dict.update(site_info)
+    
+    import chrisw
+    chrisw_info = {'chrisw':chrisw}
+    var_dict.update(chrisw_info)
 
     from chrisw.helper.django_helper import render_to_string
     return render_to_string(self.name + ".html", self.var_dict)

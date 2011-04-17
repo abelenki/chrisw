@@ -64,13 +64,16 @@ class Thing(gdb.Entity):
   source_url = db.StringProperty()
 
   tags = db.StringListProperty(default=[])
-
+  
+  extra_fields = db.ListFlyProperty(default=[])
+  
   index_fields = ['title']
   keyword_index = db.StringListProperty(required=True, default=[])
 
   # rank properties
   rank = db.FloatProperty(required=True, default=0.0)
   rank_counts = db.ListFlyProperty(default=[0] * 6)
+  rank_rates = db.ListFlyProperty(default=[0.0] * 6)
   rank_count_sum = db.IntegerFlyProperty(default=0)
 
   owner_count = db.IntegerFlyProperty(default=0)
@@ -191,6 +194,9 @@ class Thing(gdb.Entity):
       self.rank_count_sum += rank_count
 
     self.rank = self.rank / self.rank_count_sum
+    
+    for i in range(1, 6):
+      self.rank_rates[i] = self.rank_counts[i] * 1.0 / self.rank_count_sum
 
     self.put()
 
@@ -199,7 +205,8 @@ class Thing(gdb.Entity):
     """docstring for rank_info"""
     rank = self.rank
     rank_count_sum = self.rank_count_sum
-    ranks = zip(range(1, 6), self.rank_counts)
+    ranks = zip(range(1, 6), self.rank_counts[1:])
+    rates = zip(range(1, 6), self.rank_rates[1:])
     return locals()
 
   def update_keyword_index(self):
