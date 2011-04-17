@@ -34,7 +34,8 @@ class ThingSiteUI(ModelUI):
   def view_front(self):
     """docstring for view"""
     
-    
+    thing_class = self.thing_meta.thing_class
+    latest_thing = thing_class.latest()
     
     return template('page_thing_site_view_front.html', locals())
 

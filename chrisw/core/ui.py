@@ -35,7 +35,7 @@ def inspect_permissions(model_obj, user):
       args, varargs, keywords, defaults = inspect.getargspec(member)
       if args == ['self', 'user']:
         out[name] = member(user)
-  
+
   return out
 
 

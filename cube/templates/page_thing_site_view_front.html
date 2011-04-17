@@ -1,1 +1,17 @@
 {% extends "cube_master.html" %}
+
+{% load thing_render %}
+
+{% block content %}
+	<div class="thing_new">
+		<ul>
+			{% for thing in latest_thing %}
+				{% thing_render thing box %}
+			{% endfor %}
+		</ul>
+	</div>
+{% endblock %}
+
+{% block sidebar %}
+	
+{% endblock %}

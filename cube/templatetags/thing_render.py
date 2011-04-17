@@ -7,10 +7,11 @@ Created by Kang Zhang on 2011-04-16.
 Copyright (c) 2011 Shanghai Jiao Tong University. All rights reserved.
 """
 
+from django import template
+
 from chrisw.i18n import _
 from chrisw.helper.django_helper import render_to_string
 
-from home.models import TEXT_STREAM
 
 register = template.Library()
 
@@ -25,12 +26,12 @@ _supported_types = {
 class ThingRenderNode(template.Node):
   """docstring for StreamRenderNode"""
   def __init__(self, thing_name, render_mode=_TEXT):
-    super(UserStreamRenderNode, self).__init__()
+    super(ThingRenderNode, self).__init__()
     self.thing_name = thing_name
     self.render_mode = render_mode
   
   def render(self, context):
-    current_item = context[self.thing_name]
+    thing = context[self.thing_name]
     
     context.update(locals())
     
@@ -68,4 +69,4 @@ def thing_render(parser, token):
       raise template.TemplateSyntaxError("%r tag got an unknown argument: %r"\
         % (items[0], item))
   
-  return UserStreamRenderNode(thing_name, **args)
+  return ThingRenderNode(thing_name, **args)
