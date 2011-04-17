@@ -135,40 +135,40 @@ class ThingHandler(handlers.RequestHandler):
 
   def get(self, thing_id):
     """docstring for get"""
-    thing = thing_meta.thing_class.get_by_id(thing_id)
-    thing_ui = thing_meta.thing_ui_class(thing)
+    thing = self.thing_meta.thing_class.get_by_id(int(thing_id))
+    thing_ui = self.thing_meta.thing_ui_class(thing)
 
-    self.get_impl(thing_ui)
+    return self.get_impl(thing_ui)
 
   def post(self, thing_id):
     """docstring for post"""
-    thing = thing_meta.thing_class.get_by_id(thing_id)
-    thing_ui = thing_meta.thing_ui_class(thing)
+    thing = self.thing_meta.thing_class.get_by_id(int(thing_id))
+    thing_ui = self.thing_meta.thing_ui_class(thing)
 
-    self.post_impl(thing_ui)
+    return self.post_impl(thing_ui)
 
 class ThingWantHandler(handlers.PartialHandler):
-  def get_impl(self, thing):
-    return thing.want()
+  def get_impl(self, thingui):
+    return thingui.want()
 
 class ThingOwnHandler(handlers.PartialHandler):
-  def get_impl(self, thing):
-    return thing.own()
+  def get_impl(self, thingui):
+    return thingui.own()
 
 class ThingRankHandler(handlers.PartialHandler):
-  def get_impl(self, thing):
-    return thing.rank(self.request)
+  def get_impl(self, thingui):
+    return thingui.rank(self.request)
 
 class ThingEditHandler(handlers.PartialHandler):
-  def get_impl(self, thing):
-    return thing.edit()
+  def get_impl(self, thingui):
+    return thingui.edit()
 
-  def post_impl(self, thing):
-    return thing.edit(self.request)
+  def post_impl(self, thingui):
+    return thingui.edit(self.request)
 
 class ThingViewHandler(handlers.PartialHandler):
-  def get_impl(self, thing):
-    return thing.view()
+  def get_impl(self, thingui):
+    return thingui.view()
 
 
 abstract_apps = [(r'/c/%(thing_url)s/(\d+)', ThingViewHandler),

@@ -79,6 +79,10 @@ class Thing(gdb.Entity):
   
   url_format = r"/c/%(url_prefix)s/%(tid)s"
   
+  def can_view(self, user):
+    """docstring for can_view"""
+    return True
+  
   def can_own(self, user):
     """docstring for can_own"""
     return user.is_not_guest() and not self.has_owner(user)
@@ -146,7 +150,7 @@ class Thing(gdb.Entity):
 
   def can_comment(self, user):
     """docstring for can_comment"""
-    return self.is_not_guest() and not self.has_comment_by(self, user)
+    return user.is_not_guest() and not self.has_comment_by(self, user)
 
   def has_comment_by(self, user):
     """docstring for has_comment_by"""
@@ -195,7 +199,7 @@ class Thing(gdb.Entity):
     """docstring for rank_info"""
     rank = self.rank
     rank_count_sum = self.rank_count_sum
-    ranks = zip(range(1, 6), rank_counts)
+    ranks = zip(range(1, 6), self.rank_counts)
     return locals()
 
   def update_keyword_index(self):

@@ -31,20 +31,20 @@ class ThingRenderNode(template.Node):
     self.render_mode = render_mode
   
   def render(self, context):
-    thing = context[self.thing_name]
+    current_item = context[self.thing_name]
     
     context.update(locals())
     
-    if not thing:
+    if not current_item:
       return "Skipped"
       
     template_name_format = "item_%(render_mode)s_%(thing_type)s.html"
     thing_type = 'thing'
     render_mode = self.render_mode
     
-    if _supported_types.has_key(thing.type_name) and \
-      render_mode in _supported_types[thing.type_name]:
-      thing_type = thing.type_name.lower()
+    if _supported_types.has_key(current_item.type_name) and \
+      render_mode in _supported_types[current_item.type_name]:
+      thing_type = current_item.type_name.lower()
     
     template_name = template_name_format % locals()
     
