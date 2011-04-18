@@ -32,7 +32,7 @@ LOGIN_URL = "/login"
 
 DEFAULT_HOME = "/home"
 
-INSTALLED_APPS = ('home', 'cube', )
+INSTALLED_APPS = ('home', 'cube', 'common', )
 
 DEFAULT_USER_PHOTO = "http://www.gravatar.com/avatar.php?"
 

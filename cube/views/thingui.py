@@ -83,11 +83,23 @@ class ThingUI(ModelUI):
     """docstring for want"""
     self.thing.add_wanting_one(self.user)
     return back()
+  
+  @check_permission('cancel_want', _('User are not allowed to cancel.'))
+  def cancel_want(self):
+    """docstring for cancel_want"""
+    self.thing.remove_wanting_one(self.user)
+    return back()
 
   @check_permission('own', _("User can't own this item."))
   def own(self):
     """docstring for own"""
     self.thing.add_owner(self.user)
+    return back()
+  
+  @check_permission('cancel_own', _("User are not allowed to cancel."))
+  def cancel_own(self):
+    """docstring for cancel_own"""
+    self.thing.remove_owner(self.user)
     return back()
 
   @check_permission('rank', _("User can't rank this item"))
@@ -151,9 +163,18 @@ class ThingWantHandler(handlers.PartialHandler):
   def get_impl(self, thingui):
     return thingui.want()
 
+class ThingCancelWantHandler(handlers.PartialHandler):
+  def get_impl(self, thingui):
+    return thingui.cancel_want()
+
 class ThingOwnHandler(handlers.PartialHandler):
   def get_impl(self, thingui):
     return thingui.own()
+
+class ThingCancelOwnHandler(handlers.PartialHandler):
+  def get_impl(self, thingui):
+    """docstring for get_impl"""
+    return thingui.cancel_own()
 
 class ThingRankHandler(handlers.PartialHandler):
   def get_impl(self, thingui):
@@ -174,6 +195,8 @@ class ThingViewHandler(handlers.PartialHandler):
 abstract_apps = [(r'/c/%(thing_url)s/(\d+)', ThingViewHandler),
                  (r'/c/%(thing_url)s/(\d+)/edit', ThingEditHandler),
                  (r'/c/%(thing_url)s/(\d+)/own', ThingOwnHandler),
+                 (r'/c/%(thing_url)s/(\d+)/cancel_own', ThingCancelOwnHandler),
                  (r'/c/%(thing_url)s/(\d+)/want', ThingWantHandler),
+                 (r'/c/%(thing_url)s/(\d+)/cancel_want', ThingCancelWantHandler),
                  (r'/c/%(thing_url)s/(\d+)/rank', ThingRankHandler)]
 

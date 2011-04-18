@@ -113,7 +113,7 @@ def view_method(func):
       # add permission info in vardict
       user = get_current_user()
       var_dict.update( inspect_permissions(self.model_obj, user) )
-    
+      
     return action
     
   return wrapper

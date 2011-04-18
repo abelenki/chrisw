@@ -70,7 +70,7 @@ class User(gdb.Entity):
 
   def is_not_guest(self):
     """docstring for is_guest"""
-    return self.key() == Guest.key()
+    return self.key() != Guest.key()
 
 @cache_result('guest-user-object', 360)
 def _get_guest_user():

@@ -533,6 +533,16 @@ span.topic_content {
   display: block
 }
 
+.star_bar {
+  width: 55px;
+  background: url(/images/common/star_x_grey.gif) 0 0 repeat-x;
+}
+
+.star_bar div {
+  height: 12px;
+  background: url(/images/common/star_x_orange.gif) 0 0 repeat-x;
+}
+
 ul.buttom {
   margin: 0 0 0 0
 }

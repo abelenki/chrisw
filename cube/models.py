@@ -98,6 +98,10 @@ class Thing(gdb.Entity):
     """docstring for add_owner"""
     self.link(OWNER, user)
     self._update_owner_count()
+  
+  def can_cancel_own(self, user):
+    """docstring for can_cancel_own"""
+    return self.has_owner(user)
 
   def remove_owner(self, user):
     """docstring for remove_owner"""
@@ -106,7 +110,7 @@ class Thing(gdb.Entity):
 
   def _update_owner_count(self):
     """docstring for update_owner_count"""
-    self.owner_count = self.targets(OWNER, User).count()
+    self.owner_count = self.get_targets(OWNER, User).count()
     self.put()
 
 
@@ -123,6 +127,11 @@ class Thing(gdb.Entity):
     """docstring for add_wanting_one"""
     self.link(WANTING_ONE, user)
     self._update_wanting_one_count()
+  
+  def can_cancel_want(self, user):
+    """docstring for can_cancel_want"""
+    return user.is_not_guest() and not self.has_owner(user) \
+      and self.has_wanting_one(user)
 
   def remove_wanting_one(self, user):
     """docstring for remove_wanting_one"""
@@ -131,7 +140,7 @@ class Thing(gdb.Entity):
 
   def _update_wanting_one_count(self):
     """docstring for update_wanting_one_count"""
-    self.wanting_one_count = self.targets(WANTING_ONE, User).count()
+    self.wanting_one_count = self.get_targets(WANTING_ONE, User).count()
     self.put()
 
   def can_rank(self, user):
@@ -153,7 +162,7 @@ class Thing(gdb.Entity):
 
   def can_comment(self, user):
     """docstring for can_comment"""
-    return user.is_not_guest() and not self.has_comment_by(self, user)
+    return user.is_not_guest() and not self.has_comment_by(user)
 
   def has_comment_by(self, user):
     """docstring for has_comment_by"""
@@ -265,7 +274,7 @@ class ThingComment(gdb.Entity):
 
   def update_digs(self):
     """docstring for update_digs"""
-    self.ups = self.targets(DIG, User, link_attr=str(1)).count()
-    self.downs = self.targets(DIG, User, link_attr=str(-1)).count()
+    self.ups = self.get_targets(DIG, User, link_attr=str(1)).count()
+    self.downs = self.get_targets(DIG, User, link_attr=str(-1)).count()
 
     self.put()

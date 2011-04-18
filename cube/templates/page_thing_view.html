@@ -1,9 +1,57 @@
 {% extends "cube_master.html" %}
 
+{% load i18n %}
+{% load star %}
+
+{% block html_head %}
+	<link rel="stylesheet" href="/css/lib/jquery.rating.css" type="text/css" media="screen" title="no title" charset="utf-8">
+	<script type="text/javascript" charset="utf-8" src="/javascript/libs/jquery.rating.pack.js"></script>
+{% endblock %}
 
 {% block content %}
 	<h1>
 		{{ thing.title }}
 	</h1>
-	
+	<div>
+		<div class="grid_3">
+			<img class="imx" src="{{thing.photo_url}}"></img>
+		</div>
+		<div class="grid_6">
+			infos
+		</div>
+		<div class="grid_5">
+			stars
+			<table border="0" cellspacing="2" cellpadding="2">
+				{% for start_num, rate_count in thing.rank_info.ranks %}
+					<tr><td style="padding:1px;">
+						{% star start_num of 5 %} 
+						</td>
+						<td style="padding:1px;padding-left:5px;">
+							{{rate_count}}
+						</td>
+					</tr>
+
+				{% endfor %}
+			</table>
+		</div>
+		<div class="clear">
+		</div>
+
+		<div class>
+			<ul class="buttom">
+				{% if can_want %}
+					<a class="a_btn a_btn_m" href="{{thing.url}}/want"><span>{% trans "Want" %}</span></a>
+				{% endif %}
+				{% if can_cancel_want %}
+					<a class="a_btn a_btn_m" href="{{thing.url}}/cancel_want"><span>{% trans "Cancel Want" %}</span></a>
+				{% endif %}				
+				{% if can_own %}
+					<a class="a_btn a_btn_m" href="{{thing.url}}/own"><span>{% trans "Own" %}</span></a>
+				{% endif %}
+				{% if can_cancel_own %}
+					<a class="a_btn a_btn_m" href="{{thing.url}}/cancel_own"><span>{% trans "Cancel Own" %}</span></a>
+				{% endif %}
+			</ul>
+		</div>
+	</div>
 {% endblock %}
