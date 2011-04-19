@@ -160,7 +160,7 @@ class Thing(gdb.Entity):
       raise Exception("Rank must between 1 to 5")
 
 
-  def _add_annotaion(self, annotation):
+  def _add_annotaion(self, user, annotation):
     """docstring for _add_annotaion"""
     annotation.author = user
     annotation.thing = self
@@ -168,13 +168,13 @@ class Thing(gdb.Entity):
     annotation.put()
 
 
-  def can_comment(self, user):
+  def can_add_comment(self, user):
     """docstring for can_comment"""
     return user.is_not_guest() and not self.has_comment_by(user)
 
   def has_comment_by(self, user):
     """docstring for has_comment_by"""
-    return self.get_comment(user) is None
+    return self.get_comment(user) is not None
 
   def get_comment(self, user):
     """docstring for get_comment_by"""
@@ -254,7 +254,7 @@ class _ThingAnnotation(gdb.Entity):
   author = db.ReferenceProperty(User)
   content = db.TextProperty(required=True)
 
-  thing_type = db.StringProperty(required=True)
+  thing_type = db.StringProperty()
 
   ups = db.IntegerFlyProperty(default=0)
   downs = db.IntegerFlyProperty(default=0)

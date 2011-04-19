@@ -81,6 +81,8 @@ class ThingSiteUI(ModelUI):
     if form.is_valid():
       new_thing = form.save(commit=False)
       self.thing_site.create_thing(new_thing, self.user)
+      
+      return redirect(new_thing.url)
     
     return template('page_thing_site_create.html', locals())
 

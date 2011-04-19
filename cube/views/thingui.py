@@ -111,23 +111,32 @@ class ThingUI(ModelUI):
 
     return back()
 
-  @check_permission('comment', _("User can't comment this item."))
+  @check_permission('add_comment', _("User can't comment this item."))
   def comment(self, request):
+    """docstring for comment"""
+    form = ThingCommentForm()
+    post_url = request.path
+    return template("page_item_create.html", locals())
+  
+  @check_permission('add_comment', _("User can't comment this item."))
+  def comment_post(self, request):
     """docstring for comment_post"""
     form = ThingCommentForm(data=request.POST)
     if form.is_valid():
       new_comment = form.save(commit=False)
-      self.thing.add_comment(self.user, commit)
+      self.thing.add_comment(self.user, new_comment)
 
       return back()
-
+    
+    post_url = request.path
     # site message here
-    return back()
+    return template("page_item_create.html", locals())
   
   def view_comments(self, request):
     """docstring for view_comments"""
     
-    query = self.thing.comments()
+    # fetch the latest comments
+    query = self.thing.comments.order('-create_at') 
     page = Page(query=query, request=request)
     comments = page.data()
     
@@ -202,6 +211,9 @@ class ThingViewHandler(handlers.PartialHandler):
 
 class ThingCommentHandler(handlers.PartialHandler):
   def post_impl(self, thingui):
+    return thingui.comment_post(self.request)
+  
+  def get_impl(self, thingui):
     return thingui.comment(self.request)
 
 class ThingCommentsViewHandler(handlers.PartialHandler):
@@ -215,7 +227,7 @@ abstract_apps = [(r'/c/%(thing_url)s/(\d+)', ThingViewHandler),
                  (r'/c/%(thing_url)s/(\d+)/cancel_own', ThingCancelOwnHandler),
                  (r'/c/%(thing_url)s/(\d+)/want', ThingWantHandler),
                  (r'/c/%(thing_url)s/(\d+)/cancel_want', ThingCancelWantHandler),
-                 (r'/c/%(thing_url)s/(\d+)/comment', ThingCommentHandler),
+                 (r'/c/%(thing_url)s/(\d+)/comments/new', ThingCommentHandler),
                  (r'/c/%(thing_url)s/(\d+)/comments', ThingCommentsViewHandler),
                  (r'/c/%(thing_url)s/(\d+)/rank', ThingRankHandler)]
 

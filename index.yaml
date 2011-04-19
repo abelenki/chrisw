@@ -112,6 +112,12 @@ indexes:
   - name: create_time
     direction: desc
 
+- kind: ThingComment
+  properties:
+  - name: thing
+  - name: create_at
+    direction: desc
+
 - kind: Topic
   properties:
   - name: deleted
