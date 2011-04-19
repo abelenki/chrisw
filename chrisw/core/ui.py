@@ -80,7 +80,7 @@ class PermissionUI(object):
     super(PermissionUI, self).__init__()
     
     if not model_obj:
-      raise APIException("Can't find item. Wrong ID?")
+      raise APIError("Can't find item. Wrong ID?")
     
     self.model_obj = model_obj
     self.model_user = get_current_user()

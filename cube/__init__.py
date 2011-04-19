@@ -10,5 +10,6 @@ Copyright (c) 2011 Shanghai Jiao Tong University. All rights reserved.
 """
 
 import things
+from views import thing_annotation
 
-apps = things.apps
+apps = things.apps + thing_annotation.apps

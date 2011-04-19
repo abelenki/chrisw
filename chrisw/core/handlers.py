@@ -13,7 +13,7 @@ import logging
 from google.appengine.ext import webapp
 
 from chrisw.core import router, exceptions
-from chrisw.core.exceptions import CannotResolvePath
+from chrisw.core.exceptions import *
 
 from action import *
 
@@ -24,16 +24,6 @@ except Exception, e:
   from django.utils import simplejson as json
 
 __all__ = ['RequestHandler', 'PartialHandler', 'get_handler_bindings']
-
-class APIError(exceptions.ChriswException):
-  def __init__(self, reason):
-    super(APIError, self).__init__(reason)
-    self.reason = reason
-
-class UnknownActionException(exceptions.ChriswException):
-  def __init__(self, action):
-    super(UnknownActionException, self).__init__(str(action))
-    self.reason = "Can't recognized Action: " + str(action)
 
 
 def login_required(func):
@@ -106,7 +96,7 @@ def api_enabled(func):
 
     except exceptions.ChriswException, e:
       # api execute fault
-      error = 'API Execution error' + e.msg
+      error = 'API Execution error' + str(e)
     except ValueError, e:
       # fields parse fault
       error, fields_dict = 'API fields error: ' + str(e), {}
