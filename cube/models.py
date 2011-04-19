@@ -79,6 +79,7 @@ class Thing(gdb.Entity):
   owner_count = db.IntegerFlyProperty(default=0)
   wanting_one_count = db.IntegerFlyProperty(default=0)
   comment_count = db.IntegerFlyProperty(default=0)
+  review_count = db.IntegerFlyProperty(default=0)
   
   url_format = r"/c/%(url_prefix)s/%(tid)s"
   
@@ -198,6 +199,32 @@ class Thing(gdb.Entity):
   
   ######
   #
+  # review related functions
+  #
+  ######
+  
+  def can_add_review(self, user):
+    """docstring for can_add_review"""
+    return user.is_not_guest()
+  
+  def add_review(self, user, review):
+    """docstring for add_review"""
+    self._add_annotaion(user, review):
+    
+    self._update_review_count()
+  
+  def _update_review_count(self):
+    """docstring for _update_review_count"""
+    self.review_count = self.reviews.count()
+  
+  def remove_review(self, review):
+    """docstring for remove_review"""
+    review.delete()
+    
+    self._update_review_count()
+  
+  ######
+  #
   # rank related functions
   #
   ######
@@ -274,8 +301,10 @@ class _ThingAnnotation(gdb.Entity):
   """docstring for ThingComment"""
   author = db.ReferenceProperty(User)
   content = db.TextProperty(required=True)
-
+  
   thing_type = db.StringProperty()
+  
+  score = db.FloatProperty()
 
   ups = db.IntegerFlyProperty(default=0)
   downs = db.IntegerFlyProperty(default=0)
@@ -304,8 +333,20 @@ class _ThingAnnotation(gdb.Entity):
     """docstring for update_digs"""
     self.ups = self.get_targets(DIG, User, link_attr=str(1)).count()
     self.downs = self.get_targets(DIG, User, link_attr=str(-1)).count()
+    
+    self.score = self.ups * 1.0
 
     self.put()
+  
+  
+  def can_remove(self, user):
+    """docstring for can_remove"""
+    return self.has_author(user)
+  
+  def has_author(self, user):
+    """docstring for has_author"""
+    return self.author.key() == user.key()
+  
   
   @property
   def url(self):
@@ -323,6 +364,7 @@ class ThingComment(_ThingAnnotation):
 
 class ThingReview(_ThingAnnotation):
   """docstring for ThingReview"""
+  title = db.StringProperty(required=True)
   thing = db.ReferenceProperty(Thing, collection_name='reviews')
   
   url_format = r"/c/review/%(annotation_id)s"
