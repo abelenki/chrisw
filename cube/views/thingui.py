@@ -44,6 +44,18 @@ class ThingCommentForm(djangoforms.ModelForm):
   content = fields.fields.CharField(label = _("Short comment"), min_length=10,\
       max_length=140)
 
+class ThingReviewForm(djangoforms.ModelForm):
+  """docstring for ThingReviewForm"""
+  class Meta:
+    model = ThingReview
+    fields = ['content', 'title']
+
+  title = fields.fields.CharField(label = _("Title"), min_length=10,\
+    max_length=140)
+  content = fields.CharField(label = _("Content"),\
+    widget=forms.Textarea, min_length=2, max_length = 200)
+
+
 class ThingUI(ModelUI):
   """docstring for ThingUI"""
 
@@ -141,7 +153,37 @@ class ThingUI(ModelUI):
     comments = page.data()
     
     return template('page_thing_comment_view.html', locals())
+  
+  @check_permission('add_review', _("User can't review this item."))
+  def review(self, request):
+    """docstring for review"""
+    form = ThingCommentForm()
+    post_url = request.path
+    return template("page_item_create.html", locals())
+  
+  @check_permission('add_review', _("User can't review this item."))
+  def review_post(self, request):
+    """docstring for review_post"""
+    form = ThingReviewForm(data=request.POST)
+    if form.is_valid():
+      new_review = form.save(commit=False)
+      self.thing.add_review(self.user, new_review)
 
+      return back()
+    
+    post_url = request.path
+    # site message here
+    return template("page_item_create.html", locals())
+  
+  def view_reviews(self, request):
+    """docstring for view_reviews"""
+    # fetch the latest comments
+    query = self.thing.reviews.order('-create_at') 
+    page = Page(query=query, request=request)
+    reviews = page.data()
+    
+    return template('page_thing_review_view.html', locals())
+  
 
 class ThingHandler(handlers.RequestHandler):
   """Here we use a trick to enable 'mixin' feature for Python.
@@ -220,6 +262,17 @@ class ThingCommentsViewHandler(handlers.PartialHandler):
   def get_impl(self, thingui):
     return thingui.view_comments(self.request)
 
+class ThingAddReviewHandler(handlers.PartialHandler):
+  def get_impl(self, thingui):
+    return thingui.review(self.request)
+  
+  def post_impl(self, thingui):
+    return thingui.review_post(self.request)
+
+class ThingReviewsViewHandler(handlers.PartialHandler):
+  def get_impl(self, thingui):
+    return thingui.view_reviews(self.request)
+
 
 abstract_apps = [(r'/c/%(thing_url)s/(\d+)', ThingViewHandler),
                  (r'/c/%(thing_url)s/(\d+)/edit', ThingEditHandler),
@@ -229,5 +282,7 @@ abstract_apps = [(r'/c/%(thing_url)s/(\d+)', ThingViewHandler),
                  (r'/c/%(thing_url)s/(\d+)/cancel_want', ThingCancelWantHandler),
                  (r'/c/%(thing_url)s/(\d+)/comments/new', ThingCommentHandler),
                  (r'/c/%(thing_url)s/(\d+)/comments', ThingCommentsViewHandler),
+                 (r'/c/%(thing_url)s/(\d+)/reviews/new', ThingAddReviewHandler),
+                 (r'/c/%(thing_url)s/(\d+)/reviews', ThingReviewsViewHandler),
                  (r'/c/%(thing_url)s/(\d+)/rank', ThingRankHandler)]
 
