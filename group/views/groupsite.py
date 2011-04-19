@@ -31,16 +31,13 @@ class GroupSiteUI(ModelUI):
     self.group_info = UserGroupInfo.get_by_user(self.user)
     
   def follow(self, request):
-    offset = int(request.get("offset", "0"))
-    limit = int(request.get("limit", "20"))
-    
     group_info = self.group_info
     
     joined_groups = group_info.get_recent_joined_groups()
     
     query = GroupTopic.latest_by_subscriber(self.user)
     
-    page = Page(query=query, offset=offset, limit=limit, request=request)
+    page = Page(query=query, request=request)
     topics = page.data()
     
     sidebar_widgets = [forward('/group/recommend').render()]
@@ -51,16 +48,13 @@ class GroupSiteUI(ModelUI):
   
   def all(self, request):
     """docstring for all"""
-    offset = int(request.get("offset", "0"))
-    limit = int(request.get("limit", "20"))
-    
     group_info = self.group_info
     
     joined_groups = group_info.get_recent_joined_groups()
     
     query = GroupTopic.latest()
     
-    page = Page(query=query, offset=offset, limit=limit, request=request)
+    page = Page(query=query, request=request)
     topics = page.data()
     
     sidebar_widgets = [forward('/group/recommend').render()]

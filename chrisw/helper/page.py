@@ -9,16 +9,19 @@ Copyright (c) 2011 Shanghai Jiao Tong University. All rights reserved.
 
 import logging
 
+_url_format = "%(path)s?offset=%(offset)s&limit=%(limit)s"
+
 class Page(object):
   """docstring for Paginator"""
-  def __init__(self, request, offset, limit, query):
+  def __init__(self, request, query, limit=2):
     super(Page, self).__init__()
+    self.request = request
     self.query = query
     self.path = request.path
-    self.offset = offset
-    self.limit = limit
-    self.request = request
-    self.page_size = limit - offset
+    
+    self.offset = int(request.get('offset', 0))
+    self.limit = int(request.get('limit', limit))
+    
     self.count = self.query.count()
   
   def data(self):
@@ -32,29 +35,18 @@ class Page(object):
   def has_prev(self):
     """docstring for has_previous"""
     return self.offset != 0
-  
-  def prev_page(self):
-    """docstring for prev_page"""
-    return Page(self.request, self.offset - self.page_size, \
-      self.limit - self.page_size, self.query)
-  
-  def next_page(self):
-    """docstring for next_page"""
-    return Page(self.request, self.offset + self.page_size, \
-      self.limit + self.page_size, self.query)
-  
+    
   def next_url(self):
     """docstring for next_url"""
-    
-    logging.debug("URL: " + self.url())
-    return self.next_page().url() 
-  
+    path, offset, limit = self.path, self.offset + self.limit, self.limit
+    return _url_format % locals()
+      
   def prev_url(self):
     """docstring for prev_url"""
-    return self.prev_page().url()
-  
+    path, offset, limit = self.path, self.offset - self.limit, self.limit
+    return _url_format % locals()
+      
   def url(self):
     """docstring for url"""
-    # logging.debug("URL: " + self.path + "?offset=" + self.offset + "&limit=" + self.limit)
-    return self.path + "?offset=" + str(self.offset) + "&limit=" + \
-      str(self.limit)
+    path, offset, limit = self.path, self.offset, self.limit
+    return _url_format % locals()

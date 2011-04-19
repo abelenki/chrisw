@@ -98,7 +98,7 @@ class Thing(gdb.Entity):
     """docstring for add_owner"""
     self.link(OWNER, user)
     self._update_owner_count()
-  
+      
   def can_cancel_own(self, user):
     """docstring for can_cancel_own"""
     return self.has_owner(user)
@@ -160,6 +160,14 @@ class Thing(gdb.Entity):
       raise Exception("Rank must between 1 to 5")
 
 
+  def _add_annotaion(self, annotation):
+    """docstring for _add_annotaion"""
+    annotation.author = user
+    annotation.thing = self
+    annotation.thing_type = self.get_type_name()
+    annotation.put()
+
+
   def can_comment(self, user):
     """docstring for can_comment"""
     return user.is_not_guest() and not self.has_comment_by(user)
@@ -174,10 +182,7 @@ class Thing(gdb.Entity):
 
   def add_comment(self, user, comment):
     """docstring for add_comment"""
-    comment.author = user
-    comment.thing = self
-    comment.thing_type = self.get_type_name()
-    comment.put()
+    self._add_annotaion(user, comment)
 
     self._update_comment_count()
 
@@ -190,6 +195,7 @@ class Thing(gdb.Entity):
     comment.delete()
 
     self._update_comment_count()
+    
 
   def update_rank_info(self):
     """docstring for update_rank_info"""
@@ -243,12 +249,11 @@ class Thing(gdb.Entity):
     return cls.__name__
 
 
-class ThingComment(gdb.Entity):
+class _ThingAnnotation(gdb.Entity):
   """docstring for ThingComment"""
   author = db.ReferenceProperty(User)
   content = db.TextProperty(required=True)
 
-  thing = db.ReferenceProperty(Thing, collection_name='comments')
   thing_type = db.StringProperty(required=True)
 
   ups = db.IntegerFlyProperty(default=0)
@@ -278,3 +283,15 @@ class ThingComment(gdb.Entity):
     self.downs = self.get_targets(DIG, User, link_attr=str(-1)).count()
 
     self.put()
+    
+
+class ThingComment(_ThingAnnotation):
+  """docstring for ThingComment"""
+  thing = db.ReferenceProperty(Thing, collection_name='comments')
+
+
+class ThingReview(_ThingAnnotation):
+  """docstring for ThingReview"""
+  thing = db.ReferenceProperty(Thing, collection_name='reviews')
+    
+

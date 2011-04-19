@@ -66,8 +66,14 @@ class template(_RenderAction):
     from chrisw.helper.django_helper import render_to_string
     return render_to_string(self.name + ".html", self.var_dict)
 
-  def wrap(self, new_name):
+  def wrap(self, new_name=None, var_dict={}):
     """docstring for wrap"""
+    
+    if not new_name:
+      new_name = self.name
+    
+    self.var_dict.update(var_dict)
+    
     return template(new_name, self.var_dict)
 
 class text(_RenderAction):

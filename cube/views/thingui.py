@@ -123,6 +123,14 @@ class ThingUI(ModelUI):
 
     # site message here
     return back()
+  
+  def view_comments(self, request):
+    """docstring for view_comments"""
+    
+    
+    pass
+  
+  
 
 
 class ThingHandler(handlers.RequestHandler):

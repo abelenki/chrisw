@@ -45,15 +45,12 @@ class UserStreamUI(ModelUI):
   def _home(self, query, request, new_vars={}):
     """docstring for _home"""
     
-    limit = int(request.get('limit',20))
-    offset = int(request.get('offset',0))
-    
     groupinfo = UserGroupInfo.get_by_user(self.user)
     joined_groups = groupinfo.get_recent_joined_groups()
     
     stream_form = UserStreamForm()
     
-    page = Page(query=query, limit=limit, offset=offset, request=request)
+    page = Page(query=query, request=request)
     
     streams = page.data()
     

@@ -56,12 +56,9 @@ class TopicUI(ModelUI):
   #@check_permission('view', "Not allowed to open topic")
   def view(self, request):
     """docstring for view"""
-    limit = int(request.get('limit', '20'))
-    offset = int(request.get('offset', '0'))
-  
     query = self.topic.get_all_posts(has_order=True)
     post_form = PostForm()
-    page = Page(query=query, offset=offset, limit=limit, request=request)
+    page = Page(query=query, request=request)
     posts = page.data()
     
     self.topic.hits += 1
