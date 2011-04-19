@@ -1,0 +1,14 @@
+{% extends "cube_master.html" %}
+
+{% block content %}
+	
+	<ul>
+		{% for comment in comments %}
+			{{ comment.content }}
+		{% endfor %}
+		
+	</ul>
+	
+	{% include "control_pager.html" %}
+	
+{% endblock %}

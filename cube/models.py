@@ -86,6 +86,12 @@ class Thing(gdb.Entity):
     """docstring for can_view"""
     return True
   
+  ######
+  #
+  # Own related functions
+  #
+  ######
+  
   def can_own(self, user):
     """docstring for can_own"""
     return user.is_not_guest() and not self.has_owner(user)
@@ -113,6 +119,11 @@ class Thing(gdb.Entity):
     self.owner_count = self.get_targets(OWNER, User).count()
     self.put()
 
+  ######
+  #
+  # Want related functions
+  #
+  ######
 
   def can_want(self, user):
     """docstring for can_want"""
@@ -142,23 +153,7 @@ class Thing(gdb.Entity):
     """docstring for update_wanting_one_count"""
     self.wanting_one_count = self.get_targets(WANTING_ONE, User).count()
     self.put()
-
-  def can_rank(self, user):
-    """docstring for can_rank"""
-    return user.is_not_guest() and not self.get_rank(user) is None
-
-  def get_rank(self, user):
-    """docstring for get_rank"""
-    return self.get_link_attr(RANK, user)
-
-  def add_rank(self, user, rank):
-    """docstring for add_rank"""
-    if int(rank) in range(1, 6):
-      self.link(RANK, user, link_attr=rank)
-      self.update_rank_info()
-    else:
-      raise Exception("Rank must between 1 to 5")
-
+    
 
   def _add_annotaion(self, user, annotation):
     """docstring for _add_annotaion"""
@@ -166,7 +161,12 @@ class Thing(gdb.Entity):
     annotation.thing = self
     annotation.thing_type = self.get_type_name()
     annotation.put()
-
+    
+  ######
+  #
+  # comment related functions
+  #
+  ######
 
   def can_add_comment(self, user):
     """docstring for can_comment"""
@@ -195,7 +195,28 @@ class Thing(gdb.Entity):
     comment.delete()
 
     self._update_comment_count()
+  
+  ######
+  #
+  # rank related functions
+  #
+  ######
     
+  def can_rank(self, user):
+    """docstring for can_rank"""
+    return user.is_not_guest() and not self.get_rank(user) is None
+  
+  def get_rank(self, user):
+    """docstring for get_rank"""
+    return self.get_link_attr(RANK, user)
+  
+  def add_rank(self, user, rank):
+    """docstring for add_rank"""
+    if int(rank) in range(1, 6):
+      self.link(RANK, user, link_attr=rank)
+      self.update_rank_info()
+    else:
+      raise Exception("Rank must between 1 to 5")
 
   def update_rank_info(self):
     """docstring for update_rank_info"""
@@ -258,10 +279,12 @@ class _ThingAnnotation(gdb.Entity):
 
   ups = db.IntegerFlyProperty(default=0)
   downs = db.IntegerFlyProperty(default=0)
+  
+  url_format = r"/c/annotation/%(annotation_id)s"
 
   def can_dig(self, user):
     """docstring for can_dig"""
-    return user.is_not_guest() and self.has_digged_by(user)
+    return user.is_not_guest() and not self.has_digged_by(user)
 
   def has_digged_by(self, user):
     """docstring for has_digged"""
@@ -283,15 +306,25 @@ class _ThingAnnotation(gdb.Entity):
     self.downs = self.get_targets(DIG, User, link_attr=str(-1)).count()
 
     self.put()
+  
+  @property
+  def url(self):
+    """docstring for url"""
+    annotation_id = self.key().id()
+    return self.url_format % annotation_id
     
 
 class ThingComment(_ThingAnnotation):
   """docstring for ThingComment"""
   thing = db.ReferenceProperty(Thing, collection_name='comments')
+  
+  url_format = r"/c/comment/%(annotation_id)s"
 
 
 class ThingReview(_ThingAnnotation):
   """docstring for ThingReview"""
   thing = db.ReferenceProperty(Thing, collection_name='reviews')
+  
+  url_format = r"/c/review/%(annotation_id)s"
     
 
