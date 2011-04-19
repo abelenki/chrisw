@@ -20,14 +20,14 @@
 			</h2>
 			<div class="topic post" style="margin-top: 0px;">
 				<div class="topic_author_photo post_author_photo">
-					<a href="/u/{{topic.author.key.id}}">
+					<a href="{{topic.author.url}}">
 						<img src="{{topic.author.photo_url}}=s48" class="im">
 					</a>
 				</div>
 				<div class="topic_content post_content">
 					<div class="topic_meta post_meta">
 						{{ topic.create_at|date:"Y-n-j H:i" }} by
-						<a href="/u/{{topic.author.key.id}}">{{ topic.author.fullname }}</a>
+						<a href="{{topic.author.url}}">{{ topic.author.fullname }}</a>
 						{% if topic.author.status_message %}
 							({{ topic.author.status_message }})
 						{% endif %}
@@ -43,14 +43,14 @@
 		{% for post in posts %}
 			<li class="post" data-topic-id="{{topic.key.id}}">
 				<div class="post_author_photo">
-					<a href="/u/{{post.author.key.id}}">
+					<a href="{{post.author.url}}">
 						<img src="{{post.author.photo_url}}=s48" class="im">
 					</a>
 				</div>
 				<div class="post_content"> 
 					<div class="post_meta" style="color: #999999;">
 						{{ post.create_at|date:"Y-n-j H:i" }} by 
-						<a href="/u/{{post.author.key.id}}">
+						<a href="{{post.author.url}}">
 							{{ post.author.fullname }} 
 						</a>
 						{% if post.author.status_message %}
@@ -82,7 +82,7 @@
 {% block sidebar %}
 	<div class="grid_6 dashboard_widget">
 		<p class="pl">
-			> <a href="/group/{{topic.group.key.id}}">{% trans "Back to Group: " %}{{ topic.group.title }}</a>			
+			> <a href="{{topic.group.url}}">{% trans "Back to Group: " %}{{ topic.group.title }}</a>			
 		</p>
 	</div>
 {% endblock %}

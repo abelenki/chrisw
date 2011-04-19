@@ -1,9 +1,9 @@
 {% load filters %}
 	<dl class="item_box_min">
 		<dt class="photo">
-			<a href="/u/{{member.key.id}}"><img src="{{member.photo_url}}=s48"/ class="im"></a>
+			<a href="{{member.url}}"><img src="{{member.photo_url}}=s48"/ class="im"></a>
 		</dt>
 		<dd class="name">
-			<a href="/u/{{member.key.id}}">{{ member.fullname|truncatesmart:10 }}</a>
+			<a href="{{member.url}}">{{ member.fullname|truncatesmart:10 }}</a>
 		</dd>
 	</dl>

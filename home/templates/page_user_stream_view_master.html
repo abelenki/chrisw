@@ -17,7 +17,7 @@
 
 	<div id="user-profile" style = "">
 		<div class="pic" style="float:left;">
-		    <a href="/u/{{user.id}}">
+		    <a href="{{user.url}}">
 		        <img src="{{user.photo_url}}" alt="{{user.fullname}}" class="im">
 		    </a>
 		</div>
@@ -44,10 +44,10 @@
 	
 	<ul class="medium_tabs">
 		{% if can_view_following %}
-			<li class="medium_tab {% block following_title %}{% endblock %}"><a class="text_tab" href="/u/{{user.key.id}}/following">{% trans "Followed Streams" %}</a></li>
+			<li class="medium_tab {% block following_title %}{% endblock %}"><a class="text_tab" href="{{user.url}}/following">{% trans "Followed Streams" %}</a></li>
 		{% endif %}
-		<li class="medium_tab {% block mention_title %}{% endblock %}"> <a class="text_tab" href="/u/{{user.key.id}}/mention">{% trans "@Mention Streams" %}</a></li>
-		<li class="medium_tab {% block all_title %}{% endblock %}"> <a class="text_tab" href="/u/{{user.key.id}}/all">{% trans "All Streams" %}</a></li>
+		<li class="medium_tab {% block mention_title %}{% endblock %}"> <a class="text_tab" href="{{user.url}}/mention">{% trans "@Mention Streams" %}</a></li>
+		<li class="medium_tab {% block all_title %}{% endblock %}"> <a class="text_tab" href="{{user.url}}/all">{% trans "All Streams" %}</a></li>
 	</ul>
 	
 	<div id="stream-box">
@@ -80,10 +80,10 @@
 			{% if is_not_guest %}
 				<ul class="buttom">
 				{% if can_follow %}
-					<a class="a_btn a_btn_m" href="/u/{{user.key.id}}/follow"><span>{% trans "Follow User" %}</span></a>
+					<a class="a_btn a_btn_m" href="{{user.url}}/follow"><span>{% trans "Follow User" %}</span></a>
 				{% endif %}
 				{% if can_unfollow %}
-					<a class="a_btn a_btn_m" href="/u/{{user.key.id}}/unfollow"><span>{% trans "Unfollow User" %}</span></a>
+					<a class="a_btn a_btn_m" href="{{user.url}}/unfollow"><span>{% trans "Unfollow User" %}</span></a>
 				{% endif %}
 				</ul>						
 			{% endif %}

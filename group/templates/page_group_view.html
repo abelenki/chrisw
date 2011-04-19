@@ -33,7 +33,7 @@
 				<img class="im" src="{{group.photo_url}}" align="left" style="padding-right:10px" />
 				<p>
 					{% trans "Created at" %} {{group.create_at|date:"Y-n-j"}} by 
-					<a href="/u/{{group.creator.key.id}}">
+					<a href="{{group.creator.url}}">
 						{{group.creator.fullname}}
 					</a>
 				</p>
@@ -75,10 +75,10 @@
 		{% for member in members %}
 			<dl class="item_box">
 				<dt class="photo">
-					<a href="/u/{{member.key.id}}"><img src="{{member.photo_url}}=s48"/ class="im"></a>
+					<a href="{{member.url}}"><img src="{{member.photo_url}}=s48"/ class="im"></a>
 				</dt>
 				<dd class="name">
-					<a href="/u/{{member.key.id}}">{{ member.fullname }}</a>
+					<a href="{{member.url}}">{{ member.fullname }}</a>
 				</dd>
 			</dl>
 		{% endfor %}

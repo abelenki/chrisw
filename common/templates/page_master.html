@@ -63,12 +63,12 @@
 						{% if is_not_guest %}
 							<div id="name" class="grid_6 top_bar_item">
 								<span>
-									<a href="/u/{{login_user.key.id}}">
+									<a href="{{login_user.url}}">
 										<img style="margin-bottom:-3px;" width="20px" height="20px" src="{{login_user.photo_url}}" />																			
 									</a>
 								</span>
 								<span style="padding-left:3px;">
-									<a href="/u/{{login_user.key.id}}" style="color:#aaa;">
+									<a href="{{login_user.url}}" style="color:#aaa;">
 										{{ login_user.fullname }}
 									</a>
 								</span>

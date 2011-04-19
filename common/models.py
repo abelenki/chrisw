@@ -25,6 +25,8 @@ class User(gdb.Entity):
 
   status_message = db.StringFlyProperty(default="")
   introduction = db.StringFlyProperty(default="")
+  
+  url_format = r'/u/%(uid)s'
 
   def can_visit_key(self, user, key):
     """Privacy control, protect ur privacy here"""
@@ -71,6 +73,11 @@ class User(gdb.Entity):
   def is_not_guest(self):
     """docstring for is_guest"""
     return self.key() != Guest.key()
+  
+  @property
+  def url(self):
+    uid = self.key().id()
+    return self.url_format % locals()
 
 @cache_result('guest-user-object', 360)
 def _get_guest_user():
