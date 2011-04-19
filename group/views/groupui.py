@@ -69,7 +69,7 @@ class GroupUI(ModelUI):
       self.group.put()
     
     form = GroupForm(instance=self.group)
-    post_url = '/group/%d/edit' % self.group.key().id()
+    post_url = '%s/edit' % self.group.url
     
     from home.views import photo
     photo_form = GroupPhotoForm()
@@ -85,7 +85,7 @@ class GroupUI(ModelUI):
     if form.is_valid():
       new_group = form.save(commit=False)
       new_group.put()
-      return redirect('/group/%d' % self.group.key().id())
+      return redirect(self.group.url)
     return template('page_item_create.html', locals())
     
   """ deprecated  
@@ -131,7 +131,7 @@ class GroupUI(ModelUI):
   def create_topic(self):
     """docstring for create_topic"""
     form = TopicForm()
-    post_url = '/group/%d/new' % self.group.key().id()
+    post_url = '%s/new' % self.group.url
     return template('page_item_create.html', locals())
   
   @check_permission('create_topic', "Not allowed to create topic here")
@@ -142,7 +142,7 @@ class GroupUI(ModelUI):
       new_topic = form.save(commit=False)
       self.group.create_topic(new_topic, self.current_user)
       
-      return redirect('/group/topic/%d' % new_topic.key().id())
+      return redirect(new_topic.url)
     return template('page_item_create.html', locals())
 
 class GroupHandler(handlers.RequestHandler):

@@ -19,7 +19,7 @@ from common.auth import get_current_user
 from common.models import User
 from conf import settings
 
-from cube.models import ThingComment
+from cube.models import ThingComment, ThingReview
 
 class ThingForm(djangoforms.ModelForm):
   """docstring for ThingForm"""
@@ -233,7 +233,6 @@ class ThingOwnHandler(handlers.PartialHandler):
 
 class ThingCancelOwnHandler(handlers.PartialHandler):
   def get_impl(self, thingui):
-    """docstring for get_impl"""
     return thingui.cancel_own()
 
 class ThingRankHandler(handlers.PartialHandler):

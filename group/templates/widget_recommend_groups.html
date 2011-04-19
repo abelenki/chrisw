@@ -5,9 +5,9 @@
 <ul>
 	{% for group in recommend_groups %}
 		<li>
-			<a class="group_photo" href="/group/{{group.key.id}}"><img src="{{group.photo_url}}=s32" class="is"/></a>
+			<a class="group_photo" href="{{group.url}}"><img src="{{group.photo_url}}=s32" class="is"/></a>
 			<div class="group_title">
-				<a class="group_name" href="/group/{{group.key.id}}">{{ group.title }}</a>
+				<a class="group_name" href="{{group.url}}">{{ group.title }}</a>
 				<span class="group_info">{{ group.introduction|truncatesmart:20 }}</span>
 			</div>
 		</li>

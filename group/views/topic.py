@@ -70,7 +70,7 @@ class TopicUI(ModelUI):
   def edit(self):
     """docstring for edit"""
     form = TopicForm(data=self.topic.to_dict())
-    post_url = '/group/topic/%d/edit' % self.topic.key().id()
+    post_url = '%s/edit' % self.topic.url
     return template('page_item_create.html', locals())
   
   @check_permission('edit', "Not the author")
@@ -80,7 +80,7 @@ class TopicUI(ModelUI):
     if form.is_valid():
       new_topic = form.save(commit=False)
       new_topic.put()
-      return redirect('/group/topic/%d' % new_topic.key().id())
+      return redirect(new_topic.url)
     return template('page_item_create.html', locals())
   
   @check_permission('delete', "Can't delete topic")
@@ -92,7 +92,7 @@ class TopicUI(ModelUI):
   def create_post(self):
     """docstring for create_post"""
     form = PostForm()
-    post_url = '/group/topic/%d/new' % self.topic.key().id()
+    post_url = '%s/new' % self.topic.url
     return template('page_item_create.html', locals())
   
   @check_permission('create_post', "Not allowed to reply the thread")
@@ -104,7 +104,7 @@ class TopicUI(ModelUI):
       new_post = form.save(commit=False)
       self.topic.create_post(new_post, self.current_user)
       
-      return redirect('/group/topic/%d' % self.topic.key().id())
+      return redirect(self.topic.url)
     return template('page_item_create.html', locals())
 
 def topic_handler(func):

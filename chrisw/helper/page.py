@@ -13,7 +13,7 @@ _url_format = "%(path)s?offset=%(offset)s&limit=%(limit)s"
 
 class Page(object):
   """docstring for Paginator"""
-  def __init__(self, request, query, limit=2):
+  def __init__(self, request, query, limit=20):
     super(Page, self).__init__()
     self.request = request
     self.query = query

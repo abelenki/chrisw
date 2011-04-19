@@ -209,7 +209,7 @@ class Thing(gdb.Entity):
   
   def add_review(self, user, review):
     """docstring for add_review"""
-    self._add_annotaion(user, review):
+    self._add_annotaion(user, review)
     
     self._update_review_count()
   

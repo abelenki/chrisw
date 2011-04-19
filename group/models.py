@@ -127,6 +127,8 @@ class Group(gdb.Entity):
 
   recent_members = db.ListFlyProperty(default=[])
   member_count = db.IntegerFlyProperty(default=1)
+  
+  url_format = r'/group/%(group_id)s'
 
   def can_view(self, user):
     """docstring for can_see"""
@@ -264,6 +266,11 @@ class Group(gdb.Entity):
     query = GroupTopic.all(group=self)
     if has_order: query = query.order('-update_at')
     return query
+  
+  @property
+  def url(self):
+    group_id = self.key().id()
+    return self.url_format % locals()
 
   @classmethod
   def get_group_keys_by_user(cls, user):
@@ -279,6 +286,8 @@ class GroupTopic(gdb.Message):
   content = db.TextFlyProperty(default='')
   length = db.IntegerFlyProperty(default=0)
   hits = db.IntegerFlyProperty(default=0)
+  
+  url_format = r'/group/topic/%(topic_id)s'
 
   def can_view(self, user):
     """docstring for can_view"""
@@ -333,6 +342,11 @@ class GroupTopic(gdb.Message):
     if has_order:
       query = query.order("create_at")
     return query
+  
+  @property
+  def url(self):
+    topic_id = self.key().id()
+    return self.url_format % locals()
 
 
 class GroupPost(gdb.Message):
