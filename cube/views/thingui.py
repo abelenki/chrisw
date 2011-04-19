@@ -127,10 +127,11 @@ class ThingUI(ModelUI):
   def view_comments(self, request):
     """docstring for view_comments"""
     
+    query = self.thing.comments()
+    page = Page(query=query, request=request)
+    comments = page.data()
     
-    pass
-  
-  
+    return template('page_thing_comment_view.html', locals())
 
 
 class ThingHandler(handlers.RequestHandler):
@@ -199,6 +200,14 @@ class ThingViewHandler(handlers.PartialHandler):
   def get_impl(self, thingui):
     return thingui.view()
 
+class ThingCommentHandler(handlers.PartialHandler):
+  def post_impl(self, thingui):
+    return thingui.comment(self.request)
+
+class ThingCommentsViewHandler(handlers.PartialHandler):
+  def get_impl(self, thingui):
+    return thingui.view_comments(self.request)
+
 
 abstract_apps = [(r'/c/%(thing_url)s/(\d+)', ThingViewHandler),
                  (r'/c/%(thing_url)s/(\d+)/edit', ThingEditHandler),
@@ -206,5 +215,7 @@ abstract_apps = [(r'/c/%(thing_url)s/(\d+)', ThingViewHandler),
                  (r'/c/%(thing_url)s/(\d+)/cancel_own', ThingCancelOwnHandler),
                  (r'/c/%(thing_url)s/(\d+)/want', ThingWantHandler),
                  (r'/c/%(thing_url)s/(\d+)/cancel_want', ThingCancelWantHandler),
+                 (r'/c/%(thing_url)s/(\d+)/comment', ThingCommentHandler),
+                 (r'/c/%(thing_url)s/(\d+)/comments', ThingCommentsViewHandler),
                  (r'/c/%(thing_url)s/(\d+)/rank', ThingRankHandler)]
 
