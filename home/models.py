@@ -68,13 +68,13 @@ class UserStreamInfo(gdb.Entity):
   """docstring for UserStreamInfo"""
   user = db.ReferenceProperty(User, required=True)
 
-  recent_follower_keys = db.ListFlyProperty(default=[])
-  recent_following_keys = db.ListFlyProperty(default=[])
+  recent_follower_keys = db.ListCacheProperty(default=[])
+  recent_following_keys = db.ListCacheProperty(default=[])
 
-  comment_count = db.IntegerFlyProperty(default=1)
-  stream_count = db.IntegerFlyProperty(default=1)
-  follower_count = db.IntegerFlyProperty(default=1)
-  following_count = db.IntegerFlyProperty(default=1)
+  comment_count = db.IntegerCacheProperty(default=1)
+  stream_count = db.IntegerCacheProperty(default=1)
+  follower_count = db.IntegerCacheProperty(default=1)
+  following_count = db.IntegerCacheProperty(default=1)
 
   def can_view_all(self, user):
     """docstring for can_view"""
@@ -227,7 +227,7 @@ class UserStream(gdb.Message):
   target = db.ReferenceProperty()
   target_type = db.StringProperty(required=True, default=TEXT_STREAM)
 
-  content = db.StringFlyProperty(default='')
+  content = db.StringCacheProperty(default='')
 
   keywords = db.StringListProperty(required=True, default=[])
 
@@ -285,7 +285,7 @@ class UserStreamComment(gdb.Message):
   stream = db.ReferenceProperty(UserStream)
   author = db.ReferenceProperty(User)
 
-  content = db.StringFlyProperty(default='')
+  content = db.StringCacheProperty(default='')
 
 
 

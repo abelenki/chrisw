@@ -73,11 +73,11 @@ class UserGroupInfo(gdb.Entity):
   """docstring for UserGroupProfile"""
   user = db.ReferenceProperty(required=True)
 
-  topic_count = db.IntegerFlyProperty(default=0)
-  post_count = db.IntegerFlyProperty(default=0)
-  group_count = db.IntegerFlyProperty(default=0)
+  topic_count = db.IntegerCacheProperty(default=0)
+  post_count = db.IntegerCacheProperty(default=0)
+  group_count = db.IntegerCacheProperty(default=0)
 
-  _recent_joined_groups = db.ListFlyProperty(default=[])
+  _recent_joined_groups = db.ListCacheProperty(default=[])
 
   def update_topic_count(self):
     """docstring for update_topic_count"""
@@ -97,7 +97,7 @@ class UserGroupInfo(gdb.Entity):
   @property
   def recent_joined_groups(self):
     """docstring for joined_groups"""
-    return db.get(self.recent_joined_groups)
+    return db.get(self._recent_joined_groups)
 
   def update_recent_joined_groups(self):
     """docstring for get_joined_groups"""
@@ -124,8 +124,8 @@ class Group(gdb.Entity):
   introduction = db.TextProperty(default='')
   photo_url = db.StringProperty(default=settings.DEFAULT_GROUP_PHOTO)
 
-  recent_members = db.ListFlyProperty(default=[])
-  member_count = db.IntegerFlyProperty(default=1)
+  recent_members = db.ListCacheProperty(default=[])
+  member_count = db.IntegerCacheProperty(default=1)
   
   url_format = r'/group/%(group_id)s'
 
@@ -281,10 +281,10 @@ class GroupTopic(gdb.Message):
   author = db.ReferenceProperty(User)
   group = db.ReferenceProperty(Group)
 
-  title = db.TextFlyProperty(default='')
-  content = db.TextFlyProperty(default='')
-  length = db.IntegerFlyProperty(default=0)
-  hits = db.IntegerFlyProperty(default=0)
+  title = db.TextCacheProperty(default='')
+  content = db.TextCacheProperty(default='')
+  length = db.IntegerCacheProperty(default=0)
+  hits = db.IntegerCacheProperty(default=0)
   
   url_format = r'/group/topic/%(topic_id)s'
 
@@ -352,4 +352,4 @@ class GroupPost(gdb.Message):
   """docstring for Post"""
   author = db.ReferenceProperty(User)
   topic = db.ReferenceProperty(GroupTopic)
-  content = db.TextFlyProperty(default='')
+  content = db.TextCacheProperty(default='')

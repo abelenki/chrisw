@@ -65,16 +65,16 @@ class Thing(gdb.Entity):
 
   tags = db.StringListProperty(default=[])
   
-  extra_fields = db.ListFlyProperty(default=[])
+  extra_fields = db.ListCacheProperty(default=[])
   
   index_fields = ['title']
   keyword_index = db.StringListProperty(required=True, default=[])
 
   # rank properties
   rank = db.FloatProperty(required=True, default=0.0)
-  rank_counts = db.ListFlyProperty(default=[0] * 6)
-  rank_rates = db.ListFlyProperty(default=[0.0] * 6)
-  rank_count_sum = db.IntegerFlyProperty(default=0)
+  rank_counts = db.ListCacheProperty(default=[0] * 6)
+  rank_rates = db.ListCacheProperty(default=[0.0] * 6)
+  rank_count_sum = db.IntegerCacheProperty(default=0)
 
   ######
   #
@@ -82,14 +82,14 @@ class Thing(gdb.Entity):
   #
   ######
   
-  owner_count = db.IntegerFlyProperty(default=0)
-  _recent_owner_keys = db.ListFlyProperty(default=[])
+  owner_count = db.IntegerCacheProperty(default=0)
+  _recent_owner_keys = db.ListCacheProperty(default=[])
   
-  wanting_one_count = db.IntegerFlyProperty(default=0)
-  _recent_wanting_one_keys = db.ListFlyProperty(default=[])
+  wanting_one_count = db.IntegerCacheProperty(default=0)
+  _recent_wanting_one_keys = db.ListCacheProperty(default=[])
   
-  comment_count = db.IntegerFlyProperty(default=0)
-  review_count = db.IntegerFlyProperty(default=0)
+  comment_count = db.IntegerCacheProperty(default=0)
+  review_count = db.IntegerCacheProperty(default=0)
   
   url_format = r"/c/%(url_prefix)s/%(tid)s"
   
@@ -331,8 +331,8 @@ class _ThingAnnotation(gdb.Entity):
   
   score = db.FloatProperty()
 
-  ups = db.IntegerFlyProperty(default=0)
-  downs = db.IntegerFlyProperty(default=0)
+  ups = db.IntegerCacheProperty(default=0)
+  downs = db.IntegerCacheProperty(default=0)
   
   url_format = r"/c/annotation/%(annotation_id)s"
 

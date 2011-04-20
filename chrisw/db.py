@@ -24,10 +24,10 @@ from google.appengine.ext.db import djangoforms
 from django import forms
 
 
-__all__ = ['DictProperty', 'WeakReferenceProperty', 'FlyProperty',
-'IntegerFlyProperty', 'StringFlyProperty', 'ListFlyProperty',
+__all__ = ['DictProperty', 'WeakReferenceProperty', 'CacheProperty',
+'IntegerCacheProperty', 'StringCacheProperty', 'ListCacheProperty',
 'IntegerProperty', 'StringProperty', 'FloatProperty', 'delete', 'Model',
-'MapQuery', 'GetQuery', 'TextFlyProperty', 'FlyModel',
+'MapQuery', 'GetQuery', 'TextCacheProperty', 'FlyModel',
 ]
 
 
@@ -90,8 +90,8 @@ class WeakReferenceProperty(db.Property):
     return Key()
 
 
-class FlyProperty(object):
-  """FlyProperty is something lightweight than normal property and it cannot
+class CacheProperty(object):
+  """CacheProperty is something lightweight than normal property and it cannot
   be in search field.
 
   It require the object contan's a DictProperty called extra_dict.
@@ -157,19 +157,19 @@ class FlyProperty(object):
 
   data_type = str
 
-class StringFlyProperty(FlyProperty):
+class StringCacheProperty(CacheProperty):
   """A string property which will be stored in ``extra_dict``"""
   data_type = basestring
 
-class IntegerFlyProperty(FlyProperty):
+class IntegerCacheProperty(CacheProperty):
   """A integer property which will be stored in ``extra_dict``"""
   data_type = [int, long]
 
-class TextFlyProperty(FlyProperty):
+class TextCacheProperty(CacheProperty):
   """A text property which will be stored in ``extra_dict``"""
   data_type = basestring
 
-class ListFlyProperty(FlyProperty):
+class ListCacheProperty(CacheProperty):
   """A list property which will be stored in ``extra_dict``"""
   data_type = list
 
@@ -304,9 +304,9 @@ def _initialize_fly_properties(model_class, name, bases, dct):
   """docstring for _initialize_fly_properties"""
   defined = set()
   for attr, prop in dct.items():
-    if isinstance(prop, FlyProperty):
+    if isinstance(prop, CacheProperty):
       if attr in defined:
-        raise Exception("Duplicated FlyProperty %s Dectected", attr)
+        raise Exception("Duplicated CacheProperty %s Dectected", attr)
       defined.add(attr)
       model_class._fly_properties[attr] = prop
       prop.__property_config__(model_class, attr, dct)
@@ -322,7 +322,7 @@ class FlyPropertiedMeta(PropertiedClass):
 
 
 class FlyModel(Model):
-  """Fot Model added extra_dict on Model to enable the usage of FlyProperty"""
+  """Fot Model added extra_dict on Model to enable the usage of CacheProperty"""
 
   __metaclass__ = FlyPropertiedMeta
 

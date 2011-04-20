@@ -15,8 +15,8 @@ from chrisw import db
 class TestStudent(db.FlyModel):
   """docstring for Student"""
   name = db.StringProperty()
-  age = db.IntegerFlyProperty()
-  sex = db.StringFlyProperty()
+  age = db.IntegerCacheProperty()
+  sex = db.StringCacheProperty()
 
 class TestLaptop(db.Model):
   """docstring for Laptop"""
@@ -47,7 +47,7 @@ class DBTestCase(unittest.TestCase):
     return TestStudent.all().filter('name =', 'foo').get()
 
   def test_fly_property(self):
-    """Test the FlyProperty"""
+    """Test the CacheProperty"""
     foo = self.create_foo()
     
     bar = TestStudent()

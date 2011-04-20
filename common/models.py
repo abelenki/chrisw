@@ -23,8 +23,8 @@ class User(gdb.Entity):
   email = db.EmailProperty(required=True)
   photo_url = db.StringProperty(default=settings.DEFAULT_USER_PHOTO)
 
-  status_message = db.StringFlyProperty(default="")
-  introduction = db.StringFlyProperty(default="")
+  status_message = db.StringCacheProperty(default="")
+  introduction = db.StringCacheProperty(default="")
   
   url_format = r'/u/%(uid)s'
 
