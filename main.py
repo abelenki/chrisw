@@ -36,7 +36,7 @@ def main():
   from chrisw.web.util import register_app, register_handler_classes
   register_app(['group','home'])
 
-  handler_path_mappings = home.apps + group.apps #+ cube.apps
+  handler_path_mappings = home.apps + group.apps + cube.apps
   register_handler_classes(handler_path_mappings)
 
   application = webapp.WSGIApplication( handler_path_mappings + \

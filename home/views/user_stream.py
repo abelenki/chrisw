@@ -46,7 +46,7 @@ class UserStreamUI(ModelUI):
     """docstring for _home"""
     
     groupinfo = UserGroupInfo.get_by_user(self.user)
-    joined_groups = groupinfo.get_recent_joined_groups()
+    joined_groups = groupinfo.recent_joined_groups
     
     stream_form = UserStreamForm()
     

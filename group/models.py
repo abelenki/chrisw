@@ -77,7 +77,7 @@ class UserGroupInfo(gdb.Entity):
   post_count = db.IntegerFlyProperty(default=0)
   group_count = db.IntegerFlyProperty(default=0)
 
-  recent_joined_groups = db.ListFlyProperty(default=[])
+  _recent_joined_groups = db.ListFlyProperty(default=[])
 
   def update_topic_count(self):
     """docstring for update_topic_count"""
@@ -93,17 +93,16 @@ class UserGroupInfo(gdb.Entity):
     """docstring for update_group_count"""
     self.group_count = Group.all(creator=self.user).count()
     self.put()
-
-  def get_recent_joined_groups(self):
+  
+  @property
+  def recent_joined_groups(self):
     """docstring for joined_groups"""
     return db.get(self.recent_joined_groups)
 
   def update_recent_joined_groups(self):
     """docstring for get_joined_groups"""
-    self.recent_joined_groups = Group.get_group_keys_by_user(self.user)\
+    self._recent_joined_groups = Group.get_group_keys_by_user(self.user)\
       .fetch(limit=8, offset=0)
-
-    logging.debug("recent_joined_groups : %s", self.recent_joined_groups)
 
     self.put()
 

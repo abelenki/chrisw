@@ -56,7 +56,7 @@ class UserUI(ModelUI):
   def view(self):
     """the view of user profile"""
     groupinfo = UserGroupInfo.get_by_user(self.user)
-    joined_groups = groupinfo.get_recent_joined_groups()
+    joined_groups = groupinfo.recent_joined_groups
     
     return template('user_home', locals())
   

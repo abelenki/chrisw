@@ -4,8 +4,19 @@
 {% load star %}
 
 {% block html_head %}
-	<link rel="stylesheet" href="/css/lib/jquery.rating.css" type="text/css" media="screen" title="no title" charset="utf-8">
-	<script type="text/javascript" charset="utf-8" src="/javascript/libs/jquery.rating.pack.js"></script>
+	<script type="text/javascript" charset="utf-8" src="/javascript/libs/jquery.raty.min.js"></script>
+	<script type="text/javascript" charset="utf-8">
+		$(document).ready(
+			function(){
+				$('#rater').raty({
+					click: function(score, evt){
+
+					},
+					path: '/images/common',
+				});
+			}
+		);
+	</script>
 {% endblock %}
 
 {% block content %}
@@ -20,7 +31,8 @@
 			infos
 		</div>
 		<div class="grid_5">
-			stars
+			<div id="rank">
+			</div>
 			<table border="0" cellspacing="2" cellpadding="2">
 				{% for start_num, rate_count in thing.rank_info.ranks %}
 					<tr><td style="padding:1px;">
@@ -33,6 +45,8 @@
 
 				{% endfor %}
 			</table>
+			<div id="rater">
+			</div>
 		</div>
 		<div class="clear">
 		</div>

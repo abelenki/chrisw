@@ -76,8 +76,18 @@ class Thing(gdb.Entity):
   rank_rates = db.ListFlyProperty(default=[0.0] * 6)
   rank_count_sum = db.IntegerFlyProperty(default=0)
 
+  ######
+  #
+  # cache properties
+  #
+  ######
+  
   owner_count = db.IntegerFlyProperty(default=0)
+  _recent_owner_keys = db.ListFlyProperty(default=[])
+  
   wanting_one_count = db.IntegerFlyProperty(default=0)
+  _recent_wanting_one_keys = db.ListFlyProperty(default=[])
+  
   comment_count = db.IntegerFlyProperty(default=0)
   review_count = db.IntegerFlyProperty(default=0)
   
@@ -114,10 +124,17 @@ class Thing(gdb.Entity):
     """docstring for remove_owner"""
     self.unlink(OWNER, user)
     self._update_owner_count()
+  
+  @property
+  def recent_owners(self):
+    return db.get(self._recent_owner_keys)
 
   def _update_owner_count(self):
     """docstring for update_owner_count"""
     self.owner_count = self.get_targets(OWNER, User).count()
+    self._recent_owner_keys = self.get_targets(OWNER, User, keys_only=True)\
+      .fetch(limit=8, offset=1)
+    
     self.put()
 
   ######
@@ -149,10 +166,18 @@ class Thing(gdb.Entity):
     """docstring for remove_wanting_one"""
     self.unlink(WANTING_ONE, user)
     self._update_wanting_one_count()
+  
+  @property
+  def recent_wanting_ones(self):
+    """docstring for recent_wanting_ones"""
+    return db.get(self._recent_wanting_one_keys)
 
   def _update_wanting_one_count(self):
     """docstring for update_wanting_one_count"""
     self.wanting_one_count = self.get_targets(WANTING_ONE, User).count()
+    self._recent_wanting_one_keys = self.get_targets(WANTING_ONE, User,\
+      keys_only=True).fetch(limit=8, offset=1)
+    
     self.put()
     
 

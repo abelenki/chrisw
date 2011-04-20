@@ -33,7 +33,7 @@ class GroupSiteUI(ModelUI):
   def follow(self, request):
     group_info = self.group_info
     
-    joined_groups = group_info.get_recent_joined_groups()
+    joined_groups = group_info.recent_joined_groups
     
     query = GroupTopic.latest_by_subscriber(self.user)
     
@@ -50,7 +50,7 @@ class GroupSiteUI(ModelUI):
     """docstring for all"""
     group_info = self.group_info
     
-    joined_groups = group_info.get_recent_joined_groups()
+    joined_groups = group_info.recent_joined_groups
     
     query = GroupTopic.latest()
     
