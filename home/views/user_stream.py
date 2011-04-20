@@ -54,8 +54,8 @@ class UserStreamUI(ModelUI):
     
     streams = page.data()
     
-    following_users = self.user_stream_info.recent_following_users()
-    follower_users = self.user_stream_info.recent_follower_users()
+    following_users = self.user_stream_info.recent_following_users
+    follower_users = self.user_stream_info.recent_follower_users
     
     for stream in streams:
       logging.debug("stream %s", stream)

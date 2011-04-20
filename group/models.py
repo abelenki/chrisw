@@ -77,7 +77,7 @@ class UserGroupInfo(gdb.Entity):
   post_count = db.IntegerCacheProperty(default=0)
   group_count = db.IntegerCacheProperty(default=0)
 
-  _recent_joined_groups = db.ListCacheProperty(default=[])
+  _recent_joined_group_keys = db.ListCacheProperty(default=[])
 
   def update_topic_count(self):
     """docstring for update_topic_count"""
@@ -97,11 +97,11 @@ class UserGroupInfo(gdb.Entity):
   @property
   def recent_joined_groups(self):
     """docstring for joined_groups"""
-    return db.get(self._recent_joined_groups)
+    return db.get(self._recent_joined_group_keys)
 
   def update_recent_joined_groups(self):
     """docstring for get_joined_groups"""
-    self._recent_joined_groups = Group.get_group_keys_by_user(self.user)\
+    self._recent_joined_group_keys = Group.get_group_keys_by_user(self.user)\
       .fetch(limit=8, offset=0)
 
     self.put()
@@ -124,7 +124,7 @@ class Group(gdb.Entity):
   introduction = db.TextProperty(default='')
   photo_url = db.StringProperty(default=settings.DEFAULT_GROUP_PHOTO)
 
-  recent_members = db.ListCacheProperty(default=[])
+  _recent_member_keys = db.ListCacheProperty(default=[])
   member_count = db.IntegerCacheProperty(default=1)
   
   url_format = r'/group/%(group_id)s'
@@ -174,22 +174,22 @@ class Group(gdb.Entity):
     """docstring for has_member"""
     return self.has_link(GROUP_MEMEBER, user)
 
-  def get_latest_joined_members(self):
-    """docstring for get_latest_joined_members"""
-    return db.get(self.recent_members.reverse())
+  @property
+  def recent_members(self):
+    return db.get(self._recent_member_keys)
 
-  def get_member_keys(self):
-    """docstring for get_members"""
+  def _get_member_keys(self):
+    """docstring for get_member_keys"""
     return self.get_targets(GROUP_MEMEBER, User, keys_only=True)
 
   def get_members(self):
     """docstring for get_members"""
-    return db.MapQuery(self.get_member_keys(), lambda x:db.get(x), True)
+    return db.MapQuery(self._get_member_keys(), lambda x:db.get(x), True)
 
   def _update_member_info(self):
     """docstring for _update_member_count"""
-    self.member_count = self.get_member_keys().count()
-    self.recent_members = list(self.get_member_keys().fetch(limit=6))
+    self.member_count = self._get_member_keys().count()
+    self._recent_member_keys = list(self._get_member_keys().fetch(limit=6))
     self.put()
 
   #######
@@ -250,7 +250,7 @@ class Group(gdb.Entity):
 
     topic.put()
 
-    subscribers = list(self.get_member_keys()) + [Guest]
+    subscribers = list(self._get_member_keys()) + [Guest]
     topic.notify(subscribers)
 
     UserGroupInfo.get_by_user(user).update_topic_count()

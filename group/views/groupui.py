@@ -54,8 +54,6 @@ class GroupUI(ModelUI):
     page = Page(query=query, request=request)
     topics = page.data()
     
-    members = [User.get(mk) for mk in self.group.recent_members]
-    
     #var_dict = locals() # can't assign variable below this line
                 
     return template('page_group_view.html', locals())

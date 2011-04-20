@@ -68,8 +68,8 @@ class UserStreamInfo(gdb.Entity):
   """docstring for UserStreamInfo"""
   user = db.ReferenceProperty(User, required=True)
 
-  recent_follower_keys = db.ListCacheProperty(default=[])
-  recent_following_keys = db.ListCacheProperty(default=[])
+  _recent_follower_keys = db.ListCacheProperty(default=[])
+  _recent_following_keys = db.ListCacheProperty(default=[])
 
   comment_count = db.IntegerCacheProperty(default=1)
   stream_count = db.IntegerCacheProperty(default=1)
@@ -191,22 +191,24 @@ class UserStreamInfo(gdb.Entity):
   def update_follower_count(self):
     """docstring for update_follower_count"""
     query = self.get_follower_keys();
-    self.recent_follower_keys = list(query.fetch(10))
+    self._recent_follower_keys = list(query.fetch(10))
     self.update_field('follower_count', query.count())
 
   def update_following_count(self):
     """docstring for update_following_count"""
     query = self.get_following_keys()
-    self.recent_following_keys = list(query.fetch(10))
+    self._recent_following_keys = list(query.fetch(10))
     self.update_field('following_count', query.count())
 
+  @property
   def recent_follower_users(self):
     """docstring for recent_follower_users"""
-    return db.get(self.recent_follower_keys)
-
+    return db.get(self._recent_follower_keys)
+  
+  @property
   def recent_following_users(self):
     """docstring for recent_following_users"""
-    return db.get(self.recent_following_keys)
+    return db.get(self._recent_following_keys)
 
   @classmethod
   def get_instance(cls, user):
