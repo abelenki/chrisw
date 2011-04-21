@@ -30,7 +30,7 @@ class StarRenderNode(template.Node):
   def render(self, context):
     """docstring for render"""
     
-    star_value = context[self.star_value_name]
+    star_value = template.Variable(self.star_value_name).resolve(context)
     
     if not self.in_portion:
       star_value = int(star_value) * 1.0 / self.full_star_number
