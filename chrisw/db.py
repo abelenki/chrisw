@@ -27,7 +27,7 @@ from django import forms
 __all__ = ['DictProperty', 'WeakReferenceProperty', 'CacheProperty',
 'IntegerCacheProperty', 'StringCacheProperty', 'ListCacheProperty',
 'IntegerProperty', 'StringProperty', 'FloatProperty', 'delete', 'Model',
-'MapQuery', 'GetQuery', 'TextCacheProperty', 'FlyModel',
+'MapQuery', 'GetQuery', 'TextCacheProperty', 'CacheModel',
 ]
 
 
@@ -105,7 +105,7 @@ class CacheProperty(object):
 
   def __property_config__(self, model_class, property_name, dct):
     """docstring for __property_config"""
-    if not isinstance(model_class, FlyPropertiedMeta):
+    if not isinstance(model_class, CachePropertiedMeta):
       raise Exception('Model %s is not a subclass of FatModel' % \
                         type(model_class))
 
@@ -329,20 +329,20 @@ def _initialize_fly_properties(model_class, name, bases, dct):
       model_class._fly_properties[attr] = prop
       prop.__property_config__(model_class, attr, dct)
 
-class FlyPropertiedMeta(PropertiedClass):
-  """docstring for FlyPropertiedClass"""
+class CachePropertiedMeta(PropertiedClass):
+  """docstring for CachePropertiedClass"""
   _fly_properties = {}
 
   def __init__(cls, name, bases, dct):
-    super(FlyPropertiedMeta, cls).__init__(name, bases, dct)
+    super(CachePropertiedMeta, cls).__init__(name, bases, dct)
 
     _initialize_fly_properties(cls, name, bases, dct)
 
 
-class FlyModel(Model):
+class CacheModel(Model):
   """Fot Model added extra_dict on Model to enable the usage of CacheProperty"""
 
-  __metaclass__ = FlyPropertiedMeta
+  __metaclass__ = CachePropertiedMeta
 
   extra_dict = DictProperty(default={})
 

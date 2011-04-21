@@ -12,7 +12,7 @@ import unittest
 import logging
 from chrisw import db
 
-class TestStudent(db.FlyModel):
+class TestStudent(db.CacheModel):
   """docstring for Student"""
   name = db.StringProperty()
   age = db.IntegerCacheProperty()

@@ -22,7 +22,7 @@ def _get_type_name(cls):
     return cls.__name__
   return cls.__class__.__name__
 
-class Entity(db.FlyModel):
+class Entity(db.CacheModel):
   """The base model for graph node"""
   create_at = db.DateTimeProperty(auto_now_add=True)
 
@@ -144,7 +144,7 @@ def _init_user_keys(users):
     keys.append(str(key))
   return list(set(keys))
 
-class Message(db.FlyModel):
+class Message(db.CacheModel):
   """The model which represent the message in system"""
   create_at = db.DateTimeProperty(auto_now_add=True)
   update_at = db.DateTimeProperty(auto_now=True)
