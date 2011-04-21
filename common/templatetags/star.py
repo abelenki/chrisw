@@ -14,17 +14,18 @@ from chrisw.helper.django_helper import render_to_string
 
 register = template.Library()
 
-_star_html_template = """<div class="star_bar">
+_star_html_template = """<div class="star_bar_%(star_size)s">
   <div style="width:%(star_value)s%%"></div>
 </div>"""
 
 class StarRenderNode(template.Node):
   """docstring for StreamRenderNode"""
-  def __init__(self, star_value_name, full_star_number, in_portion):
+  def __init__(self, star_value_name, full_star_number, in_portion, size):
     super(StarRenderNode, self).__init__()
     self.full_star_number = full_star_number
     self.in_portion = in_portion
     self.star_value_name = star_value_name
+    self.size = size
   
   def render(self, context):
     """docstring for render"""
@@ -37,6 +38,7 @@ class StarRenderNode(template.Node):
       star_value = float(star_value)
       
     star_value = int(star_value * 100)
+    star_size = self.size
     
     return _star_html_template % locals()
     
@@ -56,6 +58,8 @@ def star(parser, token):
   full_star_number = 5
   in_portion = False
   
+  size = 'normal'
+  
   try:
     while True:
       symbol = iterator.next()
@@ -64,9 +68,11 @@ def star(parser, token):
         in_portion = True
       if symbol == 'of':
         full_star_number = int(iterator.next())
+      if symbol in ('small', 'big'):
+        size = symbol
   except StopIteration:
     pass
   
   args["full_star_number"] = full_star_number
   
-  return StarRenderNode(star_value_name, full_star_number, in_portion)
+  return StarRenderNode(star_value_name, full_star_number, in_portion, size)

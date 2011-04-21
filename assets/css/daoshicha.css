@@ -533,14 +533,24 @@ span.topic_content {
   display: block
 }
 
-.star_bar {
+.star_bar_small{
   width: 55px;
-  background: url(/images/common/star_x_grey.gif) 0 0 repeat-x;
+  background: url(/images/common/star-off-small.gif) 0 0 repeat-x;
 }
 
-.star_bar div {
+.star_bar_small div{
   height: 12px;
-  background: url(/images/common/star_x_orange.gif) 0 0 repeat-x;
+  background: url(/images/common/star-on-small.gif) 0 0 repeat-x;
+}
+
+.star_bar_normal {
+  width: 80px;
+  background: url(/images/common/star-off.png) 0 0 repeat-x;
+}
+
+.star_bar_normal div {
+  height: 16px;
+  background: url(/images/common/star-on.png) 0 0 repeat-x;
 }
 
 ul.buttom {
