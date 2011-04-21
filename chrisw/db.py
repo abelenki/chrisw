@@ -99,7 +99,7 @@ class CacheProperty(object):
 
   def __init__(self, default=None, name=None, required=False):
     """docstring for __init__"""
-    self.default = default
+    self._default = default
     self.name = name
     self.required = required
 
@@ -113,6 +113,11 @@ class CacheProperty(object):
     if self.name is None:
       self.name = property_name
 
+  @property
+  def default(self):
+    """docstring for default"""
+    return self._default
+  
   def empty(self, value):
     return value is None
 
@@ -141,7 +146,15 @@ class CacheProperty(object):
     """Populate the property from dict when it is used."""
 
     if owner_instance:
-      value = owner_instance.extra_dict.get(self.name, self.default)
+      extra_dict = owner_instance.extra_dict
+      if extra_dict.has_key(self.name):
+        value = extra_dict[self.name]
+      else:
+        value = self.default 
+        # bug fixed here
+        # value need be setted before return, consider the list []
+        extra_dict[self.name] = value 
+        
       return value
     else:
       return self;
@@ -172,6 +185,11 @@ class TextCacheProperty(CacheProperty):
 class ListCacheProperty(CacheProperty):
   """A list property which will be stored in ``extra_dict``"""
   data_type = list
+  
+  @property
+  def default(self):
+    """docstring for default"""
+    return list(self._default)
 
 
 def to_dict(model):

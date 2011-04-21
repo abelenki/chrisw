@@ -117,7 +117,7 @@ class ThingUI(ModelUI):
   @check_permission('rank', _("User can't rank this item"))
   def rank(self, request):
     """docstring for rank"""
-    rank_value = request.get('rank_value')
+    rank_value = request.get('score')
     if rank_value:
       self.thing.add_rank(self.user, rank_value)
 

@@ -256,7 +256,7 @@ class Thing(gdb.Entity):
     
   def can_rank(self, user):
     """docstring for can_rank"""
-    return user.is_not_guest() and not self.get_rank(user) is None
+    return user.is_not_guest() #and not self.get_rank(user)
   
   def get_rank(self, user):
     """docstring for get_rank"""
@@ -265,6 +265,7 @@ class Thing(gdb.Entity):
   def add_rank(self, user, rank):
     """docstring for add_rank"""
     if int(rank) in range(1, 6):
+      self.unlink(RANK, user)
       self.link(RANK, user, link_attr=rank)
       self.update_rank_info()
     else:

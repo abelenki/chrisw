@@ -8,11 +8,13 @@
 	<script type="text/javascript" charset="utf-8">
 		$(document).ready(
 			function(){
-				$('#rater').raty({
+				chrisw.raty("#rater", {
 					click: function(score, evt){
-
-					},
-					path: '/images/common',
+						var url = "{{thing.url}}/rank?score=" + score + "&result_type=json";
+						$.getJSON(url, function(data){
+							chrisw.reload()
+						})
+					}
 				});
 			}
 		);
@@ -32,9 +34,10 @@
 		</div>
 		<div class="grid_5">
 			<div id="rank">
+				{{ thing.rank_ }}
 			</div>
 			<table border="0" cellspacing="2" cellpadding="2">
-				{% for start_num, rate_count in thing.rank_info.ranks %}
+				{% for start_num, rate_count in thing.rank_info.rates %}
 					<tr><td style="padding:1px;">
 						{% star start_num of 5 %} 
 						</td>
@@ -45,8 +48,11 @@
 
 				{% endfor %}
 			</table>
-			<div id="rater">
-			</div>
+			
+			{% if can_rank %}
+				<div id="rater">
+				</div>
+			{% endif %}
 		</div>
 		<div class="clear">
 		</div>
