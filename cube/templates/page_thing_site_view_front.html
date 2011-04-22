@@ -1,12 +1,20 @@
 {% extends "cube_master.html" %}
 
 {% load thing_render %}
+{% load i18n %}
 
 {% block content %}
+	{% block thing_site_title %}
+		<h1>
+			{% trans "Daoshicha Thing" %}
+		</h1>
+	{% endblock %}
 	<div class="thing_new">
 		<ul>
 			{% for thing in latest_thing %}
-				{% thing_render thing box %}
+				<li>
+					{% thing_render thing box %}
+				</li>
 			{% endfor %}
 		</ul>
 	</div>

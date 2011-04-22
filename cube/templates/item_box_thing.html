@@ -1,2 +1,15 @@
+{% load star %}
 
-<a href="{{current_item.url}}">{{ current_item.title }}</a>
+<img class="im" src="{{current_item.photo_url}}" style="float:left" />
+
+<h3>
+	<a href="{{current_item.url}}">{{ current_item.title }}</a>
+</h3>
+
+<p>
+	<div style="float:left;">
+		{% star current_item.rank of 5 small %}
+	</div>
+	<br />
+	author: author
+</p>

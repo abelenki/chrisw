@@ -39,9 +39,18 @@
 			</ul>
 		</div>
 		<div class="grid_5">
-			<div id="rank">
-				{% star thing.rank of 5 %} {{thing.rank}}
+			<div id="rank" class="grid_4">
+				<span id="name" style="float:left;">
+					{% star thing.rank of 5 %} 
+				</span>
+				<span style="height:20px;">
+						{{thing.rank}}
+				</span>
 			</div>
+			<div class="grid_4">
+				({{ thing.rank_info.rank_count_sum }} {% trans "People ranked it" %})
+			</div>
+			<div class="grid_4">
 			<table border="0" cellspacing="2" cellpadding="2">
 				{% for start_num, rate_count in thing.rank_info.rates %}
 					<tr><td style="padding:1px;">
@@ -53,18 +62,16 @@
 					</tr>
 
 				{% endfor %}
-			</table>
+			</table>	
+			</div>
 			
-			{% if can_rank %}
-				<div id="rater">
-				</div>
-			{% endif %}
 		</div>
 		<div class="clear">
 		</div>
 
-		<div class>
-			<ul class="buttom">
+		<div>
+			<span>
+				
 				{% if can_want %}
 					<a class="a_btn a_btn_m" href="{{thing.url}}/want"><span>{% trans "Want" %}</span></a>
 				{% endif %}
@@ -77,9 +84,20 @@
 				{% if can_cancel_own %}
 					<a class="a_btn a_btn_m" href="{{thing.url}}/cancel_own"><span>{% trans "Cancel Own" %}</span></a>
 				{% endif %}
-			</ul>
+			</span>
+			
+			{% if can_rank %}
+				<span id="rater" style="padding-left:20px;">
+				</span>
+			{% endif %}
+			
 		</div>
 		<div class="clear"></div>
+		
+		<div class="grid_15">
+			<h3>{% trans "Introduction" %}</h3>
+			{{ thing.introduction }}
+		</div>
 		
 		<div class="grid_15">
 			<ul>
@@ -106,5 +124,15 @@
 		<div class="clear">
 			
 		</div>
+	</div>
+{% endblock %}
+
+{% block sidebar %}
+	<div class="">
+		<h3>{{thing.owner_count}} {% trans "Person Own it" %}</h3>
+	</div>
+	
+	<div class="">
+		<h3>{{thing.wanting_one_count}} {% trans "Person Want it" %}</h3>
 	</div>
 {% endblock %}
