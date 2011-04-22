@@ -27,7 +27,8 @@ from django import forms
 __all__ = ['DictProperty', 'WeakReferenceProperty', 'CacheProperty',
 'IntegerCacheProperty', 'StringCacheProperty', 'ListCacheProperty',
 'IntegerProperty', 'StringProperty', 'FloatProperty', 'delete', 'Model',
-'MapQuery', 'GetQuery', 'TextCacheProperty', 'CacheModel',
+'MapQuery', 'GetQuery', 'TextCacheProperty', 'CacheModel', 
+'CachePropertiedMeta',
 ]
 
 

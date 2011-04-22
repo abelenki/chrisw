@@ -69,7 +69,10 @@ class ThingUI(ModelUI):
   @check_permission('view', _('User is not allowed to view this item.'))
   def view(self):
     """docstring for view"""
-
+    
+    comments = self.thing.comments.fetch(limit=5, offset=0)
+    reviews = self.thing.reviews.fetch(limit=5, offset=0)
+    
     return template('page_thing_view.html', locals())
 
   @check_permission('edit', _("User is not allowed to edit this item."))

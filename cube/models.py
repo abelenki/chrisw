@@ -50,8 +50,29 @@ class ThingSite(db.Model):
 
     return instance
 
+def _initialize_class_properties(model_class, name, bases, dct):
+  """docstring for _initialize_fly_properties"""
+  class_properties = {}
+  for attr, prop in dct.items():
+    if isinstance(prop, db.Property):
+      class_properties[attr] = prop
+  
+  dct.update({'class_properties': class_properties})
+
+
+# monkey patch for Thing
+class _ThingMeta(db.CachePropertiedMeta):
+  """docstring for ThingMetaClass"""
+  
+  def __new__(cls, name, bases, dct):
+    _initialize_class_properties(cls, name, bases, dct)
+
+    return super(_ThingMeta, cls).__new__(cls, name, bases, dct)
+
 
 class Thing(gdb.Entity):
+  __metaclass__ = _ThingMeta
+  
   """docstring for Thing"""
   creator = db.ReferenceProperty(User)
 
@@ -316,7 +337,7 @@ class Thing(gdb.Entity):
     tid = self.key().id()
     
     return self.url_format % locals()
-
+  
   @classmethod
   def get_cls_type_name(cls):
     """docstring for get_cls_type_name"""

@@ -7,6 +7,7 @@ Created by Kang Zhang on 2011-04-12.
 Copyright (c) 2011 Shanghai Jiao Tong University. All rights reserved.
 """
 
+from chrisw import db
 
 from cube.core import ThingMeta
 from cube.models import Thing, ThingSite
@@ -17,7 +18,7 @@ __all__ = ['apps']
 
 class Book(Thing):
   """docstring for Book"""
-  pass
+  isbn = db.StringProperty()
 
 class BookSite(ThingSite):
   """docstring for BookSite"""

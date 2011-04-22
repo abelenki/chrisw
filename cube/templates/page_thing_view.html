@@ -77,7 +77,24 @@
 		
 		<div class="grid_15">
 			<ul>
-				
+				{% for comment in comments %}
+					<li>
+						{{ comment.content }}
+					</li>
+				{% endfor %}
+			</ul>
+		</div>
+		<div class="clear">
+			
+		</div>
+		
+		<div class="grid_15">
+			<ul>
+				{% for review in reviews %}
+					<li>
+						{{ review.content }}
+					</li>
+				{% endfor %}
 			</ul>
 		</div>
 		<div class="clear">

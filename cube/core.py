@@ -79,6 +79,9 @@ class ThingMeta(object):
     new_form_class_name = self.new_class_name(ThingForm)
     fields = ThingForm.Meta.fields
     
+    thing_class = self.thing_class
+    fields += [name for name in thing_class.class_properties.keys()]
+    
     # init meta class
     meta_class = type('Meta', (object,), {'model':self.thing_class,
       'fields':fields})
