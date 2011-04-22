@@ -19,6 +19,10 @@ __all__ = ['apps']
 class Book(Thing):
   """docstring for Book"""
   isbn = db.StringProperty()
+  
+  def fields(self):
+    """docstring for fields"""
+    return super(Book, self).fields() + [("isbn", self.isbn)]
 
 class BookSite(ThingSite):
   """docstring for BookSite"""

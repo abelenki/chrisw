@@ -30,7 +30,13 @@
 			<img class="imx" src="{{thing.photo_url}}"></img>
 		</div>
 		<div class="grid_6">
-			infos
+			<ul>
+				{% for key, value in thing.fields %}
+					<li>
+						{{ key }} : {{ value }}
+					</li>
+				{% endfor %}
+			</ul>
 		</div>
 		<div class="grid_5">
 			<div id="rank">

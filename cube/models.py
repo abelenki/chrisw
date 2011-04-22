@@ -86,6 +86,8 @@ class Thing(gdb.Entity):
 
   tags = db.StringListProperty(default=[])
   
+  # the extra fields of thing, used to store user defined properties
+  # [(value1_type, value1_name), (value2_type, value2_name), ]
   extra_fields = db.ListCacheProperty(default=[])
   
   index_fields = ['title']
@@ -337,6 +339,9 @@ class Thing(gdb.Entity):
     tid = self.key().id()
     
     return self.url_format % locals()
+  
+  def fields(self):
+    return self.extra_fields + [('title', self.title)]
   
   @classmethod
   def get_cls_type_name(cls):
