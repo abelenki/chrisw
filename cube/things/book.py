@@ -28,8 +28,8 @@ class Book(Thing):
   
   def fields(self):
     """docstring for fields"""
-    return super(Book, self).fields() + [("ISBN", self.isbn),
-      (_("Author"), self.author), _("Publisher", self.publisher),
+    return super(Book, self).fields() + [(_("ISBN"), self.isbn),
+      (_("Author"), self.author), (_("Publisher"), self.publisher),
       (_("Publish at"), self.publish_at), (_("Price"), self.price),
       ]
 

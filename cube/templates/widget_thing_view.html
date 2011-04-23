@@ -1,0 +1,19 @@
+
+{% load i18n %}
+{% load star %}
+
+<p class="pl">
+	> <a href="{{thing.url}}">{% trans "Back to: " %}{{ thing.title }}</a>			
+</p>
+<div>
+	<a href="{{thing.url}}"><img src="{{thing.photo_url}}"/></a>
+	</br>
+	{% star thing.rank of 5 %}
+	{% for key,value in thing.fields %}
+		<span style="color:#666;">
+			{{ key }}
+		</span>
+			{{ value }}
+		</br>
+	{% endfor %}
+</div>

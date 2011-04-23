@@ -35,6 +35,8 @@ class ThingSite(db.Model):
   def create_thing(self, thing, user):
     """docstring for create_thing"""
     thing.creator = user
+    thing.build_index()
+    
     thing.put()
     
     self.avaliable_slots -= 1
@@ -126,6 +128,13 @@ class Thing(gdb.Entity):
   def can_view(self, user):
     """docstring for can_view"""
     return True
+  
+  def build_index(self):
+    """docstring for build_index"""
+    for field in self.index_fields:
+      value = getattr(self, field)
+      if value:
+        self.keyword_index.append(value)
   
   ######
   #

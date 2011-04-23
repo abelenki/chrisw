@@ -89,6 +89,8 @@ class ThingUI(ModelUI):
       
     if form.is_valid():
       instance = form.save(commit=False)
+      instance.build_index()
+      
       instance.put()
     
     return template('page_thing_edit.html', locals())
@@ -131,7 +133,7 @@ class ThingUI(ModelUI):
     """docstring for comment"""
     form = ThingCommentForm()
     post_url = request.path
-    return template("page_item_create.html", locals())
+    return template("page_thing_item_create.html", locals())
   
   @check_permission('add_comment', _("User can't comment this item."))
   def comment_post(self, request):
@@ -145,7 +147,7 @@ class ThingUI(ModelUI):
     
     post_url = request.path
     # site message here
-    return template("page_item_create.html", locals())
+    return template("page_thing_item_create.html", locals())
   
   def view_comments(self, request):
     """docstring for view_comments"""
@@ -162,7 +164,7 @@ class ThingUI(ModelUI):
     """docstring for review"""
     form = ThingReviewForm()
     post_url = request.path
-    return template("page_item_create.html", locals())
+    return template("page_thing_item_create.html", locals())
   
   @check_permission('add_review', _("User can't review this item."))
   def review_post(self, request):
@@ -176,7 +178,7 @@ class ThingUI(ModelUI):
     
     post_url = request.path
     # site message here
-    return template("page_item_create.html", locals())
+    return template("page_thing_item_create.html", locals())
   
   def view_reviews(self, request):
     """docstring for view_reviews"""

@@ -37,6 +37,8 @@
 							{{ value }}
 						<br />
 				{% endfor %}
+			<div class="clear">
+			</div>
 		</div>
 		<div class="grid_5">
 			<div id="rank" class="grid_4">
@@ -100,6 +102,8 @@
 		</div>
 		
 		<div class="grid_15">
+			<a href="{{thing.url}}/comments">{% trans "View all comments" %}</a>
+			<a href="{{thing.url}}/comments/new">{% trans "Create new comment" %}</a>
 			<ul>
 				{% for comment in comments %}
 					<li>
