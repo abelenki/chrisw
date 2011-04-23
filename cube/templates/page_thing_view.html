@@ -30,13 +30,13 @@
 			<img class="imx" src="{{thing.photo_url}}"></img>
 		</div>
 		<div class="grid_6">
-			<ul>
 				{% for key, value in thing.fields %}
-					<li>
-						{{ key }} : {{ value }}
-					</li>
+						<span style="color:#666">
+							{{ key }}
+						</span>
+							{{ value }}
+						<br />
 				{% endfor %}
-			</ul>
 		</div>
 		<div class="grid_5">
 			<div id="rank" class="grid_4">
@@ -128,11 +128,21 @@
 {% endblock %}
 
 {% block sidebar %}
-	<div class="">
+
+	<div class="sidebar_box no_border">
 		<h3>{{thing.owner_count}} {% trans "Person Own it" %}</h3>
+		{% with thing.recent_owners as members%}
+			{% include "set_grid_user.html" %}
+		{% endwith %}
+		<div class="clear">
+		</div>
 	</div>
 	
-	<div class="">
+	<div class="sidebar_box no_border">
 		<h3>{{thing.wanting_one_count}} {% trans "Person Want it" %}</h3>
+		{% with thing.recent_wanting_ones as members %}
+			{% include "set_grid_user.html" %}
+		{% endwith %}
 	</div>
+	
 {% endblock %}

@@ -108,17 +108,14 @@ def api_enabled(func):
     if isinstance(action, back):
       from_url = self.request.headers.get('Referer','/')
       
-      if not from_url:
-        if back.default_url :
-          action = redirect(back.default_url)
+      if not from_url or from_url == self.request.url:
+        if action.default_url :
+          action = redirect(action.default_url)
         else:
           # back to root folder
           action = redirect('/')
       else:
-        if from_url == self.request.url:
-          action = template('page_error.html', {'error':"Visiting loop"})
-        else:
-          action = redirect(from_url)
+        action = redirect(from_url)
     elif isinstance(action, login):
       from home import create_login_url
       action = redirect(create_login_url(self.request.url))

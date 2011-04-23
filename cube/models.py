@@ -12,6 +12,7 @@ import logging
 
 from chrisw import db, gdb
 from chrisw.core.memcache import cache_result
+from chrisw.i18n import _
 
 from common.auth import get_current_user, User, Guest
 from conf import settings
@@ -25,7 +26,8 @@ DIG = 'has-been-thing-comment-dig-by'
 class ThingSite(db.Model):
   """docstring for ThingSite"""
   avaliable_slots = db.IntegerProperty(default=0)
-
+  url_format = r'/c/%(thing_name)s'
+  
   def can_create_thing(self, user):
     """docstring for can_create_thing"""
     return self.avaliable_slots > -10
@@ -49,6 +51,11 @@ class ThingSite(db.Model):
       instance.put()
 
     return instance
+  
+  @property
+  def url(self):
+    thing_name = self.__class__.__name__.lower().replace("site", "")
+    return self.url_format % locals()
 
 def _initialize_class_properties(model_class, name, bases, dct):
   """docstring for _initialize_fly_properties"""
@@ -156,8 +163,7 @@ class Thing(gdb.Entity):
     """docstring for update_owner_count"""
     self.owner_count = self.get_targets(OWNER, User).count()
     self._recent_owner_keys = self.get_targets(OWNER, User, keys_only=True)\
-      .fetch(limit=8, offset=1)
-    
+      .fetch(limit=8, offset=0)
     self.put()
 
   ######
@@ -199,7 +205,7 @@ class Thing(gdb.Entity):
     """docstring for update_wanting_one_count"""
     self.wanting_one_count = self.get_targets(WANTING_ONE, User).count()
     self._recent_wanting_one_keys = self.get_targets(WANTING_ONE, User,\
-      keys_only=True).fetch(limit=8, offset=1)
+      keys_only=True).fetch(limit=8, offset=0)
     
     self.put()
     
@@ -341,7 +347,7 @@ class Thing(gdb.Entity):
     return self.url_format % locals()
   
   def fields(self):
-    return self.extra_fields + [('title', self.title)]
+    return [(_('Title'), self.title)] + self.extra_fields;
   
   @classmethod
   def get_cls_type_name(cls):
@@ -404,7 +410,7 @@ class _ThingAnnotation(gdb.Entity):
   def url(self):
     """docstring for url"""
     annotation_id = self.key().id()
-    return self.url_format % annotation_id
+    return self.url_format % locals()
     
 
 class ThingComment(_ThingAnnotation):

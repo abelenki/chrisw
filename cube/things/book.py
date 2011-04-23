@@ -9,6 +9,8 @@ Copyright (c) 2011 Shanghai Jiao Tong University. All rights reserved.
 
 from chrisw import db
 
+from chrisw.i18n import _
+
 from cube.core import ThingMeta
 from cube.models import Thing, ThingSite
 
@@ -19,10 +21,17 @@ __all__ = ['apps']
 class Book(Thing):
   """docstring for Book"""
   isbn = db.StringProperty()
+  author = db.StringProperty()
+  publisher = db.StringProperty()
+  publish_at = db.DateTimeProperty()
+  price = db.FloatProperty()
   
   def fields(self):
     """docstring for fields"""
-    return super(Book, self).fields() + [("isbn", self.isbn)]
+    return super(Book, self).fields() + [("ISBN", self.isbn),
+      (_("Author"), self.author), _("Publisher", self.publisher),
+      (_("Publish at"), self.publish_at), (_("Price"), self.price),
+      ]
 
 class BookSite(ThingSite):
   """docstring for BookSite"""

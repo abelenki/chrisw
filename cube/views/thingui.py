@@ -48,7 +48,7 @@ class ThingReviewForm(djangoforms.ModelForm):
   """docstring for ThingReviewForm"""
   class Meta:
     model = ThingReview
-    fields = ['content', 'title']
+    fields = ['title', 'content']
 
   title = fields.fields.CharField(label = _("Title"), min_length=10,\
     max_length=140)
@@ -160,7 +160,7 @@ class ThingUI(ModelUI):
   @check_permission('add_review', _("User can't review this item."))
   def review(self, request):
     """docstring for review"""
-    form = ThingCommentForm()
+    form = ThingReviewForm()
     post_url = request.path
     return template("page_item_create.html", locals())
   
@@ -172,7 +172,7 @@ class ThingUI(ModelUI):
       new_review = form.save(commit=False)
       self.thing.add_review(self.user, new_review)
 
-      return back()
+      return back(new_review.url)
     
     post_url = request.path
     # site message here

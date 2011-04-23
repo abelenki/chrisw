@@ -21,5 +21,7 @@
 {% endblock %}
 
 {% block sidebar %}
-	
+	{% if can_create_thing %}
+		<h2>{% trans "Want to create a new one?" %}<a href="{{thing_site.url}}/new"> {% trans "Click here" %} </a> </h2>
+	{% endif %}
 {% endblock %}
