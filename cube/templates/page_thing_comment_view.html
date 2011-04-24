@@ -11,19 +11,26 @@
 
 {% block content %}
 	
-	<ul class="simple_list">
-		{% for comment in comments %}
-			<li>
-				<div style="float:left; margin-right:12px;padding-top:10px;">
-					<img class="is" src="{{comment.author.photo_url}}">
-				</div>
-				{% include "item_comment_box.html" %}
-			</li>
-		{% endfor %}
+	<div class="mwindow">
+		<span style="margin-left:5px;" class="plain">
+			{% trans "There are " %} <b>{{ page.count }}</b> {% trans "comments" %}.
+		</span>
+		<div class="spe_line"></div>
+		<ul class="simple_list">
+			{% for comment in comments %}
+				<li>
+					<div style="float:left; margin-right:12px;padding-top:9px;">
+						<img class="is" src="{{comment.author.photo_url}}">
+					</div>
+					{% include "item_comment_box.html" %}
+				</li>
+			{% endfor %}
+
+		</ul>
+
+		{% include "control_pager.html" %}
 		
-	</ul>
-	
-	{% include "control_pager.html" %}
+	</div>
 	
 {% endblock %}
 

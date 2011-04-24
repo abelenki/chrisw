@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-04-11 17:39+0800\n"
+"POT-Creation-Date: 2011-04-24 16:39+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -64,6 +64,188 @@ msgstr ""
 
 #: common/templates/page_master.html:125
 msgid "(Google Account is supported)"
+msgstr ""
+
+#: cube/models.py:359 cube/views/thingui.py:30 cube/views/thingui.py:53
+msgid "Title"
+msgstr ""
+
+#: cube/templates/item_comment_box.html:7
+msgid "Up"
+msgstr ""
+
+#: cube/templates/page_thing_comment_view.html:8
+msgid "Related comments"
+msgstr ""
+
+#: cube/templates/page_thing_comment_view.html:32
+#: cube/templates/page_thing_view.html:111
+msgid "Create new comment"
+msgstr ""
+
+#: cube/templates/page_thing_edit.html:12
+#: cube/templates/page_thing_item_create.html:16
+#: cube/templates/page_thing_site_create.html:36
+#: group/templates/page_item_create.html:6
+#: group/templates/page_item_create.html:15
+msgid "Create"
+msgstr ""
+
+#: cube/templates/page_thing_site_create.html:23
+msgid "Optional fields: "
+msgstr ""
+
+#: cube/templates/page_thing_site_create.html:25
+msgid "In attribute name and attribute value format"
+msgstr ""
+
+#: cube/templates/page_thing_site_create.html:27
+msgid " + More field"
+msgstr ""
+
+#: cube/templates/page_thing_site_create.html:28
+msgid "- Less field"
+msgstr ""
+
+#: cube/templates/page_thing_site_view_front.html:9
+msgid "Daoshicha Thing"
+msgstr ""
+
+#: cube/templates/page_thing_site_view_front.html:25
+msgid "Want to create a new one?"
+msgstr ""
+
+#: cube/templates/page_thing_site_view_front.html:25
+#: group/templates/page_groupsite_view_master.html:64
+msgid "Click here"
+msgstr ""
+
+#: cube/templates/page_thing_view.html:53
+msgid "People ranked it"
+msgstr ""
+
+#: cube/templates/page_thing_view.html:78
+msgid "Want"
+msgstr ""
+
+#: cube/templates/page_thing_view.html:81
+msgid "Cancel Want"
+msgstr ""
+
+#: cube/templates/page_thing_view.html:84
+msgid "Own"
+msgstr ""
+
+#: cube/templates/page_thing_view.html:87
+msgid "Cancel Own"
+msgstr ""
+
+#: cube/templates/page_thing_view.html:100 cube/views/thingui.py:32
+msgid "Introduction"
+msgstr ""
+
+#: cube/templates/page_thing_view.html:106
+msgid "Comments ......"
+msgstr ""
+
+#: cube/templates/page_thing_view.html:108
+msgid "View all comments"
+msgstr ""
+
+#: cube/templates/page_thing_view.html:144
+msgid "Person Own it"
+msgstr ""
+
+#: cube/templates/page_thing_view.html:153
+msgid "Person Want it"
+msgstr ""
+
+#: cube/templates/widget_thing_view.html:6
+msgid "Back to: "
+msgstr ""
+
+#: cube/things/book.py:31
+msgid "ISBN"
+msgstr ""
+
+#: cube/things/book.py:32
+msgid "Author"
+msgstr ""
+
+#: cube/things/book.py:32
+msgid "Publisher"
+msgstr ""
+
+#: cube/things/book.py:33
+msgid "Publish at"
+msgstr ""
+
+#: cube/things/book.py:33
+msgid "Price"
+msgstr ""
+
+#: cube/views/thing_annotation.py:31 cube/views/thing_annotation.py:36
+msgid "User can't dig this annotation"
+msgstr ""
+
+#: cube/views/thing_annotation.py:47
+msgid "User can't remove this annotation"
+msgstr ""
+
+#: cube/views/thing_annotation.py:59
+msgid "User can't remove this review"
+msgstr ""
+
+#: cube/views/thingsite.py:54 cube/views/thingsite.py:76
+msgid "You are not allowed to create this type of item."
+msgstr ""
+
+#: cube/views/thingui.py:34
+msgid "Tags (Please seperate tags by comma ',')"
+msgstr ""
+
+#: cube/views/thingui.py:44
+msgid "Short comment(less than 140 characters)"
+msgstr ""
+
+#: cube/views/thingui.py:55
+msgid "Content"
+msgstr ""
+
+#: cube/views/thingui.py:69
+msgid "User is not allowed to view this item."
+msgstr ""
+
+#: cube/views/thingui.py:78 cube/views/thingui.py:84
+msgid "User is not allowed to edit this item."
+msgstr ""
+
+#: cube/views/thingui.py:98
+msgid "User are not allowed to want this item."
+msgstr ""
+
+#: cube/views/thingui.py:104 cube/views/thingui.py:116
+msgid "User are not allowed to cancel."
+msgstr ""
+
+#: cube/views/thingui.py:110
+msgid "User can't own this item."
+msgstr ""
+
+#: cube/views/thingui.py:122
+msgid "User can't rank this item"
+msgstr ""
+
+#: cube/views/thingui.py:131 cube/views/thingui.py:139
+msgid "User can't comment this item."
+msgstr ""
+
+#: cube/views/thingui.py:136 cube/views/thingui.py:150
+msgid "New Thing Comment"
+msgstr ""
+
+#: cube/views/thingui.py:164 cube/views/thingui.py:171
+msgid "User can't review this item."
 msgstr ""
 
 #: group/templates/control_pager.html:9
@@ -130,15 +312,6 @@ msgstr ""
 msgid "Want to create a new group?"
 msgstr ""
 
-#: group/templates/page_groupsite_view_master.html:64
-msgid "Click here"
-msgstr ""
-
-#: group/templates/page_item_create.html:6
-#: group/templates/page_item_create.html:15
-msgid "Create"
-msgstr ""
-
 #: group/templates/page_topic_view.html:74
 msgid "Add Post"
 msgstr ""
@@ -183,11 +356,11 @@ msgstr ""
 msgid "Post Content"
 msgstr ""
 
-#: home/models.py:29
+#: home/models.py:32
 msgid "Daoshicha.com"
 msgstr ""
 
-#: home/models.py:31
+#: home/models.py:34
 msgid "Want to be the best open source SNS!"
 msgstr ""
 
@@ -361,23 +534,23 @@ msgstr ""
 msgid "Content of stream"
 msgstr ""
 
-#: home/views/user_stream.py:79 home/views/user_stream.py:85
+#: home/views/user_stream.py:76 home/views/user_stream.py:82
 msgid "Can't visit given user's homepage"
 msgstr ""
 
-#: home/views/user_stream.py:91
+#: home/views/user_stream.py:88
 msgid "Can't view given user's mentions"
 msgstr ""
 
-#: home/views/user_stream.py:98
+#: home/views/user_stream.py:95
 msgid "Can't create stream for user"
 msgstr ""
 
-#: home/views/user_stream.py:110
+#: home/views/user_stream.py:107
 msgid "Can't follow the user"
 msgstr ""
 
-#: home/views/user_stream.py:116
+#: home/views/user_stream.py:113
 msgid "Can't unfollow given user"
 msgstr ""
 

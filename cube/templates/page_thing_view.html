@@ -98,7 +98,9 @@
 		
 		<div class="grid_15 mwindow">
 			<h3>{% trans "Introduction" %}</h3>
-			{{ thing.introduction }}
+			{% for line in thing.introduction.splitlines %}
+				<p>{{line}}</p>
+			{% endfor %}
 		</div>
 		
 		<div class="grid_15 mwindow">

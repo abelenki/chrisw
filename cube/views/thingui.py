@@ -29,7 +29,7 @@ class ThingForm(djangoforms.ModelForm):
   
   title = fields.fields.CharField(label = _("Title"), min_length=2,\
         max_length=20)
-  introduction = fields.CharField(label = _("Introductioin"),\
+  introduction = fields.CharField(label = _("Introduction"),\
     widget=forms.Textarea, min_length=2, max_length = 200)
   tags = fields.fields.CharField(label = _("Tags (Please seperate tags by comma ',')"),\
   min_length=2, max_length=20)
@@ -144,7 +144,7 @@ class ThingUI(ModelUI):
       new_comment = form.save(commit=False)
       self.thing.add_comment(self.user, new_comment)
 
-      return back(new_comment.url)
+      return back(self.thing.url)
     
     post_url = request.path
     title = _('New Thing Comment')

@@ -190,6 +190,10 @@
   border: 1px solid transparent !important
 }
 
+.normal_font{
+  font-weight:normal;
+}
+
 .pink {
   color: #FF0084
 }
@@ -613,6 +617,11 @@ ul.simple_list{
   ul.simple_list li {
     border-bottom: 1px dashed #DDDDDD;
     margin-bottom: 5px;
+    padding-bottom: 0px;
+  }
+  
+  ul.simple_list li p{
+    margin-bottom: 10px;
   }
 
 .user_stream_item .user_stream_actions{

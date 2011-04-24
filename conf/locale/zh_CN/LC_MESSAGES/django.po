@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-04-11 17:39+0800\n"
+"POT-Creation-Date: 2011-04-24 16:39+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -65,6 +65,188 @@ msgstr "登陆"
 #: common/templates/page_master.html:125
 msgid "(Google Account is supported)"
 msgstr "(支持Google账户登陆)"
+
+#: cube/models.py:359 cube/views/thingui.py:30 cube/views/thingui.py:53
+msgid "Title"
+msgstr "名称"
+
+#: cube/templates/item_comment_box.html:7
+msgid "Up"
+msgstr "有用"
+
+#: cube/templates/page_thing_comment_view.html:8
+msgid "Related comments"
+msgstr "的短评"
+
+#: cube/templates/page_thing_comment_view.html:32
+#: cube/templates/page_thing_view.html:111
+msgid "Create new comment"
+msgstr "创建新短评"
+
+#: cube/templates/page_thing_edit.html:12
+#: cube/templates/page_thing_item_create.html:16
+#: cube/templates/page_thing_site_create.html:36
+#: group/templates/page_item_create.html:6
+#: group/templates/page_item_create.html:15
+msgid "Create"
+msgstr "创建"
+
+#: cube/templates/page_thing_site_create.html:23
+msgid "Optional fields: "
+msgstr ""
+
+#: cube/templates/page_thing_site_create.html:25
+msgid "In attribute name and attribute value format"
+msgstr ""
+
+#: cube/templates/page_thing_site_create.html:27
+msgid " + More field"
+msgstr ""
+
+#: cube/templates/page_thing_site_create.html:28
+msgid "- Less field"
+msgstr ""
+
+#: cube/templates/page_thing_site_view_front.html:9
+msgid "Daoshicha Thing"
+msgstr ""
+
+#: cube/templates/page_thing_site_view_front.html:25
+msgid "Want to create a new one?"
+msgstr "想创建新的?"
+
+#: cube/templates/page_thing_site_view_front.html:25
+#: group/templates/page_groupsite_view_master.html:64
+msgid "Click here"
+msgstr "点击这里"
+
+#: cube/templates/page_thing_view.html:53
+msgid "People ranked it"
+msgstr "人打分"
+
+#: cube/templates/page_thing_view.html:78
+msgid "Want"
+msgstr "想要"
+
+#: cube/templates/page_thing_view.html:81
+msgid "Cancel Want"
+msgstr "取消想要"
+
+#: cube/templates/page_thing_view.html:84
+msgid "Own"
+msgstr "已拥有"
+
+#: cube/templates/page_thing_view.html:87
+msgid "Cancel Own"
+msgstr "取消拥有"
+
+#: cube/templates/page_thing_view.html:100 cube/views/thingui.py:32
+msgid "Introduction"
+msgstr "简介"
+
+#: cube/templates/page_thing_view.html:106
+msgid "Comments ......"
+msgstr "短评 ……"
+
+#: cube/templates/page_thing_view.html:108
+msgid "View all comments"
+msgstr "查看所有短评"
+
+#: cube/templates/page_thing_view.html:144
+msgid "Person Own it"
+msgstr "人拥有"
+
+#: cube/templates/page_thing_view.html:153
+msgid "Person Want it"
+msgstr "人想要"
+
+#: cube/templates/widget_thing_view.html:6
+msgid "Back to: "
+msgstr "回到: "
+
+#: cube/things/book.py:31
+msgid "ISBN"
+msgstr ""
+
+#: cube/things/book.py:32
+msgid "Author"
+msgstr "作者"
+
+#: cube/things/book.py:32
+msgid "Publisher"
+msgstr "出版社"
+
+#: cube/things/book.py:33
+msgid "Publish at"
+msgstr "出版日期"
+
+#: cube/things/book.py:33
+msgid "Price"
+msgstr "价格"
+
+#: cube/views/thing_annotation.py:31 cube/views/thing_annotation.py:36
+msgid "User can't dig this annotation"
+msgstr ""
+
+#: cube/views/thing_annotation.py:47
+msgid "User can't remove this annotation"
+msgstr ""
+
+#: cube/views/thing_annotation.py:59
+msgid "User can't remove this review"
+msgstr ""
+
+#: cube/views/thingsite.py:54 cube/views/thingsite.py:76
+msgid "You are not allowed to create this type of item."
+msgstr ""
+
+#: cube/views/thingui.py:34
+msgid "Tags (Please seperate tags by comma ',')"
+msgstr ""
+
+#: cube/views/thingui.py:44
+msgid "Short comment(less than 140 characters)"
+msgstr "短评(请保持在140字以内)"
+
+#: cube/views/thingui.py:55
+msgid "Content"
+msgstr "内容"
+
+#: cube/views/thingui.py:69
+msgid "User is not allowed to view this item."
+msgstr ""
+
+#: cube/views/thingui.py:78 cube/views/thingui.py:84
+msgid "User is not allowed to edit this item."
+msgstr ""
+
+#: cube/views/thingui.py:98
+msgid "User are not allowed to want this item."
+msgstr ""
+
+#: cube/views/thingui.py:104 cube/views/thingui.py:116
+msgid "User are not allowed to cancel."
+msgstr ""
+
+#: cube/views/thingui.py:110
+msgid "User can't own this item."
+msgstr ""
+
+#: cube/views/thingui.py:122
+msgid "User can't rank this item"
+msgstr ""
+
+#: cube/views/thingui.py:131 cube/views/thingui.py:139
+msgid "User can't comment this item."
+msgstr ""
+
+#: cube/views/thingui.py:136 cube/views/thingui.py:150
+msgid "New Thing Comment"
+msgstr "新建短评"
+
+#: cube/views/thingui.py:164 cube/views/thingui.py:171
+msgid "User can't review this item."
+msgstr ""
 
 #: group/templates/control_pager.html:9
 msgid "Previous Page"
@@ -129,15 +311,6 @@ msgstr "话题"
 msgid "Want to create a new group?"
 msgstr "想创建自己的小组?"
 
-#: group/templates/page_groupsite_view_master.html:64
-msgid "Click here"
-msgstr "点击这里"
-
-#: group/templates/page_item_create.html:6
-#: group/templates/page_item_create.html:15
-msgid "Create"
-msgstr "创建于"
-
 #: group/templates/page_topic_view.html:74
 msgid "Add Post"
 msgstr "提交回复"
@@ -182,11 +355,11 @@ msgstr "内容"
 msgid "Post Content"
 msgstr "回复"
 
-#: home/models.py:29
+#: home/models.py:32
 msgid "Daoshicha.com"
 msgstr ""
 
-#: home/models.py:31
+#: home/models.py:34
 msgid "Want to be the best open source SNS!"
 msgstr "努力做最好的开源SNS!"
 
@@ -360,24 +533,23 @@ msgstr "年前"
 msgid "Content of stream"
 msgstr "微博内容"
 
-#: home/views/user_stream.py:79 home/views/user_stream.py:85
+#: home/views/user_stream.py:76 home/views/user_stream.py:82
 msgid "Can't visit given user's homepage"
 msgstr "无法访问该用户首页"
 
-#: home/views/user_stream.py:91
-#, fuzzy
+#: home/views/user_stream.py:88
 msgid "Can't view given user's mentions"
-msgstr "无法访问该用户首页"
+msgstr "无法访问该用户的mentions"
 
-#: home/views/user_stream.py:98
+#: home/views/user_stream.py:95
 msgid "Can't create stream for user"
 msgstr "无法创建微博"
 
-#: home/views/user_stream.py:110
+#: home/views/user_stream.py:107
 msgid "Can't follow the user"
 msgstr "无法关注该用户"
 
-#: home/views/user_stream.py:116
+#: home/views/user_stream.py:113
 msgid "Can't unfollow given user"
 msgstr "无法取消关注"
 
