@@ -1,14 +1,34 @@
 {% extends "page_thing_related_master.html" %}
 
+{% load i18n %}
+
+
+{% block header_panel %}
+	<h2>
+		{{ thing.title }} {% trans "Related comments" %}
+	</h2>
+{% endblock %}
+
 {% block content %}
 	
-	<ul>
+	<ul class="simple_list">
 		{% for comment in comments %}
-			{{ comment.content }}
+			<li>
+				<div style="float:left; margin-right:12px;padding-top:10px;">
+					<img class="is" src="{{comment.author.photo_url}}">
+				</div>
+				{% include "item_comment_box.html" %}
+			</li>
 		{% endfor %}
 		
 	</ul>
 	
 	{% include "control_pager.html" %}
 	
+{% endblock %}
+
+{% block thing_sidebar %}
+	<p class="pl">
+		> <a href="{{thing.url}}/comments/new">{% trans "Create new comment" %}</a>			
+	</p>
 {% endblock %}

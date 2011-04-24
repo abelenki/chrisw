@@ -31,10 +31,12 @@ class _ThingAnnotationUI(ModelUI):
   @check_permission('dig', _("User can't dig this annotation"))
   def up(self):
     self.annotation.up(self.user)
+    return back(self.annotation.url)
   
   @check_permission('dig', _("User can't dig this annotation"))
   def down(self):
-    self.annotation.down(self.user)    
+    self.annotation.down(self.user)
+    return back(self.annotation.url)    
   
 class ThingCommentUI(_ThingAnnotationUI):
   """docstring for ThingCommentUI"""
@@ -65,14 +67,14 @@ class ThingCommentHandler(handlers.RequestHandler):
   def get(self, comment_id):
     """docstring for get"""
     comment_ui = ThingCommentUI(ThingComment.get_by_id(int(comment_id)))
-    return comment_ui.get_impl(comment_ui)
+    return self.get_impl(comment_ui)
 
 class ThingReviewHandler(handlers.RequestHandler):
   """docstring for ThingCommentHandler"""
   def get(self, review_id):
     """docstring for get"""
     review_ui = ThingReviewUI(ThingReview.get_by_id(int(review_id)))
-    return comment_ui.get_impl(review_ui)
+    return self.get_impl(review_ui)
 
 class ThingCommentUpHandler(ThingCommentHandler):
   def get_impl(self, comment_ui):

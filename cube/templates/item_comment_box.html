@@ -1,0 +1,19 @@
+{% load i18n %}
+	
+<div class="comment">
+	<h4 style="vertical-align: middle;margin-bottom:5px;">
+		<span class="float_right">
+			{{ comment.ups }}
+			<a href="{{comment.url}}/up">{% trans "Up" %}</a>
+		</span>
+		<span class="float_left">
+			<a href="{{comment.author.url}}">{{ comment.author.fullname }}</a>
+		</span>
+		<span style="margin-left:10px;">
+			{{ comment.create_at }}
+		</span>
+	</h4>
+	<p>
+		{{ comment.content }}
+	</p>
+</div>

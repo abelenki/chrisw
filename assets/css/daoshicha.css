@@ -137,6 +137,14 @@
   margin: 0
 }
 
+.float_right{
+  float:right;
+}
+
+.float_left{
+  float:left;
+}
+
 .group_info {
   display: block;
   font-size: 12px;
@@ -174,6 +182,10 @@
   height: 40px
 }
 
+.mwindow{
+  margin: 14px 0 0 0;
+}
+
 .no_border {
   border: 1px solid transparent !important
 }
@@ -185,6 +197,11 @@
 .post {
   list-style: none outside none;
   margin-top: 40px
+}
+
+.plain {
+  color: #666;
+  font: 12px/150% Arial,Helvetica,sans-serif;
 }
 
 .post_author_photo {
@@ -586,6 +603,16 @@ ul.medium_tabs {
     font-size: 1em;
     font-weight: bold;
     border: 1px solid transparent
+  }
+
+ul.simple_list{
+  list-style-type: none;
+  margin-left: 3px;
+}
+
+  ul.simple_list li {
+    border-bottom: 1px dashed #DDDDDD;
+    margin-bottom: 5px;
   }
 
 .user_stream_item .user_stream_actions{

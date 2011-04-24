@@ -234,7 +234,7 @@ class Thing(gdb.Entity):
 
   def can_add_comment(self, user):
     """docstring for can_comment"""
-    return user.is_not_guest() and not self.has_comment_by(user)
+    return user.is_not_guest() #and not self.has_comment_by(user)
 
   def has_comment_by(self, user):
     """docstring for has_comment_by"""
@@ -371,7 +371,7 @@ class _ThingAnnotation(gdb.Entity):
   
   thing_type = db.StringProperty()
   
-  score = db.FloatProperty()
+  score = db.FloatProperty(default=0.0)
 
   ups = db.IntegerCacheProperty(default=0)
   downs = db.IntegerCacheProperty(default=0)

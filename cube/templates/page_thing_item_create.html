@@ -2,7 +2,12 @@
 
 {% load i18n %}
 
+{% block head %}
+	{{ title }}
+{% endblock %}
+
 {% block content %}
+	<h2>{{ title }}</h2>
 	<form action="{{post_url}}" method="POST" accept-charset="utf-8">
 		<table border="0" cellspacing="5" cellpadding="5">
 			{{ form.as_p }}

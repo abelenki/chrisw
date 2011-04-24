@@ -31,7 +31,7 @@
 		</div>
 		<div class="grid_6">
 				{% for key, value in thing.fields %}
-						<span style="color:#666">
+						<span class="plain">
 							{{ key }}
 						</span>
 							{{ value }}
@@ -50,7 +50,7 @@
 				</span>
 			</div>
 			<div class="grid_4">
-				({{ thing.rank_info.rank_count_sum }} {% trans "People ranked it" %})
+				(<span class="plain">{{ thing.rank_info.rank_count_sum }} {% trans "People ranked it" %}</span>)
 			</div>
 			<div class="grid_4">
 			<table border="0" cellspacing="2" cellpadding="2">
@@ -96,18 +96,25 @@
 		</div>
 		<div class="clear"></div>
 		
-		<div class="grid_15">
+		<div class="grid_15 mwindow">
 			<h3>{% trans "Introduction" %}</h3>
 			{{ thing.introduction }}
 		</div>
 		
-		<div class="grid_15">
-			<a href="{{thing.url}}/comments">{% trans "View all comments" %}</a>
-			<a href="{{thing.url}}/comments/new">{% trans "Create new comment" %}</a>
-			<ul>
+		<div class="grid_15 mwindow">
+			<h3>
+				{% trans "Comments ......" %}
+				<span class="plain">
+					(<a href="{{thing.url}}/comments">{% trans "View all comments" %}</a>)
+				</span>
+				{% if can_add_comment %}
+					<a class="float_right a_btn a_btn_m" href="{{thing.url}}/comments/new"><span>{% trans "Create new comment" %}</span></a>
+				{% endif %}
+			</h3>
+			<ul class="simple_list">
 				{% for comment in comments %}
 					<li>
-						{{ comment.content }}
+						{% include "item_comment_box.html" %}
 					</li>
 				{% endfor %}
 			</ul>

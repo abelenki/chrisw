@@ -118,6 +118,17 @@ indexes:
   - name: create_at
     direction: desc
 
+- kind: ThingComment
+  properties:
+  - name: thing
+  - name: score
+
+- kind: ThingComment
+  properties:
+  - name: thing
+  - name: score
+    direction: desc
+
 - kind: Topic
   properties:
   - name: deleted

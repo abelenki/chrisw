@@ -41,8 +41,8 @@ class ThingCommentForm(djangoforms.ModelForm):
     model = ThingComment
     fields = ['content']
 
-  content = fields.fields.CharField(label = _("Short comment"), min_length=10,\
-      max_length=140)
+  content = fields.fields.CharField(label = _("Short comment(less than 140 characters)"),\
+    min_length=10, widget=forms.Textarea, max_length=140)
 
 class ThingReviewForm(djangoforms.ModelForm):
   """docstring for ThingReviewForm"""
@@ -70,7 +70,7 @@ class ThingUI(ModelUI):
   def view(self):
     """docstring for view"""
     
-    comments = self.thing.comments.fetch(limit=5, offset=0)
+    comments = self.thing.comments.order("-score").fetch(limit=5, offset=0)
     reviews = self.thing.reviews.fetch(limit=5, offset=0)
     
     return template('page_thing_view.html', locals())
@@ -133,6 +133,7 @@ class ThingUI(ModelUI):
     """docstring for comment"""
     form = ThingCommentForm()
     post_url = request.path
+    title = _('New Thing Comment')
     return template("page_thing_item_create.html", locals())
   
   @check_permission('add_comment', _("User can't comment this item."))
@@ -143,9 +144,10 @@ class ThingUI(ModelUI):
       new_comment = form.save(commit=False)
       self.thing.add_comment(self.user, new_comment)
 
-      return back()
+      return back(new_comment.url)
     
     post_url = request.path
+    title = _('New Thing Comment')
     # site message here
     return template("page_thing_item_create.html", locals())
   
@@ -153,7 +155,7 @@ class ThingUI(ModelUI):
     """docstring for view_comments"""
     
     # fetch the latest comments
-    query = self.thing.comments.order('-create_at') 
+    query = self.thing.comments.order('-score') 
     page = Page(query=query, request=request)
     comments = page.data()
     
