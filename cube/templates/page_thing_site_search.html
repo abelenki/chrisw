@@ -1,1 +1,24 @@
 {% extends "page_thing_site_master.html" %}
+
+{% load thing_render %}
+{% load i18n %}
+
+{% block content %}
+	
+	<div class="mwindow">
+		<span style="margin-left:5px;" class="plain">
+			{% trans "There are " %} <b>{{ page.count }}</b> {% trans "results" %}.
+		</span>
+		<div class="spe_line"></div>
+		
+		<ul class="simple_list search_results">
+			{% for result in results %}
+				<li>
+					{% thing_render result box large %}
+				</li>
+			{% endfor %}
+		</ul>
+		
+		{% include "control_pager.html" %}
+	</div>
+{% endblock %}

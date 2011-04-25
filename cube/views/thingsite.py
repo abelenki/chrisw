@@ -45,11 +45,18 @@ class ThingSiteUI(ModelUI):
 
   def search(self, request):
     """docstring for search"""
+    keywords = request.get('keywords', '')
+    
+    if keywords:
+      query = self.thing_meta.thing_class.search(keywords)
+      page = Page(query=query, request=request)
+      results = page.data()
+    
     return template('page_thing_site_search.html', locals())
 
   def search_post(self, request):
     """docstring for search_post"""
-    pass
+    return self.search(request)
 
   @check_permission('create_thing', _('You are not allowed to create this type of item.'))
   def create(self):

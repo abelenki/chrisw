@@ -136,6 +136,12 @@ class Thing(gdb.Entity):
       if value:
         self.keyword_index.append(value)
   
+  @classmethod
+  def search(cls, keyword):
+    """TODO: this search only support a single keyword, please improve it.
+    """
+    return cls.all(keyword_index=keyword.strip())
+  
   ######
   #
   # Own related functions

@@ -20,6 +20,7 @@ from google.appengine.ext import db
 from google.appengine.ext.db import *
 from google.appengine.api import datastore_errors
 from google.appengine.api.datastore_types import Blob
+from google.appengine.ext.db import polymodel
 from google.appengine.ext.db import djangoforms
 from django import forms
 

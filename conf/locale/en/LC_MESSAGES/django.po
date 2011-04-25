@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-04-24 16:39+0800\n"
+"POT-Creation-Date: 2011-04-25 20:11+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -70,6 +70,10 @@ msgstr ""
 msgid "Title"
 msgstr ""
 
+#: cube/templates/item_box_thing.html:23
+msgid "Created at:"
+msgstr ""
+
 #: cube/templates/item_comment_box.html:7
 msgid "Up"
 msgstr ""
@@ -78,7 +82,15 @@ msgstr ""
 msgid "Related comments"
 msgstr ""
 
-#: cube/templates/page_thing_comment_view.html:32
+#: cube/templates/page_thing_comment_view.html:16
+msgid "There are "
+msgstr ""
+
+#: cube/templates/page_thing_comment_view.html:16
+msgid "comments"
+msgstr ""
+
+#: cube/templates/page_thing_comment_view.html:39
 #: cube/templates/page_thing_view.html:111
 msgid "Create new comment"
 msgstr ""
@@ -107,40 +119,40 @@ msgstr ""
 msgid "- Less field"
 msgstr ""
 
-#: cube/templates/page_thing_site_view_front.html:9
-msgid "Daoshicha Thing"
+#: cube/templates/page_thing_site_master.html:12
+msgid "Search"
 msgstr ""
 
-#: cube/templates/page_thing_site_view_front.html:25
+#: cube/templates/page_thing_site_master.html:19
 msgid "Want to create a new one?"
 msgstr ""
 
-#: cube/templates/page_thing_site_view_front.html:25
+#: cube/templates/page_thing_site_master.html:19
 #: group/templates/page_groupsite_view_master.html:64
 msgid "Click here"
 msgstr ""
 
-#: cube/templates/page_thing_view.html:53
+#: cube/templates/page_thing_view.html:51
 msgid "People ranked it"
 msgstr ""
 
-#: cube/templates/page_thing_view.html:78
+#: cube/templates/page_thing_view.html:76
 msgid "Want"
 msgstr ""
 
-#: cube/templates/page_thing_view.html:81
+#: cube/templates/page_thing_view.html:79
 msgid "Cancel Want"
 msgstr ""
 
-#: cube/templates/page_thing_view.html:84
+#: cube/templates/page_thing_view.html:82
 msgid "Own"
 msgstr ""
 
-#: cube/templates/page_thing_view.html:87
+#: cube/templates/page_thing_view.html:85
 msgid "Cancel Own"
 msgstr ""
 
-#: cube/templates/page_thing_view.html:100 cube/views/thingui.py:32
+#: cube/templates/page_thing_view.html:98 cube/views/thingui.py:32
 msgid "Introduction"
 msgstr ""
 

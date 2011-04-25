@@ -19,16 +19,20 @@ _TEXT = 'text'
 _SQUARE = 'square'
 _BOX = 'box'
 
+_SMALL = 'small'
+_LARGE = 'large'
+
 _supported_types = {
   'Book':('',),
 }
 
 class ThingRenderNode(template.Node):
   """docstring for StreamRenderNode"""
-  def __init__(self, thing_name, render_mode=_TEXT):
+  def __init__(self, thing_name, render_mode=_TEXT, size=""):
     super(ThingRenderNode, self).__init__()
     self.thing_name = thing_name
     self.render_mode = render_mode
+    self.size = size
   
   def render(self, context):
     current_item = context[self.thing_name]
@@ -38,9 +42,10 @@ class ThingRenderNode(template.Node):
     if not current_item:
       return "Skipped"
       
-    template_name_format = "item_%(render_mode)s_%(thing_type)s.html"
+    template_name_format = "item_%(render_mode)s_%(thing_type)s%(size)s.html"
     thing_type = 'thing'
     render_mode = self.render_mode
+    size = self.size
     
     if _supported_types.has_key(current_item.type_name) and \
       render_mode in _supported_types[current_item.type_name]:
@@ -65,6 +70,8 @@ def thing_render(parser, token):
   for item in items[2:]:
     if item.lower() in (_TEXT, _SQUARE, _BOX):
       args["render_mode"] = item.lower()
+    elif item.lower() in (_SMALL, _LARGE):
+      args["size"] = "_" + item.lower()
     else:
       raise template.TemplateSyntaxError("%r tag got an unknown argument: %r"\
         % (items[0], item))

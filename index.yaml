@@ -92,6 +92,36 @@ indexes:
   - name: update_at
     direction: desc
 
+- kind: Model
+  properties:
+  - name: class
+  - name: deleted
+  - name: create_at
+    direction: desc
+
+- kind: Model
+  properties:
+  - name: class
+  - name: deleted
+  - name: keywords
+  - name: create_at
+    direction: desc
+
+- kind: Model
+  properties:
+  - name: class
+  - name: deleted
+  - name: subscribers
+  - name: target_type
+  - name: update_at
+    direction: desc
+
+- kind: Model
+  properties:
+  - name: thing
+  - name: score
+    direction: desc
+
 - kind: Post
   properties:
   - name: deleted
