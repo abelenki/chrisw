@@ -22,6 +22,48 @@ AppEngine based application development.
 
 It contains:
 
+Cube System
+-----------
+
+Cube system is a submodule of Chrisw. It could be used to create kinds of sub
+portals for users to share, collect, rank, comment and review.
+
+A book cube can be created by following code:
+
+::
+
+  class Book(Thing):
+    isbn = db.StringProperty()
+    author = db.StringProperty()
+    publisher = db.StringProperty()
+    publish_at = db.DateTimeProperty()
+    price = db.FloatProperty()
+    
+    def fields(self):
+      return super(Book, self).fields() + [(_("ISBN"), self.isbn),
+        (_("Author"), self.author), (_("Publisher"), self.publisher),
+        (_("Publish at"), self.publish_at), (_("Price"), self.price),
+        ]
+  
+  class BookSite(ThingSite):
+    pass
+  
+  class BookMeta(ThingMeta):
+    class_prefix = "Book"
+    url_prefix = 'book'
+    
+    title = 'Book'
+    
+    _thing_class = Book
+    _thing_site_class = BookSite
+    
+  meta = BookMeta()
+  
+  apps = meta.apps
+
+
+
+
 Pipline Rendering
 -----------------
 
@@ -162,7 +204,7 @@ About
     Kang Zhang (jobo.zh <at> gmail.com) http://home.kangzhang.org
 
 :Version:
-	0.5.3
+	0.5.7
 
 :License:
     CPAL
