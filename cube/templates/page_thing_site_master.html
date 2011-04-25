@@ -1,1 +1,9 @@
 {% extends "cube_master.html" %}
+
+{% load i18n %}
+
+{% block sidebar %}
+	{% if can_create_thing %}
+		<h3 class="normal_font">{% trans "Want to create a new one?" %}<a href="{{thing_site.url}}/new"> {% trans "Click here" %} </a> </h3>
+	{% endif %}
+{% endblock %}

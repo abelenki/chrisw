@@ -3,16 +3,19 @@
 {% load thing_render %}
 {% load i18n %}
 
-{% block content %}
+{% block header_panel %}
 	{% block thing_site_title %}
 		<h1>
 			{% trans "Daoshicha Thing" %}
 		</h1>
 	{% endblock %}
-	<div class="thing_new">
-		<ul>
+{% endblock %}
+
+{% block content %}
+	<div class="mwindow thing_new">
+		<ul class="simple_list">
 			{% for thing in latest_thing %}
-				<li>
+				<li class="grid_7">
 					{% thing_render thing box %}
 				</li>
 			{% endfor %}
@@ -21,7 +24,4 @@
 {% endblock %}
 
 {% block sidebar %}
-	{% if can_create_thing %}
-		<h2>{% trans "Want to create a new one?" %}<a href="{{thing_site.url}}/new"> {% trans "Click here" %} </a> </h2>
-	{% endif %}
 {% endblock %}

@@ -41,13 +41,11 @@
 			</div>
 		</div>
 		<div class="grid_5">
-			<div id="rank" class="grid_4">
-				<span id="name" style="float:left;">
+			<div id="rank" class="grid_4 big_rank">
+				<span id="name" class="star_wrapper">
 					{% star thing.rank of 5 %} 
 				</span>
-				<span style="height:20px;">
 						{{thing.rank}}
-				</span>
 			</div>
 			<div class="grid_4">
 				(<span class="plain">{{ thing.rank_info.rank_count_sum }} {% trans "People ranked it" %}</span>)

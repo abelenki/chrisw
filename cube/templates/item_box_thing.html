@@ -1,15 +1,29 @@
 {% load star %}
+{% load i18n %}
 
-<img class="im" src="{{current_item.photo_url}}" style="float:left" />
+<div class="thing_photo">
+	<img class="im" src="{{current_item.photo_url}}" style="float:left" />
+</div>
 
-<h3>
-	<a href="{{current_item.url}}">{{ current_item.title }}</a>
-</h3>
+<div class="thing_intro">
+	<h3>
+		<a href="{{current_item.url}}">{{ current_item.title }}</a>
+	</h3>
 
-<p>
-	<div style="float:left;">
-		{% star current_item.rank of 5 small %}
-	</div>
-	<br />
-	author: author
-</p>
+			<div class="star_wrapper">
+				{% star current_item.rank of 5 small %}
+			</div>
+			<span class="plain">
+				{{ current_item.rank }} 
+			</span>
+			<br />
+	<p>
+		{% block item_fields %}
+			<span>
+				{% trans "Created at:" %}
+			</span>
+			{{ current_item.create_at|date:'Y-m-h'}}
+			<br />
+		{% endblock %}
+	</p>
+</div>

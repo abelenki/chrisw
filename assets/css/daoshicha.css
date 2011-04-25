@@ -270,6 +270,30 @@
     border-color: rgba(82, 168, 236, 0.75) !important
   }
 
+.star_wrapper{
+  float: left;
+  height: 15px;
+  padding-top: 2px;
+  margin-right: 4px;
+}
+  .big_rank .star_wrapper{
+    padding-top: 0;
+  }
+
+.thing_photo{
+  float:left;
+  width:80px;
+}
+
+.thing_intro{
+  float:right;
+  width:180px;
+}
+  .thing_intro h3{
+    padding:0;
+    margin:0;
+  }
+
 .topic_list .topic_actions {
   visibility: hidden
 }
@@ -616,7 +640,7 @@ ul.simple_list{
 
   ul.simple_list li {
     border-bottom: 1px dashed #DDDDDD;
-    margin-bottom: 5px;
+    margin: 0 0 5px 0px;
     padding-bottom: 0px;
   }
   
