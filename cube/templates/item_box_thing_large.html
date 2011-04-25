@@ -1,0 +1,33 @@
+{% load star %}
+{% load i18n %}
+
+<div class="thing_photo">
+	<img class="il" src="{{current_item.photo_url}}" style="float:left" />
+</div>
+
+<div class="thing_intro" style="width:480px;">
+	<h3>
+		<a href="{{current_item.url}}">{{ current_item.title }}</a>
+	</h3>
+
+			<div class="star_wrapper">
+				{% star current_item.rank of 5 small %}
+			</div>
+			<span class="plain">
+				{{ current_item.rank }} 
+			</span>
+			<br />
+	<p>
+		{% block item_fields %}
+			{% for key, value in current_item.fields %}
+				<span class="plain">
+					{{ key }}
+				</span>
+				{{ value }}
+			{% endfor %}
+			<br />
+		{% endblock %}
+	</p>
+</div>
+
+<div class="clear"></div>
