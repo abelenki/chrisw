@@ -26,6 +26,8 @@ DIG = 'has-been-thing-comment-dig-by'
 class ThingSite(db.Model):
   """docstring for ThingSite"""
   avaliable_slots = db.IntegerProperty(default=0)
+  
+  title = _('Daoshicha Thing')
   url_format = r'/c/%(thing_name)s'
   
   def can_create_thing(self, user):
@@ -39,6 +41,7 @@ class ThingSite(db.Model):
     
     thing.put()
     
+    # race condition here
     self.avaliable_slots -= 1
     self.put()
 

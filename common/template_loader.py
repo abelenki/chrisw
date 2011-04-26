@@ -48,7 +48,7 @@ def minimize(template):
 
 def generate_script():
   
-  template_names = ['user_stream_reply']
+  template_names = ['user_stream_reply', 'user_stream_recommend']
   
   template_folder = os.path.join(os.path.dirname(__file__), 'templates')
   
@@ -58,7 +58,7 @@ def generate_script():
     template = minimize(open(template_path).read())
     template_pairs.append("%s :'%s'" % (template_name, template))
   
-  template_pair_string = "\n".join(template_pairs)
+  template_pair_string = ",\n".join(template_pairs)
   
   script_formats = """
   chrisw.templates = {

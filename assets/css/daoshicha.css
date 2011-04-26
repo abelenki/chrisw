@@ -574,12 +574,17 @@ span.stream_author_photo {
   position: absolute
 }
 
-span.stream_content {
+.stream_content {
   margin-left: 56px;
   overflow: visible;
   min-height: 48px;
-  display: block
+  display: block;
 }
+  span.stream_content .stream_row{
+    
+  }
+  span.stream_content .last{
+  }
 
 span.topic_author_photo {
   width: 50px;

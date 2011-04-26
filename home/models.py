@@ -19,7 +19,9 @@ __all__ = ['Site', 'UserSite', 'Photo', 'UserStream', 'UserStreamComment',
 'UserStreamInfo',]
 
 FOLLOWED_BY = 'user-followed-by'
+
 TEXT_STREAM = 'text'
+RECOMMEND_STREAM = 'recommend'
 
 _VALID_NICK_ = r'[^ \s:@]+'
 _KEY_FORMAT_ = r'%s' + _VALID_NICK_
@@ -158,6 +160,17 @@ class UserStreamInfo(gdb.Entity):
     stream.notify(list(self.get_follower_keys()) + [self.user.key()])
 
     self.update_stream_count()
+  
+  def create_recommend(self, stream, key):
+    """docstring for create_recommend"""
+    target = db.get(key)
+    
+    if target:
+      recommend_stream = UserStream(target=target, \
+        stream_type=RECOMMEND_STREAM)
+      recommend_stream.content = stream.content
+      
+      self.create_stream(recommend_stream)
 
   def delete_stream(self, stream):
     """docstring for delete_stream"""
@@ -229,6 +242,8 @@ class UserStream(gdb.Message):
   target = db.ReferenceProperty()
   target_type = db.StringProperty(required=True, default=TEXT_STREAM)
 
+  stream_type = db.StringProperty(required=True, default=TEXT_STREAM)
+  
   content = db.StringCacheProperty(default='')
 
   keywords = db.StringListProperty(required=True, default=[])
@@ -282,6 +297,7 @@ class UserStream(gdb.Message):
     """docstring for latest_by_keywords"""
     return cls.latest().filter('keywords', keyword)
 
+
 class UserStreamComment(gdb.Message):
   """docstring for UserStreamComment"""
   stream = db.ReferenceProperty(UserStream)
@@ -289,5 +305,6 @@ class UserStreamComment(gdb.Message):
 
   content = db.StringCacheProperty(default='')
 
+      
 
 

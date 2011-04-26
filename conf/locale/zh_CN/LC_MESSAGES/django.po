@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-04-25 20:12+0800\n"
+"POT-Creation-Date: 2011-04-25 22:21+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -66,12 +66,19 @@ msgstr "登陆"
 msgid "(Google Account is supported)"
 msgstr "(支持Google账户登陆)"
 
-#: cube/models.py:359 cube/views/thingui.py:30 cube/views/thingui.py:53
+#: cube/models.py:30
+msgid "Daoshicha Thing"
+msgstr "Daoshicha 收藏"
+
+#: cube/models.py:367 cube/views/thingui.py:30 cube/views/thingui.py:53
 msgid "Title"
 msgstr "名称"
 
+#: cube/templates/control_thing_site_header.html:11
+msgid "Search"
+msgstr "搜索"
+
 #: cube/templates/item_box_thing.html:23
-#, fuzzy
 msgid "Created at:"
 msgstr "创建于"
 
@@ -84,16 +91,16 @@ msgid "Related comments"
 msgstr "的短评"
 
 #: cube/templates/page_thing_comment_view.html:16
+#: cube/templates/page_thing_site_search.html:10
 msgid "There are "
-msgstr ""
+msgstr "共计"
 
 #: cube/templates/page_thing_comment_view.html:16
-#, fuzzy
 msgid "comments"
-msgstr "的短评"
+msgstr "个短评"
 
 #: cube/templates/page_thing_comment_view.html:39
-#: cube/templates/page_thing_view.html:111
+#: cube/templates/page_thing_view.html:117
 msgid "Create new comment"
 msgstr "创建新短评"
 
@@ -122,55 +129,62 @@ msgid "- Less field"
 msgstr ""
 
 #: cube/templates/page_thing_site_master.html:12
-msgid "Search"
-msgstr ""
+msgid "No one in your mind here? "
+msgstr "没有你要找的?"
 
-#: cube/templates/page_thing_site_master.html:19
-msgid "Want to create a new one?"
-msgstr "想创建新的?"
+#: cube/templates/page_thing_site_master.html:12
+msgid "Click here to create it."
+msgstr "点这里创建它吧"
 
-#: cube/templates/page_thing_site_master.html:19
-#: group/templates/page_groupsite_view_master.html:64
-msgid "Click here"
-msgstr "点击这里"
+#: cube/templates/page_thing_site_search.html:10
+msgid "results"
+msgstr "条结果"
 
-#: cube/templates/page_thing_view.html:51
+#: cube/templates/page_thing_site_view_front.html:8
+msgid "Latest items"
+msgstr "新鲜出炉"
+
+#: cube/templates/page_thing_site_view_front.html:20
+msgid "Latest Comments"
+msgstr "新鲜短评"
+
+#: cube/templates/page_thing_view.html:57
 msgid "People ranked it"
 msgstr "人打分"
 
-#: cube/templates/page_thing_view.html:76
+#: cube/templates/page_thing_view.html:82
 msgid "Want"
 msgstr "想要"
 
-#: cube/templates/page_thing_view.html:79
+#: cube/templates/page_thing_view.html:85
 msgid "Cancel Want"
 msgstr "取消想要"
 
-#: cube/templates/page_thing_view.html:82
+#: cube/templates/page_thing_view.html:88
 msgid "Own"
 msgstr "已拥有"
 
-#: cube/templates/page_thing_view.html:85
+#: cube/templates/page_thing_view.html:91
 msgid "Cancel Own"
 msgstr "取消拥有"
 
-#: cube/templates/page_thing_view.html:98 cube/views/thingui.py:32
+#: cube/templates/page_thing_view.html:104 cube/views/thingui.py:32
 msgid "Introduction"
 msgstr "简介"
 
-#: cube/templates/page_thing_view.html:106
+#: cube/templates/page_thing_view.html:112
 msgid "Comments ......"
 msgstr "短评 ……"
 
-#: cube/templates/page_thing_view.html:108
+#: cube/templates/page_thing_view.html:114
 msgid "View all comments"
 msgstr "查看所有短评"
 
-#: cube/templates/page_thing_view.html:144
+#: cube/templates/page_thing_view.html:150
 msgid "Person Own it"
 msgstr "人拥有"
 
-#: cube/templates/page_thing_view.html:153
+#: cube/templates/page_thing_view.html:159
 msgid "Person Want it"
 msgstr "人想要"
 
@@ -210,7 +224,7 @@ msgstr ""
 msgid "User can't remove this review"
 msgstr ""
 
-#: cube/views/thingsite.py:54 cube/views/thingsite.py:76
+#: cube/views/thingsite.py:66 cube/views/thingsite.py:88
 msgid "You are not allowed to create this type of item."
 msgstr ""
 
@@ -226,39 +240,39 @@ msgstr "短评(请保持在140字以内)"
 msgid "Content"
 msgstr "内容"
 
-#: cube/views/thingui.py:69
+#: cube/views/thingui.py:70
 msgid "User is not allowed to view this item."
 msgstr ""
 
-#: cube/views/thingui.py:78 cube/views/thingui.py:84
+#: cube/views/thingui.py:79 cube/views/thingui.py:85
 msgid "User is not allowed to edit this item."
 msgstr ""
 
-#: cube/views/thingui.py:98
+#: cube/views/thingui.py:99
 msgid "User are not allowed to want this item."
 msgstr ""
 
-#: cube/views/thingui.py:104 cube/views/thingui.py:116
+#: cube/views/thingui.py:105 cube/views/thingui.py:117
 msgid "User are not allowed to cancel."
 msgstr ""
 
-#: cube/views/thingui.py:110
+#: cube/views/thingui.py:111
 msgid "User can't own this item."
 msgstr ""
 
-#: cube/views/thingui.py:122
+#: cube/views/thingui.py:123
 msgid "User can't rank this item"
 msgstr ""
 
-#: cube/views/thingui.py:131 cube/views/thingui.py:139
+#: cube/views/thingui.py:132 cube/views/thingui.py:140
 msgid "User can't comment this item."
 msgstr ""
 
-#: cube/views/thingui.py:136 cube/views/thingui.py:150
+#: cube/views/thingui.py:137 cube/views/thingui.py:151
 msgid "New Thing Comment"
 msgstr "新建短评"
 
-#: cube/views/thingui.py:164 cube/views/thingui.py:171
+#: cube/views/thingui.py:165 cube/views/thingui.py:172
 msgid "User can't review this item."
 msgstr ""
 
@@ -324,6 +338,10 @@ msgstr "话题"
 #: group/templates/page_groupsite_view_master.html:63
 msgid "Want to create a new group?"
 msgstr "想创建自己的小组?"
+
+#: group/templates/page_groupsite_view_master.html:64
+msgid "Click here"
+msgstr "点击这里"
 
 #: group/templates/page_topic_view.html:74
 msgid "Add Post"
@@ -599,14 +617,14 @@ msgstr "用户头像"
 msgid "Your photo has been changed.:-)"
 msgstr "头像更换成功"
 
+#~ msgid "Want to create a new one?"
+#~ msgstr "想创建新的?"
+
 #~ msgid "User Settings"
 #~ msgstr "用户设置"
 
 #~ msgid "Latest Posts from the Groups You Followed"
 #~ msgstr "关注小组的最新动态"
-
-#~ msgid "Latest Post"
-#~ msgstr "最新话题"
 
 #~ msgid "You Followed Groups"
 #~ msgstr "关注小组"

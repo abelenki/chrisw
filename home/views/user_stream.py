@@ -104,6 +104,19 @@ class UserStreamUI(ModelUI):
 
     return back()
   
+  @check_permission('create_stream', _("Can't create stream for user"))
+  def recommend(self, request):
+    """docstring for recommend"""
+    
+    stream_form = UserStreamForm(data=request.POST)
+    key = request.get("key", '')
+    
+    if stream_form.is_valid() and key:
+      new_stream = stream_form.save(commit=False)
+      self.user_stream_info.create_recommend(new_stream, key)
+    
+    return back()
+    
   @check_permission('follow', _("Can't follow the user"))
   def follow(self):
     """docstring for follow"""
@@ -155,57 +168,44 @@ class UserOwnStreamHandler(UserStreamHandler):
     return self.post_impl(UserStreamUI(user_stream_info))
   
 class UserOwnStreamCreateHandler(UserOwnStreamHandler):
-  """docstring for UserOwnStreamPostHandler"""
   
   def post_impl(self, user_stream_ui):
-    """docstring for post_impl"""
     return user_stream_ui.home_post(self.request)
-    
+
+class UserOwnStreamRecommendHandler(UserOwnStreamHandler):
+  def post_impl(self, user_stream_ui):
+    return user_stream_ui.recommend(self.request)
 
 class UserStreamHomeHandler(UserStreamHandler):
   
   def get_impl(self, user_stream_ui):
-    """docstring for get_impl"""
     return user_stream_ui.home(self.request)
   
   def post_impl(self, user_stream_ui):
-    """docstring for post_impl"""
     return user_stream_ui.home_post(self.request)
 
 class UserStreamHomeAllHandler(UserStreamHandler):
-  """docstring for UserStreamHomeAllHandler"""
   def get_impl(self, user_stream_ui):
-    """docstring for get_impl"""
     return user_stream_ui.home_all(self.request)
   
 class UserStreamHomeFollowingHandler(UserStreamHandler):
-  """docstring for UserStreamHomeAllHandler"""
   def get_impl(self, user_stream_ui):
-    """docstring for get_impl"""
     return user_stream_ui.home_following(self.request)
 
 class UserStreamHomeMentionHandler(UserStreamHandler):
-  """docstring for UserStreamHomeMentionHandler"""
   def get_impl(self, user_stream_ui):
-    """docstring for get_impl"""
     return user_stream_ui.home_mention(self.request)
 
 class UserStreamHomeFollowHandler(UserStreamHandler):
-  """docstring for UserStreamHomeFollowHandler"""
   def get_impl(self, user_stream_ui):
-    """docstring for get_impl"""
     return user_stream_ui.follow()
   
 class UserStreamHomeUnfollowHandler(UserStreamHandler):
-  """docstring for UserStreamHomeUnfollowHandler"""
   def get_impl(self, user_stream_ui):
-    """docstring for get_impl"""
     return user_stream_ui.unfollow()
 
 class UserStreamHomeRootHandler(handlers.RequestHandler):
-  """docstring for UserStreamHomeRootHandler"""
   def get(self):
-    """docstring for get_impl"""
     user = get_current_user()
     if user.key() == Guest.key():
       return redirect(settings.DEFAULT_HOME)
@@ -214,6 +214,7 @@ class UserStreamHomeRootHandler(handlers.RequestHandler):
 
 apps = [(r'/u', UserStreamHomeRootHandler),
         (r'/u/new', UserOwnStreamCreateHandler),
+        (r'/u/recommend', UserOwnStreamRecommendHandler),
         (r'/u/(\d+)', UserStreamHomeHandler),
         (r'/u/(\d+)/all', UserStreamHomeAllHandler),
         (r'/u/(\d+)/following', UserStreamHomeFollowingHandler),

@@ -12,7 +12,7 @@ from django import template
 from chrisw.i18n import _
 from chrisw.helper.django_helper import render_to_string
 
-from home.models import TEXT_STREAM
+from home.models import TEXT_STREAM, RECOMMEND_STREAM
 
 register = template.Library()
 
@@ -34,8 +34,11 @@ class UserStreamRenderNode(template.Node):
     if not stream:
       return "Skipped"
     
-    if stream.target_type == TEXT_STREAM or stream.target_type is None:
+    if stream.stream_type == TEXT_STREAM or stream.target_type is None:
       return render_to_string("item_text_user_stream.html", context)
+    
+    if stream.stream_type == RECOMMEND_STREAM:
+      return render_to_string("item_recommend_user_stream.html", context)
     
     raise Exception("Can't render this type of stream %s %s" % \
       (stream, stream.target_type))

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-04-25 20:11+0800\n"
+"POT-Creation-Date: 2011-04-25 22:21+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -66,8 +66,16 @@ msgstr ""
 msgid "(Google Account is supported)"
 msgstr ""
 
-#: cube/models.py:359 cube/views/thingui.py:30 cube/views/thingui.py:53
+#: cube/models.py:30
+msgid "Daoshicha Thing"
+msgstr ""
+
+#: cube/models.py:367 cube/views/thingui.py:30 cube/views/thingui.py:53
 msgid "Title"
+msgstr ""
+
+#: cube/templates/control_thing_site_header.html:11
+msgid "Search"
 msgstr ""
 
 #: cube/templates/item_box_thing.html:23
@@ -83,6 +91,7 @@ msgid "Related comments"
 msgstr ""
 
 #: cube/templates/page_thing_comment_view.html:16
+#: cube/templates/page_thing_site_search.html:10
 msgid "There are "
 msgstr ""
 
@@ -91,7 +100,7 @@ msgid "comments"
 msgstr ""
 
 #: cube/templates/page_thing_comment_view.html:39
-#: cube/templates/page_thing_view.html:111
+#: cube/templates/page_thing_view.html:117
 msgid "Create new comment"
 msgstr ""
 
@@ -120,55 +129,64 @@ msgid "- Less field"
 msgstr ""
 
 #: cube/templates/page_thing_site_master.html:12
-msgid "Search"
+msgid "No one in your mind here? "
 msgstr ""
 
-#: cube/templates/page_thing_site_master.html:19
-msgid "Want to create a new one?"
+#: cube/templates/page_thing_site_master.html:12
+msgid "Click here to create it."
 msgstr ""
 
-#: cube/templates/page_thing_site_master.html:19
-#: group/templates/page_groupsite_view_master.html:64
-msgid "Click here"
+#: cube/templates/page_thing_site_search.html:10
+msgid "results"
 msgstr ""
 
-#: cube/templates/page_thing_view.html:51
+#: cube/templates/page_thing_site_view_front.html:8
+#, fuzzy
+msgid "Latest items"
+msgstr "Latest Post from your group2"
+
+#: cube/templates/page_thing_site_view_front.html:20
+#, fuzzy
+msgid "Latest Comments"
+msgstr "Latest Post from your group2"
+
+#: cube/templates/page_thing_view.html:57
 msgid "People ranked it"
 msgstr ""
 
-#: cube/templates/page_thing_view.html:76
+#: cube/templates/page_thing_view.html:82
 msgid "Want"
 msgstr ""
 
-#: cube/templates/page_thing_view.html:79
+#: cube/templates/page_thing_view.html:85
 msgid "Cancel Want"
 msgstr ""
 
-#: cube/templates/page_thing_view.html:82
+#: cube/templates/page_thing_view.html:88
 msgid "Own"
 msgstr ""
 
-#: cube/templates/page_thing_view.html:85
+#: cube/templates/page_thing_view.html:91
 msgid "Cancel Own"
 msgstr ""
 
-#: cube/templates/page_thing_view.html:98 cube/views/thingui.py:32
+#: cube/templates/page_thing_view.html:104 cube/views/thingui.py:32
 msgid "Introduction"
 msgstr ""
 
-#: cube/templates/page_thing_view.html:106
+#: cube/templates/page_thing_view.html:112
 msgid "Comments ......"
 msgstr ""
 
-#: cube/templates/page_thing_view.html:108
+#: cube/templates/page_thing_view.html:114
 msgid "View all comments"
 msgstr ""
 
-#: cube/templates/page_thing_view.html:144
+#: cube/templates/page_thing_view.html:150
 msgid "Person Own it"
 msgstr ""
 
-#: cube/templates/page_thing_view.html:153
+#: cube/templates/page_thing_view.html:159
 msgid "Person Want it"
 msgstr ""
 
@@ -208,7 +226,7 @@ msgstr ""
 msgid "User can't remove this review"
 msgstr ""
 
-#: cube/views/thingsite.py:54 cube/views/thingsite.py:76
+#: cube/views/thingsite.py:66 cube/views/thingsite.py:88
 msgid "You are not allowed to create this type of item."
 msgstr ""
 
@@ -224,39 +242,39 @@ msgstr ""
 msgid "Content"
 msgstr ""
 
-#: cube/views/thingui.py:69
+#: cube/views/thingui.py:70
 msgid "User is not allowed to view this item."
 msgstr ""
 
-#: cube/views/thingui.py:78 cube/views/thingui.py:84
+#: cube/views/thingui.py:79 cube/views/thingui.py:85
 msgid "User is not allowed to edit this item."
 msgstr ""
 
-#: cube/views/thingui.py:98
+#: cube/views/thingui.py:99
 msgid "User are not allowed to want this item."
 msgstr ""
 
-#: cube/views/thingui.py:104 cube/views/thingui.py:116
+#: cube/views/thingui.py:105 cube/views/thingui.py:117
 msgid "User are not allowed to cancel."
 msgstr ""
 
-#: cube/views/thingui.py:110
+#: cube/views/thingui.py:111
 msgid "User can't own this item."
 msgstr ""
 
-#: cube/views/thingui.py:122
+#: cube/views/thingui.py:123
 msgid "User can't rank this item"
 msgstr ""
 
-#: cube/views/thingui.py:131 cube/views/thingui.py:139
+#: cube/views/thingui.py:132 cube/views/thingui.py:140
 msgid "User can't comment this item."
 msgstr ""
 
-#: cube/views/thingui.py:136 cube/views/thingui.py:150
+#: cube/views/thingui.py:137 cube/views/thingui.py:151
 msgid "New Thing Comment"
 msgstr ""
 
-#: cube/views/thingui.py:164 cube/views/thingui.py:171
+#: cube/views/thingui.py:165 cube/views/thingui.py:172
 msgid "User can't review this item."
 msgstr ""
 
@@ -322,6 +340,10 @@ msgstr ""
 
 #: group/templates/page_groupsite_view_master.html:63
 msgid "Want to create a new group?"
+msgstr ""
+
+#: group/templates/page_groupsite_view_master.html:64
+msgid "Click here"
 msgstr ""
 
 #: group/templates/page_topic_view.html:74
@@ -597,6 +619,3 @@ msgstr ""
 #: home/views/userui.py:74
 msgid "Your photo has been changed.:-)"
 msgstr ""
-
-#~ msgid "Latest Post"
-#~ msgstr "Latest Post from your group2"

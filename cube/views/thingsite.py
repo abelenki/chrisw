@@ -20,6 +20,7 @@ from common.auth import get_current_user
 from common.models import User
 from conf import settings
 
+from cube.models import ThingComment, ThingReview
 
 class ThingSiteUI(ModelUI):
   """docstring for ThingSiteUI"""
@@ -35,7 +36,11 @@ class ThingSiteUI(ModelUI):
     """docstring for view"""
     
     thing_class = self.thing_meta.thing_class
-    latest_thing = thing_class.latest()
+    
+    latest_thing = thing_class.latest().fetch(offset=0, limit=10)
+    latest_comments = ThingComment\
+      .all(thing_type=thing_class.get_cls_type_name()).order("-create_at")\
+      .fetch(offset=0, limit=5)
     
     return template('page_thing_site_view_front.html', locals())
 

@@ -3,21 +3,13 @@
 {% load i18n %}
 
 {% block header_panel %}
-	<div id="thing_site_title">
-		Daoshicha Thing
-	</div>
-	<div id="thing_site_search_bar" class="grid_18">
-		<form action="{{thing_site.url}}/search" method="POST" accept-charset="utf-8" style="border: 1px solid #eee;width:300px">
-			<input type="text" name="keywords" value="{{keywords}}" id="keywords" style="width:240px;margin:2px;">
-			<input type="submit" value="{% trans "Search" %}" style="margin:2px;">
-		</form>
-	</div>
+	{% include "control_thing_site_header.html" %}
 {% endblock %}
 
 {% block sidebar %}
 {% if can_create_thing %}
 	<h3 class="normal_font">
-		No one in your mind here? <a href="{{thing_site.url}}/new">Click here to create it.</a>
+		{% trans "No one in your mind here? " %}<a href="{{thing_site.url}}/new">{% trans "Click here to create it." %}</a>
 	</h3>
 {% endif %}
 {% endblock %}

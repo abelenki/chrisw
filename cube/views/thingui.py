@@ -21,19 +21,18 @@ from conf import settings
 
 from cube.models import ThingComment, ThingReview
 
+
 class ThingForm(djangoforms.ModelForm):
   """docstring for ThingForm"""
   class Meta:
     """docstring for Meta"""
-    fields = ['title', 'introduction', 'tags']
+    fields = ['title', 'introduction']
   
   title = fields.fields.CharField(label = _("Title"), min_length=2,\
         max_length=20)
   introduction = fields.CharField(label = _("Introduction"),\
     widget=forms.Textarea, min_length=2, max_length = 200)
-  tags = fields.fields.CharField(label = _("Tags (Please seperate tags by comma ',')"),\
-  min_length=2, max_length=20)
-  
+
 
 class ThingCommentForm(djangoforms.ModelForm):
   """docstring for ThingCommentForm"""
@@ -43,6 +42,7 @@ class ThingCommentForm(djangoforms.ModelForm):
 
   content = fields.fields.CharField(label = _("Short comment(less than 140 characters)"),\
     min_length=10, widget=forms.Textarea, max_length=140)
+
 
 class ThingReviewForm(djangoforms.ModelForm):
   """docstring for ThingReviewForm"""
@@ -65,6 +65,7 @@ class ThingUI(ModelUI):
     super(ThingUI, self).__init__(thing)
     self.thing = thing
     self.user = get_current_user()
+    self.thing_site = self.thing_meta.thing_site_class.get_instance()
 
   @check_permission('view', _('User is not allowed to view this item.'))
   def view(self):

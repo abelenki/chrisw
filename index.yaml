@@ -144,6 +144,13 @@ indexes:
 
 - kind: ThingComment
   properties:
+  - name: deleted
+  - name: thing_type
+  - name: create_at
+    direction: desc
+
+- kind: ThingComment
+  properties:
   - name: thing
   - name: create_at
     direction: desc

@@ -13,7 +13,7 @@ It now supports:
 
 * a group-based community
 * i18n. (It now supports both English and Chinese as the UI language).
-* a storage designed for speed and large scale
+* a storage designed for speed and large scale social network applications.
 * more features are coming :-P
 
 Chrisw is not only a website but also a macro web framework for Google

@@ -21,6 +21,12 @@
 	</script>
 {% endblock %}
 
+{% block header_panel %}
+	{% include "control_thing_site_header.html" %}
+	<div class="clear" style="padding-bottom:20px"></div>
+{% endblock %}
+
+
 {% block content %}
 	<h1>
 		{{ thing.title }}
@@ -91,6 +97,9 @@
 				</span>
 			{% endif %}
 			
+			<a class="recommend_button" href="#" key="{{thing.key}}" title="{{thing.title}}">
+				<b>{% trans "Recommend" %}</b>
+			</a>
 		</div>
 		<div class="clear"></div>
 		
