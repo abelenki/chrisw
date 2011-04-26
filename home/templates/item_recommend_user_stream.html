@@ -1,0 +1,45 @@
+{% load filters %}
+{% load i18n %}
+
+<li class="user_stream_item" data-stream-id="{{stream.key.id}}" author-username="{{stream.author.fullname}}">
+	<span class="stream_author_photo">
+		<img src="{{stream.author.photo_url}}=s48" class="is" style="padding-left:10px;padding-top:10px;">
+	</span>
+	<span class="stream_content"> 
+		<div class="float_right">
+			<a href="{{stream.target.url}}">
+				<img class="im" src="{{stream.target.photo_url}}"></img>
+			</a>
+		</div>
+		<span style="display: block; margin-bottom: 5px; color:#888;">
+			{% if display_name %}
+				<a class="user_link" href="{{stream.author.url}}">{{ stream.author.fullname }}</a>
+			{% endif %}
+			{% trans "Recommends:" %}
+			<a href="{{stream.target.url}}">
+				{{ stream.target.title }}
+			</a>
+		</span>
+		<span class="stream_text" style="display: block; margin-bottom: 5px;">
+			{{ stream.content }}
+		</span>
+		<div class="clear"></div>
+		<div class="stream_row last">
+			<span style=" color: #999999; font-size:80%;">
+				{{ stream.create_at|pretty_time }} 
+			</span>
+			{% if is_not_guest %}
+				<span class="user_stream_actions">
+					<a class="reply_action text_link" href="#">
+						<b>{% trans "Reply" %}</b>
+					</a>
+					&nbsp;
+					<a class="retweet_action text_link" href="#">
+						<b>{% trans "Retweet" %}</b>
+					</a>
+				</span>
+			{% endif %}
+		</div>
+	</span>
+
+</li>
