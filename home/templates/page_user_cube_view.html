@@ -1,0 +1,30 @@
+{% extends "page_user_view_master.html" %}
+
+{% load i18n %}
+{% load thing_render %}
+
+{% block cube_title %}active{% endblock %}
+
+{% block user_content %}
+	<div id="cube">
+		<h3 class="normal_font">{% trans "Things I Own" %} ......</h3>
+		<ul class="simple_list">
+			{% for thing in own_things %}
+				<li>
+					{% thing_render thing square %}
+				</li>
+			{% endfor %}
+		</ul>
+		
+		<h3 class="normal_font">{% trans "Things I Want" %} ......</h3>
+		
+		<ul class="simple_list">
+			{% for thing in own_things %}
+				<li>
+					{% thing_render thing square %}
+				</li>
+			{% endfor %}
+		</ul>
+		
+	</div>
+{% endblock %}

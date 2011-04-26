@@ -81,6 +81,11 @@ class _ThingMeta(db.CachePropertiedMeta):
 
     return super(_ThingMeta, cls).__new__(cls, name, bases, dct)
 
+def get_own_things(user, keys_only=False):
+  return gdb.get_sources(link_type=OWNER, target=user)
+
+def get_wanting_things(user, keys_only=False):
+  return gdb.get_sources(link_type=WANTING_ONE, target=user)
 
 class Thing(gdb.Entity):
   __metaclass__ = _ThingMeta

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-04-25 22:21+0800\n"
+"POT-Creation-Date: 2011-04-26 14:13+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,11 +17,13 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#: common/templates/js_user_stream_recommend.html:8
 #: common/templates/js_user_stream_reply.html:7
 #: home/templates/page_user_stream_view_master.html:36
 msgid "What's happing?"
 msgstr ""
 
+#: common/templates/js_user_stream_recommend.html:9
 #: common/templates/js_user_stream_reply.html:8
 #: home/templates/page_user_stream_view_master.html:37
 msgid "Post New Stream"
@@ -31,38 +33,38 @@ msgstr ""
 msgid "Sorry, got a error :-("
 msgstr ""
 
-#: common/templates/page_master.html:53
+#: common/templates/page_master.html:54
 #: group/templates/page_groupsite_view_master.html:54
 #: home/templates/page_site_home_v1.html:67
 msgid "Groups"
 msgstr ""
 
-#: common/templates/page_master.html:58
+#: common/templates/page_master.html:59
 #: home/templates/page_site_home_v1.html:91
 msgid "Microblog"
 msgstr ""
 
-#: common/templates/page_master.html:78
+#: common/templates/page_master.html:79
 msgid "Settings"
 msgstr ""
 
-#: common/templates/page_master.html:84
+#: common/templates/page_master.html:85
 msgid "Logout"
 msgstr ""
 
-#: common/templates/page_master.html:111
+#: common/templates/page_master.html:112
 msgid "Sign up"
 msgstr ""
 
-#: common/templates/page_master.html:119
+#: common/templates/page_master.html:120
 msgid "Have an account?"
 msgstr ""
 
-#: common/templates/page_master.html:120
+#: common/templates/page_master.html:121
 msgid "Sign in"
 msgstr ""
 
-#: common/templates/page_master.html:125
+#: common/templates/page_master.html:126
 msgid "(Google Account is supported)"
 msgstr ""
 
@@ -70,7 +72,7 @@ msgstr ""
 msgid "Daoshicha Thing"
 msgstr ""
 
-#: cube/models.py:367 cube/views/thingui.py:30 cube/views/thingui.py:53
+#: cube/models.py:368 cube/views/thingui.py:31 cube/views/thingui.py:53
 msgid "Title"
 msgstr ""
 
@@ -100,7 +102,7 @@ msgid "comments"
 msgstr ""
 
 #: cube/templates/page_thing_comment_view.html:39
-#: cube/templates/page_thing_view.html:117
+#: cube/templates/page_thing_view.html:120
 msgid "Create new comment"
 msgstr ""
 
@@ -170,23 +172,27 @@ msgstr ""
 msgid "Cancel Own"
 msgstr ""
 
-#: cube/templates/page_thing_view.html:104 cube/views/thingui.py:32
+#: cube/templates/page_thing_view.html:101
+msgid "Recommend"
+msgstr ""
+
+#: cube/templates/page_thing_view.html:107 cube/views/thingui.py:33
 msgid "Introduction"
 msgstr ""
 
-#: cube/templates/page_thing_view.html:112
+#: cube/templates/page_thing_view.html:115
 msgid "Comments ......"
 msgstr ""
 
-#: cube/templates/page_thing_view.html:114
+#: cube/templates/page_thing_view.html:117
 msgid "View all comments"
 msgstr ""
 
-#: cube/templates/page_thing_view.html:150
+#: cube/templates/page_thing_view.html:153
 msgid "Person Own it"
 msgstr ""
 
-#: cube/templates/page_thing_view.html:159
+#: cube/templates/page_thing_view.html:162
 msgid "Person Want it"
 msgstr ""
 
@@ -230,11 +236,7 @@ msgstr ""
 msgid "You are not allowed to create this type of item."
 msgstr ""
 
-#: cube/views/thingui.py:34
-msgid "Tags (Please seperate tags by comma ',')"
-msgstr ""
-
-#: cube/views/thingui.py:44
+#: cube/views/thingui.py:43
 msgid "Short comment(less than 140 characters)"
 msgstr ""
 
@@ -390,24 +392,30 @@ msgstr ""
 msgid "Post Content"
 msgstr ""
 
-#: home/models.py:32
+#: home/models.py:34
 msgid "Daoshicha.com"
 msgstr ""
 
-#: home/models.py:34
+#: home/models.py:36
 msgid "Want to be the best open source SNS!"
 msgstr ""
 
-#: home/templates/item_text_user_stream.html:13
-msgid "Says:"
+#: home/templates/item_recommend_user_stream.html:18
+msgid "Recommends:"
 msgstr ""
 
+#: home/templates/item_recommend_user_stream.html:34
 #: home/templates/item_text_user_stream.html:25
 msgid "Reply"
 msgstr ""
 
+#: home/templates/item_recommend_user_stream.html:38
 #: home/templates/item_text_user_stream.html:29
 msgid "Retweet"
+msgstr ""
+
+#: home/templates/item_text_user_stream.html:13
+msgid "Says:"
 msgstr ""
 
 #: home/templates/page_site_home_v1.html:67
@@ -576,15 +584,15 @@ msgstr ""
 msgid "Can't view given user's mentions"
 msgstr ""
 
-#: home/views/user_stream.py:95
+#: home/views/user_stream.py:95 home/views/user_stream.py:107
 msgid "Can't create stream for user"
 msgstr ""
 
-#: home/views/user_stream.py:107
+#: home/views/user_stream.py:120
 msgid "Can't follow the user"
 msgstr ""
 
-#: home/views/user_stream.py:113
+#: home/views/user_stream.py:126
 msgid "Can't unfollow given user"
 msgstr ""
 

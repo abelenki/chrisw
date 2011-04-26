@@ -1,0 +1,11 @@
+{% load i18n %}
+{% load filters %}
+
+<div class="item_box_min">
+	<div class="photo">
+		<a href="{{current_item.url}}"><img src="{{current_item.photo_url}}"/ class="im"></a>
+	</dt>
+	<div class="name">
+		<a href="{{current_item.url}}">{{ current_item.title|truncatesmart:10 }}</a>
+	</div>
+</div>

@@ -1,54 +1,8 @@
-{% extends "home_master.html" %}
+{% extends "page_user_view_master.html" %}
 
-{% load i18n %}
-{% load filters %}
 {% load stream_render %}
 
-{% block html_head %}
-	<script type="text/javascript" charset="utf-8" src="/javascript/user_stream.js"></script>
-{% endblock %}
-
-{% block title %}
-	{{ user.fullname }}
-{% endblock %}
-
-
-{% block content %}
-
-	<div id="user-profile" style = "">
-		<div class="pic" style="float:left;">
-		    <a href="{{user.url}}">
-		        <img src="{{user.photo_url}}" alt="{{user.fullname}}" class="im">
-		    </a>
-		</div>
-		<div class="info" style="margin-left:53px;padding-top:10px;">
-		    <h1>
-		        {{ user.fullname }}
-				{% if user.status_message %}
-					<span id="display" class="status-message">({{ user.status_message }})</span>
-				{% endif %}
-		    </h1>
-				<div style="padding-top:10px;">
-			{% if can_create_stream %}
-					<form action="{{post_url}}" method="POST" accept-charset="utf-8">
-							<textarea class="stream_box_editor" style="width: 526px; height: 36px;" name="content" id="id_content" ></textarea>
-							<div style="text-align:right">
-								<span style="float:left; padding-left:14px;padding-top:4px; color:#aaa;">{% trans "What's happing?" %}</span>
-								<input class="a_btn" type="submit" value="{% trans "Post New Stream" %}" style="margin-bottom:0px; height:26px;">
-							</div>
-					</form>
-			{% endif %}
-				</div>
-		</div>
-	</div>
-	
-	<ul class="medium_tabs">
-		{% if can_view_following %}
-			<li class="medium_tab {% block following_title %}{% endblock %}"><a class="text_tab" href="{{user.url}}/following">{% trans "Followed Streams" %}</a></li>
-		{% endif %}
-		<li class="medium_tab {% block mention_title %}{% endblock %}"> <a class="text_tab" href="{{user.url}}/mention">{% trans "@Mention Streams" %}</a></li>
-		<li class="medium_tab {% block all_title %}{% endblock %}"> <a class="text_tab" href="{{user.url}}/all">{% trans "All Streams" %}</a></li>
-	</ul>
+{% block user_content %}
 	
 	<div id="stream-box">
 		<ol class="streams">
@@ -62,63 +16,5 @@
 		</ol>
 		{% include "control_pager.html" %}
 	</div>
-
-{% endblock %}
-
-
-{% block sidebar %}
-	<div id="control" class="sidebar_box">
-		<div id="user-info">
-			<img class="im" src="{{user.photo_url}}" align="left" style="padding-right:10px" />
-			<p>
-				{{user.fullname}}
-			<br/>
-				{% trans "Joined at" %} {{user.create_at|date:"Y-n-j"}}
-			</p>
-		</div>
-		<div style="padding-top:10px;">
-			{% if is_not_guest %}
-				<ul class="buttom">
-				{% if can_follow %}
-					<a class="a_btn a_btn_m" href="{{user.url}}/follow"><span>{% trans "Follow User" %}</span></a>
-				{% endif %}
-				{% if can_unfollow %}
-					<a class="a_btn a_btn_m" href="{{user.url}}/unfollow"><span>{% trans "Unfollow User" %}</span></a>
-				{% endif %}
-				</ul>						
-			{% endif %}
-		</div>
-		<div class="spe_line" style="padding-top:5px;">
-		</div>
-		{% for line in user.introduction.splitlines %}
-			<p>{{line}}</p>
-		{% endfor %}
-	</div>
 	
-	{% if following_users %}
-		<div class="sidebar_box no_border">
-			<h3>{% trans "Following Members:" %}</h3>
-			{% for member in following_users %}
-				{% include "item_box_member.html" %}
-			{% endfor %}
-			<div class="clear"></div>
-		</div>
-	{% endif %}
-	
-	{% if follower_users %}
-		<div class="sidebar_box no_border">
-			<h3>{% trans "Followed by Members:" %}</h3>
-			{% for member in follower_users %}
-				{% include "item_box_member.html" %}
-			{% endfor %}
-			<div class="clear"></div>
-		</div>
-	{% endif %}
-	
-	{% if joined_groups %}
-		<div class="sidebar_box no_border">
-			{% include "widget_joined_groups.html" %}
-			<div class="clear"></div>
-		</div>
-	{% endif %}
 {% endblock %}

@@ -98,6 +98,19 @@ class Entity(db.CacheModel):
     """Return the latest created entities"""
     return cls.all().order("-create_at")
 
+def get_sources(link_type, target, link_attr=None, keys_only=False):
+  """Return all source entities by given link type and target entity.
+
+  keys_only -- if only keys will be loaded.
+  """
+  query = db.MapQuery(Link.all(link_type=link_type, target=target,\
+    link_attr=link_attr), lambda x: x.source)
+
+  if not keys_only:
+    query = db.GetQuery(query)
+
+  return query
+
 class Link(db.Model):
   """The model for the link between entites"""
   link_type = db.StringProperty(required=True)

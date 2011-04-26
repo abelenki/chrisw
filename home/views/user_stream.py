@@ -24,6 +24,7 @@ from conf import settings
 
 from group.models import *
 from home.models import *
+from cube.models import *
 
 class UserStreamForm(djangoforms.ModelForm):
   """docstring for UserStreamForm"""
@@ -103,6 +104,16 @@ class UserStreamUI(ModelUI):
       self.user_stream_info.create_stream(new_stream)
 
     return back()
+  
+  def cube_all(self):
+    """docstring for cube_all"""
+    
+    wanting_things = get_wanting_things(self.user)
+    own_things = get_own_things(self.user)
+    
+    logging.debug("own_things" + str(own_things.get()))
+    
+    return template('page_user_cube_view.html', locals())
   
   @check_permission('create_stream', _("Can't create stream for user"))
   def recommend(self, request):
@@ -204,6 +215,10 @@ class UserStreamHomeUnfollowHandler(UserStreamHandler):
   def get_impl(self, user_stream_ui):
     return user_stream_ui.unfollow()
 
+class UserCubeViewHandler(UserStreamHandler):
+  def get_impl(self, user_stream_ui):
+    return user_stream_ui.cube_all()
+
 class UserStreamHomeRootHandler(handlers.RequestHandler):
   def get(self):
     user = get_current_user()
@@ -218,6 +233,7 @@ apps = [(r'/u', UserStreamHomeRootHandler),
         (r'/u/(\d+)', UserStreamHomeHandler),
         (r'/u/(\d+)/all', UserStreamHomeAllHandler),
         (r'/u/(\d+)/following', UserStreamHomeFollowingHandler),
+        (r'/u/(\d+)/cube', UserCubeViewHandler),
         (r'/u/(\d+)/mention', UserStreamHomeMentionHandler),
         (r'/u/(\d+)/follow', UserStreamHomeFollowHandler),
         (r'/u/(\d+)/unfollow', UserStreamHomeUnfollowHandler)]
