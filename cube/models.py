@@ -137,6 +137,10 @@ class Thing(gdb.Entity):
     """docstring for can_view"""
     return True
   
+  def can_edit(self, user):
+    """docstring for can_edit"""
+    return self.creator.key() == user.key()
+  
   def build_index(self):
     """docstring for build_index"""
     for field in self.index_fields:

@@ -58,8 +58,7 @@ class PhotoHandler(blobstore_handlers.BlobstoreUploadHandler):
     if photo_url:
       back_url = back_url + "?image_url=" + urllib.quote_plus(photo_url)
 
-    return redirect(back_url)
-    
+    self.redirect(back_url)
     
 
 apps = [(r'/img/upload', PhotoHandler),

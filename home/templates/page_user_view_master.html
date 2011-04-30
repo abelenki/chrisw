@@ -48,7 +48,7 @@
 		{% endif %}
 		<li class="medium_tab {% block mention_title %}{% endblock %}"> <a class="text_tab" href="{{user.url}}/mention">{% trans "@Mention Streams" %}</a></li>
 		<li class="medium_tab {% block all_title %}{% endblock %}"> <a class="text_tab" href="{{user.url}}/all">{% trans "All Streams" %}</a></li>
-		<li class="medium_tab {% block cube_title %}{% endblock %}"> <a class="text_tab" href="{{user.url}}/cube">{% trans "Cube" %}</a></li>
+		{# <li class="medium_tab {% block cube_title %}{% endblock %}"> <a class="text_tab" href="{{user.url}}/cube">{% trans "Cube" %}</a></li> #}
 	</ul>
 	
 	{% block user_content %}

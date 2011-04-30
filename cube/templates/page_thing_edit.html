@@ -1,8 +1,10 @@
-{% extends "cube_master.html" %}
+{% extends "page_thing_related_master.html" %}
 
 {% load i18n %}
 
 {% block content %}
+
+{% include "widget_photo_upload_form.html" %}
 	
 <form action="{{thing.url}}/edit" method="POST" accept-charset="utf-8">
 	<table id="thing_edit_form" border="0" cellspacing="5" cellpadding="5">

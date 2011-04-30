@@ -21,6 +21,9 @@ from conf import settings
 
 from cube.models import ThingComment, ThingReview
 
+class ThingPhotoForm(forms.Form):
+  """docstring for ProfilePhoto"""
+  photo = fields.ImageField(label = _("Picture"))
 
 class ThingForm(djangoforms.ModelForm):
   """docstring for ThingForm"""
@@ -77,9 +80,19 @@ class ThingUI(ModelUI):
     return template('page_thing_view.html', locals())
 
   @check_permission('edit', _("User is not allowed to edit this item."))
-  def edit(self):
+  def edit(self, request):
     """docstring for edit"""
-    form = self.thing_meta.thing_form_class()
+    form = self.thing_meta.thing_form_class(instance=self.thing)
+    
+    if request.get('image_url', ''):
+      self.thing.photo_url = request.get('image_url')
+      self.thing.put()
+    
+    from home.views import photo
+    photo_form = ThingPhotoForm()
+    photo_upload_url = photo.create_upload_url()
+    back_url = request.path
+    
     return template('page_thing_edit.html', locals())
 
   @check_permission('edit', _("User is not allowed to edit this item."))
@@ -93,6 +106,11 @@ class ThingUI(ModelUI):
       instance.build_index()
       
       instance.put()
+    
+    from home.views import photo
+    photo_form = ThingPhotoForm()
+    photo_upload_url = photo.create_upload_url()
+    back_url = request.path
     
     return template('page_thing_edit.html', locals())
 
@@ -249,7 +267,7 @@ class ThingRankHandler(handlers.PartialHandler):
 
 class ThingEditHandler(handlers.PartialHandler):
   def get_impl(self, thingui):
-    return thingui.edit()
+    return thingui.edit(self.request)
 
   def post_impl(self, thingui):
     return thingui.edit(self.request)

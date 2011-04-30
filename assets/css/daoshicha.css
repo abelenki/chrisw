@@ -245,6 +245,25 @@
   margin-left: 30px
 }
 
+.recommend_button {
+  background: none repeat scroll 0 0 #D54E21;
+  border: medium none;
+  border-radius: 3px 3px 3px 3px;
+  color: #FFFFFF;
+  display: block;
+  line-height: 1.4em;
+  height: 22px;
+  width: 40px;
+  padding: 0;
+  text-align: center;
+  text-shadow: none;
+  vertical-align: middle;
+}
+  .recommend_button a {
+    color: white;
+    vertical-align: middle;
+  }
+
 .spe_line {
   border-bottom: 1px solid #eee;
   clear: both;

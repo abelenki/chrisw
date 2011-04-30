@@ -77,7 +77,9 @@
 
 		<div>
 			<span>
-				
+				{% if can_edit %}
+					<a class="a_btn a_btn_m" href="{{thing.url}}/edit"><span>{% trans "Edit" %}</span></a>					
+				{% endif %}
 				{% if can_want %}
 					<a class="a_btn a_btn_m" href="{{thing.url}}/want"><span>{% trans "Want" %}</span></a>
 				{% endif %}
@@ -97,9 +99,13 @@
 				</span>
 			{% endif %}
 			
-			<a class="recommend_button" href="#" key="{{thing.key}}" title="{{thing.title}}">
-				<b>{% trans "Recommend" %}</b>
-			</a>
+			<span style="float:right;">
+				<p class="recommend_button" key="{{thing.key}}" title="{{thing.title}}">
+					<a class="" href="#" >
+						<b>{% trans "Recommend" %}</b>
+					</a>
+				</p>
+			</span>
 		</div>
 		<div class="clear"></div>
 		
