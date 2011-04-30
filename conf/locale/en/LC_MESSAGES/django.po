@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-04-26 14:13+0800\n"
+"POT-Creation-Date: 2011-04-30 23:30+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,13 +19,13 @@ msgstr ""
 
 #: common/templates/js_user_stream_recommend.html:8
 #: common/templates/js_user_stream_reply.html:7
-#: home/templates/page_user_stream_view_master.html:36
+#: home/templates/page_user_view_master.html:36
 msgid "What's happing?"
 msgstr ""
 
 #: common/templates/js_user_stream_recommend.html:9
 #: common/templates/js_user_stream_reply.html:8
-#: home/templates/page_user_stream_view_master.html:37
+#: home/templates/page_user_view_master.html:37
 msgid "Post New Stream"
 msgstr ""
 
@@ -72,11 +72,11 @@ msgstr ""
 msgid "Daoshicha Thing"
 msgstr ""
 
-#: cube/models.py:368 cube/views/thingui.py:31 cube/views/thingui.py:53
+#: cube/models.py:377 cube/views/thingui.py:34
 msgid "Title"
 msgstr ""
 
-#: cube/templates/control_thing_site_header.html:11
+#: cube/templates/control_thing_site_header.html:12
 msgid "Search"
 msgstr ""
 
@@ -87,6 +87,11 @@ msgstr ""
 #: cube/templates/item_comment_box.html:7
 msgid "Up"
 msgstr ""
+
+#: cube/templates/item_comment_box.html:17
+#, fuzzy
+msgid "Comments on"
+msgstr "Latest Post from your group2"
 
 #: cube/templates/page_thing_comment_view.html:8
 msgid "Related comments"
@@ -102,11 +107,11 @@ msgid "comments"
 msgstr ""
 
 #: cube/templates/page_thing_comment_view.html:39
-#: cube/templates/page_thing_view.html:120
+#: cube/templates/page_thing_view.html:126
 msgid "Create new comment"
 msgstr ""
 
-#: cube/templates/page_thing_edit.html:12
+#: cube/templates/page_thing_edit.html:14
 #: cube/templates/page_thing_item_create.html:16
 #: cube/templates/page_thing_site_create.html:36
 #: group/templates/page_item_create.html:6
@@ -156,43 +161,47 @@ msgstr "Latest Post from your group2"
 msgid "People ranked it"
 msgstr ""
 
-#: cube/templates/page_thing_view.html:82
+#: cube/templates/page_thing_view.html:81
+msgid "Edit"
+msgstr ""
+
+#: cube/templates/page_thing_view.html:84
 msgid "Want"
 msgstr ""
 
-#: cube/templates/page_thing_view.html:85
+#: cube/templates/page_thing_view.html:87
 msgid "Cancel Want"
 msgstr ""
 
-#: cube/templates/page_thing_view.html:88
+#: cube/templates/page_thing_view.html:90
 msgid "Own"
 msgstr ""
 
-#: cube/templates/page_thing_view.html:91
+#: cube/templates/page_thing_view.html:93
 msgid "Cancel Own"
 msgstr ""
 
-#: cube/templates/page_thing_view.html:101
+#: cube/templates/page_thing_view.html:105
 msgid "Recommend"
 msgstr ""
 
-#: cube/templates/page_thing_view.html:107 cube/views/thingui.py:33
+#: cube/templates/page_thing_view.html:113 cube/views/thingui.py:36
 msgid "Introduction"
 msgstr ""
 
-#: cube/templates/page_thing_view.html:115
+#: cube/templates/page_thing_view.html:121
 msgid "Comments ......"
 msgstr ""
 
-#: cube/templates/page_thing_view.html:117
+#: cube/templates/page_thing_view.html:123
 msgid "View all comments"
 msgstr ""
 
-#: cube/templates/page_thing_view.html:153
+#: cube/templates/page_thing_view.html:159
 msgid "Person Own it"
 msgstr ""
 
-#: cube/templates/page_thing_view.html:162
+#: cube/templates/page_thing_view.html:168
 msgid "Person Want it"
 msgstr ""
 
@@ -220,6 +229,38 @@ msgstr ""
 msgid "Price"
 msgstr ""
 
+#: cube/things/book.py:38
+msgid "Daoshicha Book"
+msgstr ""
+
+#: cube/things/movie.py:33
+msgid "Actors"
+msgstr ""
+
+#: cube/things/movie.py:34
+msgid "Director"
+msgstr ""
+
+#: cube/things/movie.py:34
+msgid "Company"
+msgstr ""
+
+#: cube/things/movie.py:35
+msgid "Editor"
+msgstr ""
+
+#: cube/things/movie.py:36
+msgid "Release at"
+msgstr ""
+
+#: cube/things/movie.py:36
+msgid "Movie Type"
+msgstr ""
+
+#: cube/things/movie.py:41
+msgid "Daoshicha Movie"
+msgstr ""
+
 #: cube/views/thing_annotation.py:31 cube/views/thing_annotation.py:36
 msgid "User can't dig this annotation"
 msgstr ""
@@ -236,48 +277,60 @@ msgstr ""
 msgid "You are not allowed to create this type of item."
 msgstr ""
 
-#: cube/views/thingui.py:43
+#: cube/views/thingui.py:26
+msgid "Picture"
+msgstr ""
+
+#: cube/views/thingui.py:46
 msgid "Short comment(less than 140 characters)"
 msgstr ""
 
-#: cube/views/thingui.py:55
+#: cube/views/thingui.py:56
+msgid "Review Title"
+msgstr ""
+
+#: cube/views/thingui.py:59
 msgid "Content"
 msgstr ""
 
-#: cube/views/thingui.py:70
+#: cube/views/thingui.py:79
 msgid "User is not allowed to view this item."
 msgstr ""
 
-#: cube/views/thingui.py:79 cube/views/thingui.py:85
+#: cube/views/thingui.py:88 cube/views/thingui.py:104
 msgid "User is not allowed to edit this item."
 msgstr ""
 
-#: cube/views/thingui.py:99
+#: cube/views/thingui.py:123
 msgid "User are not allowed to want this item."
 msgstr ""
 
-#: cube/views/thingui.py:105 cube/views/thingui.py:117
+#: cube/views/thingui.py:129 cube/views/thingui.py:141
 msgid "User are not allowed to cancel."
 msgstr ""
 
-#: cube/views/thingui.py:111
+#: cube/views/thingui.py:135
 msgid "User can't own this item."
 msgstr ""
 
-#: cube/views/thingui.py:123
+#: cube/views/thingui.py:147
 msgid "User can't rank this item"
 msgstr ""
 
-#: cube/views/thingui.py:132 cube/views/thingui.py:140
+#: cube/views/thingui.py:156 cube/views/thingui.py:164
 msgid "User can't comment this item."
 msgstr ""
 
-#: cube/views/thingui.py:137 cube/views/thingui.py:151
+#: cube/views/thingui.py:161 cube/views/thingui.py:175
 msgid "New Thing Comment"
 msgstr ""
 
-#: cube/views/thingui.py:165 cube/views/thingui.py:172
+#: cube/views/thingui.py:189 cube/views/thingui.py:197
 msgid "User can't review this item."
+msgstr ""
+
+#: cube/views/thingui.py:194
+msgid "New Thing Review"
 msgstr ""
 
 #: group/templates/control_pager.html:9
@@ -488,44 +541,56 @@ msgstr ""
 msgid "Click here to login."
 msgstr ""
 
-#: home/templates/page_user_profile.html:15
-msgid "Change Photo"
+#: home/templates/page_user_cube_view.html:11
+msgid "Things I Own"
 msgstr ""
 
-#: home/templates/page_user_profile.html:22
+#: home/templates/page_user_cube_view.html:22
+msgid "Things I Want"
+msgstr ""
+
+#: home/templates/page_user_profile.html:16
 msgid "Save"
 msgstr ""
 
-#: home/templates/page_user_stream_view_master.html:47
+#: home/templates/page_user_view_master.html:47
 msgid "Followed Streams"
 msgstr ""
 
-#: home/templates/page_user_stream_view_master.html:49
+#: home/templates/page_user_view_master.html:49
 msgid "@Mention Streams"
 msgstr ""
 
-#: home/templates/page_user_stream_view_master.html:50
+#: home/templates/page_user_view_master.html:50
 msgid "All Streams"
 msgstr ""
 
-#: home/templates/page_user_stream_view_master.html:76
+#: home/templates/page_user_view_master.html:51
+msgid "Cube"
+msgstr ""
+
+#: home/templates/page_user_view_master.html:68
 msgid "Joined at"
 msgstr ""
 
-#: home/templates/page_user_stream_view_master.html:83
+#: home/templates/page_user_view_master.html:75
 msgid "Follow User"
 msgstr ""
 
-#: home/templates/page_user_stream_view_master.html:86
+#: home/templates/page_user_view_master.html:78
 msgid "Unfollow User"
 msgstr ""
 
-#: home/templates/page_user_stream_view_master.html:100
+#: home/templates/page_user_view_master.html:92
 msgid "Following Members:"
 msgstr ""
 
-#: home/templates/page_user_stream_view_master.html:110
+#: home/templates/page_user_view_master.html:102
 msgid "Followed by Members:"
+msgstr ""
+
+#: home/templates/widget_photo_upload_form.html:7
+msgid "Change Photo"
 msgstr ""
 
 #: home/templatetags/filters.py:81
@@ -572,27 +637,27 @@ msgstr ""
 msgid " years ago"
 msgstr ""
 
-#: home/views/user_stream.py:34
+#: home/views/user_stream.py:35
 msgid "Content of stream"
 msgstr ""
 
-#: home/views/user_stream.py:76 home/views/user_stream.py:82
+#: home/views/user_stream.py:77 home/views/user_stream.py:83
 msgid "Can't visit given user's homepage"
 msgstr ""
 
-#: home/views/user_stream.py:88
+#: home/views/user_stream.py:89
 msgid "Can't view given user's mentions"
 msgstr ""
 
-#: home/views/user_stream.py:95 home/views/user_stream.py:107
+#: home/views/user_stream.py:96 home/views/user_stream.py:118
 msgid "Can't create stream for user"
 msgstr ""
 
-#: home/views/user_stream.py:120
+#: home/views/user_stream.py:131
 msgid "Can't follow the user"
 msgstr ""
 
-#: home/views/user_stream.py:126
+#: home/views/user_stream.py:137
 msgid "Can't unfollow given user"
 msgstr ""
 

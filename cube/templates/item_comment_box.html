@@ -10,8 +10,16 @@
 			<a href="{{comment.author.url}}">{{ comment.author.fullname }}</a>
 		</span>
 		<span class="plain" style="margin-left:10px;">
-			{{ comment.create_at|date:"Y-n-j" }}
+			{{ comment.create_at|date:"Y-n-j" }} 
 		</span>
+		{% if display_thing_title %}
+			<span class="plain">
+				{% trans "Comments on" %}
+			</span>
+			<span>
+				<a href="{{comment.thing.url}}">{{ comment.thing.title }}</a>
+			</span>
+		{% endif %}
 	</h4>
 	<p>
 		{{ comment.content }}

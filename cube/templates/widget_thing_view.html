@@ -6,7 +6,7 @@
 	> <a href="{{thing.url}}">{% trans "Back to: " %}{{ thing.title }}</a>			
 </p>
 <div>
-	<a href="{{thing.url}}"><img src="{{thing.photo_url}}"/></a>
+	<a href="{{thing.url}}"><img class="ixl" src="{{thing.photo_url}}"/></a>
 	</br>
 	{% star thing.rank of 5 %}
 	{% for key,value in thing.fields %}

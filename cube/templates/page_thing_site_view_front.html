@@ -21,9 +21,11 @@
 		</h3>
 		<ul class="simple_list">
 			{% for comment in latest_comments %}
-				<li>
-					{% include "item_comment_box.html" %}
-				</li>
+				{% with 1 as display_thing_title %}
+					<li>
+						{% include "item_comment_box.html" %}
+					</li>
+				{% endwith %}
 			{% endfor %}
 		</ul>
 	</div>

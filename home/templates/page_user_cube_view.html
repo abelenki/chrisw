@@ -7,19 +7,22 @@
 
 {% block user_content %}
 	<div id="cube">
-		<h3 class="normal_font">{% trans "Things I Own" %} ......</h3>
-		<ul class="simple_list">
+		<br />
+		<h4 class="">{% trans "Things I Own" %} ......</h4>
+		<ul class="simple_list no_border">
 			{% for thing in own_things %}
 				<li>
 					{% thing_render thing square %}
 				</li>
 			{% endfor %}
 		</ul>
+		<div class="clear">
+			
+		</div>
+		<h4 class="">{% trans "Things I Want" %} ......</h4>
 		
-		<h3 class="normal_font">{% trans "Things I Want" %} ......</h3>
-		
-		<ul class="simple_list">
-			{% for thing in own_things %}
+		<ul class="simple_list no_border">
+			{% for thing in wanting_things %}
 				<li>
 					{% thing_render thing square %}
 				</li>

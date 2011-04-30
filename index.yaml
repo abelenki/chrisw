@@ -122,6 +122,12 @@ indexes:
   - name: score
     direction: desc
 
+- kind: Movie
+  properties:
+  - name: deleted
+  - name: create_at
+    direction: desc
+
 - kind: Post
   properties:
   - name: deleted

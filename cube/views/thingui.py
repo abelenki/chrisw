@@ -34,7 +34,7 @@ class ThingForm(djangoforms.ModelForm):
   title = fields.fields.CharField(label = _("Title"), min_length=2,\
         max_length=20)
   introduction = fields.CharField(label = _("Introduction"),\
-    widget=forms.Textarea, min_length=2, max_length = 200)
+    widget=forms.Textarea, min_length=2, max_length = 2000)
 
 
 class ThingCommentForm(djangoforms.ModelForm):
@@ -53,10 +53,16 @@ class ThingReviewForm(djangoforms.ModelForm):
     model = ThingReview
     fields = ['title', 'content']
 
-  title = fields.fields.CharField(label = _("Title"), min_length=10,\
+  title = fields.CharField(label = _("Review Title"), min_length=10,\
     max_length=140)
+    
   content = fields.CharField(label = _("Content"),\
-    widget=forms.Textarea, min_length=2, max_length = 200)
+    widget=forms.Textarea, min_length=2, max_length = 2000)
+
+  def __init__(self, *args, **kwargs):
+    """docstring for __init__"""
+    super(ThingReviewForm, self).__init__(*args, **kwargs)
+    self.fields.keyOrder = ['title', 'content']
 
 
 class ThingUI(ModelUI):
@@ -185,6 +191,7 @@ class ThingUI(ModelUI):
     """docstring for review"""
     form = ThingReviewForm()
     post_url = request.path
+    title = _("New Thing Review")
     return template("page_thing_item_create.html", locals())
   
   @check_permission('add_review', _("User can't review this item."))
@@ -270,7 +277,7 @@ class ThingEditHandler(handlers.PartialHandler):
     return thingui.edit(self.request)
 
   def post_impl(self, thingui):
-    return thingui.edit(self.request)
+    return thingui.edit_post(self.request)
 
 class ThingViewHandler(handlers.PartialHandler):
   def get_impl(self, thingui):

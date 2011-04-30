@@ -448,6 +448,18 @@ div.sidebar_box {
   margin: 10px
 }
 
+div.item_box_min{
+  display: inline;
+  float: left;
+  width: 78px;
+  text-align: center
+}
+  div.item_box_min .name{
+    text-align: center;
+    height: 55px;
+    margin: 0
+  }
+
 
 .chrisw_dialog {
   position: fixed;
@@ -510,6 +522,10 @@ img.ies {
 
 img.il {
   width: 64px
+}
+
+img.ixl {
+  width: 96px;
 }
 
 img.im {
@@ -686,6 +702,10 @@ ul.simple_list{
   ul.simple_list li p{
     margin-bottom: 10px;
   }
+
+ul.no_border li {
+  border: 1px solid transparent !important;
+}  
 
 .user_stream_item .user_stream_actions{
   visibility:hidden;

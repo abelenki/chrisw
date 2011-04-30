@@ -95,7 +95,7 @@ class Thing(gdb.Entity):
 
   title = db.StringProperty(required=True)
 
-  introduction = db.StringProperty(required=True)
+  introduction = db.StringProperty(required=True, multiline=True)
 
   photo_url = db.StringProperty(required=True, default=settings.DEFAULT_THING_PHOTO)
 

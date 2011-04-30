@@ -35,7 +35,7 @@ class Book(Thing):
 
 class BookSite(ThingSite):
   """docstring for BookSite"""
-  pass
+  title = _("Daoshicha Book")
 
 class BookMeta(ThingMeta):
   """docstring for BookMeta"""
