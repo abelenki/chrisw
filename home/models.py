@@ -147,7 +147,7 @@ class UserStreamInfo(gdb.Entity):
 
   def can_create_stream(self, user):
     """docstring for can_create_stream"""
-    return self.is_me(user)
+    return self.is_me(user) and user.is_not_guest()
 
   def create_stream(self, stream):
     """docstring for create_stream"""

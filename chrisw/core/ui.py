@@ -66,6 +66,7 @@ class check_permission(object):
         return func(ui, *args, **kwargs)
       elif ui.model_user == Guest:
         # Guest can't be used to do anything
+        from action import login
         return login()
         
       raise PermissionException(self.error_msg, ui.model_user, ui.model_obj)
